@@ -1,0 +1,3 @@
+dynamic class transform:
+	get class binary via classloader, transform, inject into classloader, reconstruct objects.
+	for Attr, NBAttr, etc
