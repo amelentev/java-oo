@@ -1,0 +1,2 @@
+implict valueOf:
+	BigInteger a = 1	<=>	BigInteger a = BigInteger.valueOf(1)
