@@ -66,14 +66,16 @@ use operators on them "out of the box".
 - [javac-oo]
 	- patched version of JavaC 1.7 for Operator Overloading support. If you need standalone javac compiler with OO.
 
+- [eclipse-oo]
+	- Eclipse [Java Developer Tools] fork for Operator Overloading.
+	- use it if you need native **[Eclipse] IDE support**, or Eclipse Java Compiler support.
+
 comming soon:
 
-- ecj-oo
-	- patch Eclipse Java Compiler
-- ecj-oo-plugin
-	- Eclipse IDE support
+- eclipse-oo-plugin
+	- [Eclipse] IDE and ECJ support via "plugin" similar to javac-oo-plugin.
 - idea-oo-plugin
-	- Intellij Idea support
+	- [Intellij Idea] support
 - update [lombok-oo]
 	- all-in-one solution bundled with great [lombok] plugin.
 
@@ -81,3 +83,6 @@ comming soon:
 [javac-oo]: https://bitbucket.org/amelentev/javac-oo
 [lombok]: http://projectlombok.org/
 [lombok-oo]: https://github.com/amelentev/lombok-oo
+[eclipse]: http://eclipse.org/
+[Java Developer Tools]: http://eclipse.org/jdt/
+[Intellij Idea]: http://www.jetbrains.com/idea/
