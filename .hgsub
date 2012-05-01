@@ -1,1 +1,2 @@
 javac-oo = ../javac-oo
+eclipse-oo = [git]git@bitbucket.org:amelentev/eclipse.jdt.core-oo.git
