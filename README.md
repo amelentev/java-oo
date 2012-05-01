@@ -48,7 +48,7 @@ comparison:
 index:
 
 	| []  | get       | `v = lst[i]` <=> `v = lst.get(i)`
-	| []= | set, put  | `map[s] = v` <=> `map.set(s,v)`
+	| []= | set, put  | `map[s] = v` <=> `map.put(s,v)`,  `lst[i] = v` <=> `lst.set(i,v)`
 
 These methods exists in many java classes (ex:BigInteger,BigDecimal) so you can
 use operators on them "out of the box".
