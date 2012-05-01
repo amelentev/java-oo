@@ -1,2 +1,12 @@
 implict valueOf:
 	BigInteger a = 1	<=>	BigInteger a = BigInteger.valueOf(1)
+
+delombok
+	via pe.getFiler(), after Attr phase
+
+bug:
+	lst[0] = lst[1] = 1;
+
+String? s    <=>  @Nullable String s
+String  s    <=>  @NotNull String s
+
