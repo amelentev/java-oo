@@ -10,3 +10,8 @@ bug:
 String? s    <=>  @Nullable String s
 String  s    <=>  @NotNull String s
 
+extension methods
+	s.iterator() -> static Iterator<Char> iterator(String s)
+
+Flow dependent typing
+	Object a = ...; if (a instanceof BigInteger) c = a.add(b)
