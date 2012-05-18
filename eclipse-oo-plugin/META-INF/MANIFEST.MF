@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Eclipse JDT plugin for Operator Overloading
+Bundle-SymbolicName: eclipse-oo-plugin
+Bundle-Version: 0.0.1
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Require-Bundle: org.aspectj.runtime,
+ org.eclipse.jdt.core;bundle-version="3.7.0",
+ org.junit
+Eclipse-SupplementBundle: org.eclipse.jdt.core
+Export-Package: javaoo.eclipse;aspects="BinaryExpressionAspect"
