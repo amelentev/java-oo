@@ -3,5 +3,7 @@
 	<aspects>
 		<aspect name="javaoo.eclipse.UnaryExpressionAspect"/>
 		<aspect name="javaoo.eclipse.BinaryExpressionAspect"/>
+		<aspect name="javaoo.eclipse.AssignmentAspect"/>
+		<aspect name="javaoo.eclipse.ArrayReferenceAspect"/>
 	</aspects>
 </aspectj>

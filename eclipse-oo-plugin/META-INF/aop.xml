@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- is this really needed? seems true for < v4.2 and old equanox -->
 <aspectj>
     <aspects>
         <aspect name="javaoo.eclipse.BinaryExpressionAspect" />
+        <aspect name="javaoo.eclipse.UnaryExpressionAspect" />
+        <aspect name="javaoo.eclipse.ArrayReferenceAspect" />
+        <aspect name="javaoo.eclipse.AssignmentAspect" />
     </aspects>
 </aspectj>

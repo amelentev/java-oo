@@ -16,8 +16,8 @@ public class AspectTest {
 		System.out.println(new File(".").getAbsolutePath());
 		compile("MathTest.java");
 		compile("CmpTest.java");
-		/*compile("ListIndexGetTest.java");
+		compile("ListIndexGetTest.java");
 		compile("ListIndexSetTest.java");
-		compile("MapIndexTest.java");*/
+		compile("MapIndexTest.java");
 	}
 }
