@@ -27,6 +27,7 @@ v1.0
    </license>
 
    <url>
+      <update label="Java Operator Overload support for Eclipse JDT" url="https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/"/>
       <discovery label="AJDT" url="http://download.eclipse.org/tools/ajdt/37/update"/>
    </url>
 
