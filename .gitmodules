@@ -1,0 +1,3 @@
+[submodule "eclipse-oo"]
+	path = eclipse-oo
+	url = git@github.com:amelentev/eclipse.jdt-oo.git

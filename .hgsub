@@ -1,3 +1,3 @@
-javac-oo = ../javac-oo
-eclipse-oo = [git]git@bitbucket.org:amelentev/eclipse.jdt.core-oo.git
+javac-oo = ssh://hg@bitbucket.org/amelentev/javac-oo
+eclipse.jdt-oo = [git]git@github.com:amelentev/eclipse.jdt-oo.git
 lombok-oo = [git]git@github.com:amelentev/lombok-oo.git
