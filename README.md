@@ -5,16 +5,17 @@ Works with JavaC and Netbeans IDE.
 
 Example (see also: javac-oo/sample/*.java):
 
-	:::java
-	import java.math.BigInteger;
-	public class Test {
-		public static void main(String[] args) {
-			BigInteger  a = BigInteger.valueOf(1),
-				b = BigInteger.valueOf(2),
-				c = a + b*a; // here is `magic`
-			System.out.println(c);
-		}
+```java
+import java.math.BigInteger;
+public class Test {
+	public static void main(String[] args) {
+		BigInteger  a = BigInteger.valueOf(1),
+			b = BigInteger.valueOf(2),
+			c = a + b*a; // here is `magic`
+		System.out.println(c);
 	}
+}
+```
 
 Here `a+b*a` will be transformed to `a.add(b.multiply(a))`.
 
@@ -70,14 +71,13 @@ use operators on them "out of the box".
 	- Eclipse [Java Developer Tools] fork for Operator Overloading.
 	- use it if you need native **[Eclipse] IDE support**, or Eclipse Java Compiler support.
 
+- eclipse-oo-plugin
+	- [Eclipse] IDE plugin for OO support.
+
 comming soon:
 
-- eclipse-oo-plugin
-	- [Eclipse] IDE and ECJ support via "plugin" similar to javac-oo-plugin.
 - idea-oo-plugin
 	- [Intellij Idea] support
-- update [lombok-oo]
-	- all-in-one solution bundled with great [lombok] plugin.
 
 [Scala-like]: http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973
 [javac-oo]: https://bitbucket.org/amelentev/javac-oo
