@@ -86,4 +86,4 @@ comming soon:
 [eclipse]: http://eclipse.org/
 [Java Developer Tools]: http://eclipse.org/jdt/
 [Intellij Idea]: http://www.jetbrains.com/idea/
-[eclipse-oo]: https://bitbucket.org/amelentev/eclipse.jdt.core-oo
+[eclipse-oo]: https://github.com/amelentev/eclipse.jdt-oo
