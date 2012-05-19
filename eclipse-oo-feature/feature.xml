@@ -4,17 +4,31 @@
       label="Operator Overloading for Eclipse JDT"
       version="0.1.0.qualifier">
 
-   <description url="http://www.example.com/description">
-      [Enter Feature Description here.]
+   <description url="http://amelentev.github.com/java-oo/">
+      Plugin for Java Operator Overloading support in Eclipse IDE
    </description>
 
-   <copyright url="http://www.example.com/copyright">
-      [Enter Copyright Description here.]
+   <copyright url="http://www.eclipse.org/legal/epl-v10.html">
+      * Copyright (c) 2012 Artem Melentyev &lt;amelentev@gmail.com&gt;.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License
+v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
    </copyright>
 
-   <license url="http://www.example.com/license">
-      [Enter License Description here.]
+   <license url="http://www.eclipse.org/legal/epl-v10.html">
+      * Copyright (c) 2012 Artem Melentyev &lt;amelentev@gmail.com&gt;.
+* All rights reserved. This program and the accompanying materials
+* are made available under the terms of the Eclipse Public License
+v1.0
+* which accompanies this distribution, and is available at
+* http://www.eclipse.org/legal/epl-v10.html
    </license>
+
+   <url>
+      <discovery label="AJDT" url="http://download.eclipse.org/tools/ajdt/37/update"/>
+   </url>
 
    <requires>
       <import plugin="org.aspectj.runtime"/>

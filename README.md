@@ -73,6 +73,7 @@ use operators on them "out of the box".
 
 - eclipse-oo-plugin
 	- [Eclipse] IDE plugin for OO support.
+	- update site url: https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/
 
 comming soon:
 
