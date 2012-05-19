@@ -1,2 +1,7 @@
 *~
+*.class
 bin
+target
+javac-oo-plugin/.??*
+/.project
+/.settings

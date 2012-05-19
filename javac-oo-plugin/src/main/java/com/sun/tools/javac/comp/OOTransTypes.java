@@ -1,7 +1,6 @@
 package com.sun.tools.javac.comp;
 
 import com.sun.tools.javac.code.Symtab;
-import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.code.Types;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.Context;

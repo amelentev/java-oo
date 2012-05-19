@@ -1,13 +1,16 @@
 import java.util.Arrays;
 import java.util.List;
 
-public class ListIndexGetTest {
+public class ListIndexGet {
     public static boolean test() {
-        Integer[] arr = new Integer[] {1};
         List<Integer> lst = Arrays.asList(1);
-        int resa = arr[0];
+        // without OO:
         int resl1 = lst.get(0);
+        // with OO:
         int resl2 = lst[0];
-        return resl2 == resa;
+        return resl2 == resl1;
     }
+    public static void main(String[] args) {
+		System.out.println(ListIndexGet.test());
+	}
 }
