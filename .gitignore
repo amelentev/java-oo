@@ -5,3 +5,4 @@ target
 javac-oo-plugin/.??*
 /.project
 /.settings
+/javac-oo
