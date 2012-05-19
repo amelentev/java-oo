@@ -22,7 +22,7 @@ Here `a+b*a` will be transformed to `a.add(b.multiply(a))`.
 # Installation #
 
 ## Eclipse IDE update site ##
-Click in menu: Help - Install New Software. In "Work with" enter:
+Click in menu: Help - Install New Software. Enter in "Work with" field:
 
 	https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/
 
