@@ -19,6 +19,15 @@ public class Test {
 
 Here `a+b*a` will be transformed to `a.add(b.multiply(a))`.
 
+# Installation #
+
+## Eclipse IDE update site ##
+Click in menu: Help - Install New Software. In "Work with" enter:
+
+	https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/
+
+# Details #
+
 Supported operators (operator to method map):
 
 binary:
@@ -55,7 +64,7 @@ These methods exists in many java classes (ex:BigInteger,BigDecimal) so you can
 use operators on them "out of the box".
 
 
-## subprojects
+## Subprojects
 
 - javac-oo-plugin
 	- plugin to JavaC 1.7 and **Netbeans IDE** for operator overloading. Based on [javac-oo].
