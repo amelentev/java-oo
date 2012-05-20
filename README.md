@@ -26,6 +26,19 @@ Click in menu: Help - Install New Software. Enter in "Work with" field:
 
 	https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/
 
+## Netbeans IDE ##
+Add [javac-oo-plugin.jar] as compile or processor library to Netbeans and enable "Annotation Processing in Editor" (Project Properties-Build-Compiling). Tested on 7.1.1, 7.2-dev
+
+## javac, ant, etc ##
+Just add [javac-oo-plugin.jar] to classpath:
+```
+javac -cp javac-oo-plugin.jar <sources>
+```
+Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/examples/compile.sh)
+
+## Maven ##
+Look at [javac-oo-mvndemo/pom.xml](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/pom.xml)
+
 # Details #
 
 Supported operators (operator to method map):
@@ -97,3 +110,5 @@ comming soon:
 [Java Developer Tools]: http://eclipse.org/jdt/
 [Intellij Idea]: http://www.jetbrains.com/idea/
 [eclipse-oo]: https://github.com/amelentev/eclipse.jdt-oo
+
+[javac-oo-plugin.jar]: http://amelentev.github.com/mvnrepo/java-oo/javac-oo-plugin/0.1/javac-oo-plugin-0.1.jar
