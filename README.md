@@ -1,6 +1,6 @@
 # Java Operator Overloading #
 
-Implementation of ([Scala-like]) Operator Overloading for Java language.
+Implementation of ([Scala-like]) [Operator Overloading] for Java language.
 Works with JavaC and Netbeans IDE.
 
 Example (see also: javac-oo/sample/*.java):
@@ -24,7 +24,7 @@ Here `a+b*a` will be transformed to `a.add(b.multiply(a))`.
 ## Eclipse IDE update site ##
 Click in menu: Help - Install New Software. Enter in "Work with" field:
 
-	https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/
+	http://amelentev.github.com/eclipse.jdt-oo-site/
 
 ## Netbeans IDE ##
 Add [javac-oo-plugin.jar] as compile or processor library to Netbeans and enable "Annotation Processing in Editor" (Project Properties-Build-Compiling). Tested on 7.1.1, 7.2-dev
@@ -81,10 +81,9 @@ use operators on them "out of the box".
 
 - javac-oo-plugin
 	- plugin to JavaC 1.7 and **Netbeans IDE** for operator overloading. Based on [javac-oo].
-	- just add it to classpath while compiling (ant, maven, etc):
-		- `javac -cp javac-oo-plugin.jar <sources>`
-	- Add it as compile or processor library to Netbeans and enable "Annotation Processing in Editor" (Project Properties-Build-Compiling)
-		- tested on 7.1.1, 7.2-dev
+
+- eclipse-oo-plugin
+	- [Eclipse] IDE (JDT) plugin for OO support.
 
 - [javac-oo]
 	- patched version of JavaC 1.7 for Operator Overloading support. If you need standalone javac compiler with OO.
@@ -92,10 +91,6 @@ use operators on them "out of the box".
 - [eclipse-oo]
 	- Eclipse [Java Developer Tools] fork for Operator Overloading.
 	- use it if you need native **[Eclipse] IDE support**, or Eclipse Java Compiler support.
-
-- eclipse-oo-plugin
-	- [Eclipse] IDE plugin for OO support.
-	- update site url: https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/
 
 comming soon:
 
@@ -110,5 +105,6 @@ comming soon:
 [Java Developer Tools]: http://eclipse.org/jdt/
 [Intellij Idea]: http://www.jetbrains.com/idea/
 [eclipse-oo]: https://github.com/amelentev/eclipse.jdt-oo
+[Operator Overloading]: http://en.wikipedia.org/wiki/Operator_overloading
 
 [javac-oo-plugin.jar]: http://amelentev.github.com/mvnrepo/java-oo/javac-oo-plugin/0.1/javac-oo-plugin-0.1.jar
