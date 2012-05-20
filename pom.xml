@@ -10,6 +10,7 @@
 
     <modules>
         <module>javac-oo-plugin</module>
+        <module>javac-oo-mvndemo</module>
     </modules>
 
     <repositories>
