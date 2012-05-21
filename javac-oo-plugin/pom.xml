@@ -5,6 +5,8 @@
     <artifactId>javac-oo-plugin</artifactId>
     <version>0.2-SNAPSHOT</version>
     <packaging>jar</packaging>
+    <name>Java Operator Overloading plugin for javac</name>
+    <url>http://amelentev.github.com/java-oo/</url>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
