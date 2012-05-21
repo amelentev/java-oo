@@ -85,7 +85,7 @@ public aspect BinaryExpressionAspect {
 	}
 
 	pointcut generateCode(BinaryExpression that, BlockScope scope, CodeStream stream, boolean valueRequired):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.BinaryExpression) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.generateCode(BlockScope, CodeStream, boolean)) &&
 		args(scope, stream, valueRequired);
 	
@@ -104,7 +104,7 @@ public aspect BinaryExpressionAspect {
 	}
 	
 	pointcut resolveType(BinaryExpression be, BlockScope scope):
-		this(be) &&
+		this(be) && within(org.eclipse.jdt.internal.compiler.ast.BinaryExpression) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.resolveType(BlockScope)) &&
 		args(scope);
 	

@@ -50,7 +50,7 @@ public aspect UnaryExpressionAspect {
 	}
 	
 	pointcut generateCode(UnaryExpression that, BlockScope scope, CodeStream stream, boolean valueRequired):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.UnaryExpression) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.UnaryExpression.generateCode(BlockScope, CodeStream, boolean)) &&
 		args(scope, stream, valueRequired);
 
@@ -70,7 +70,7 @@ public aspect UnaryExpressionAspect {
 	}
 	
 	pointcut resolveType(UnaryExpression that, BlockScope scope):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.UnaryExpression) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.UnaryExpression.resolveType(BlockScope)) &&
 		args(scope);
 

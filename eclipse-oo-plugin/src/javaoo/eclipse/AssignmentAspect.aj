@@ -28,7 +28,7 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 @SuppressWarnings("restriction")
 public privileged aspect AssignmentAspect {
 	pointcut resolveType(Assignment that, BlockScope scope):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.Assignment) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.Assignment.resolveType(BlockScope)) &&
 		args(scope);
 	

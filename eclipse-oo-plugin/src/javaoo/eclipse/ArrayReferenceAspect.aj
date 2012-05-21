@@ -29,7 +29,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	public MessageSend ArrayReference.overloadMethod;
 	
 	pointcut resolveType(ArrayReference that, BlockScope scope):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.resolveType(BlockScope)) &&
 		args(scope);
 	
@@ -66,7 +66,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	}
 	
 	pointcut generateAssignment(ArrayReference that, BlockScope currentScope, CodeStream codeStream, Assignment assignment, boolean valueRequired):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.generateAssignment(BlockScope, CodeStream, Assignment, boolean)) &&
 		args(currentScope, codeStream, assignment, valueRequired);
 	
@@ -80,7 +80,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	}
 	
 	pointcut generateCode(ArrayReference that, BlockScope currentScope, CodeStream codeStream, boolean valueRequired):
-		this(that) &&
+		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.generateCode(BlockScope, CodeStream, boolean)) &&
 		args(currentScope, codeStream, valueRequired);
 	
