@@ -1,7 +1,10 @@
+CompoundAssignment overload:
+	a += b		<=>		a.mutableAdd(b)  or  a = a.add(b)
+
 implict valueOf:
 	BigInteger a = 1	<=>	BigInteger a = BigInteger.valueOf(1)
 
-delombok
+translate to pure java. like delombok
 	via pe.getFiler(), after Attr phase
 
 bug:
@@ -19,3 +22,5 @@ null operators:
 	String? s    <=>  @Nullable String s
 	String  s    <=>  @NotNull String s
 
+light syntax:
+	like python.
