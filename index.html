@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8' />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <meta name="description" content="Java-OO : Java Operator Overloading" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Java-OO</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/amelentev/java-oo">View on GitHub</a>
+
+          <h1 id="project_title">Java-OO</h1>
+          <h2 id="project_tagline">Java Operator Overloading</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/amelentev/java-oo/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/amelentev/java-oo/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>Java Operator Overloading</h1>
+
+<p>Implementation of (<a href="http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973">Scala-like</a>) <a href="http://en.wikipedia.org/wiki/Operator_overloading">Operator Overloading</a> for Java language.
+Works with standard JavaC compiler, Netbeans IDE, Eclipse IDE and any build tools.</p>
+
+<p>Example (see other examples at <a href="https://github.com/amelentev/java-oo/tree/master/examples">examples/</a> dir):</p>
+
+<div class="highlight">
+<pre><span class="kn">import</span> <span class="nn">java.math.*</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">BigInteger</span>  <span class="n">a</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span>
+                <span class="n">b</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">2</span><span class="o">),</span>
+
+                <span class="n">c1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">negate</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">b</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">a</span><span class="o">)),</span> <span class="c1">// without OO</span>
+                <span class="n">c2</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span><span class="o">/</span><span class="n">a</span><span class="o">;</span> <span class="c1">// with OO</span>
+
+        <span class="k">if</span> <span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">c2</span><span class="o">)&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">c1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">c2</span><span class="o">)&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"impossible"</span><span class="o">);</span> <span class="c1">// without OO</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">c1</span><span class="o">&lt;</span><span class="n">c2</span> <span class="o">||</span> <span class="n">c1</span><span class="o">&gt;</span><span class="n">c2</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"impossible"</span><span class="o">);</span> <span class="c1">// with OO</span>
+
+        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+        <span class="k">if</span> <span class="o">(!</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="s">"qwe"</span><span class="o">))</span> <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"qwe"</span><span class="o">,</span> <span class="s">"asd"</span><span class="o">);</span> <span class="c1">// without OO</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">map</span><span class="o">[</span><span class="s">"qwe"</span><span class="o">]==</span><span class="kc">null</span><span class="o">)</span> <span class="n">map</span><span class="o">[</span><span class="s">"qwe"</span><span class="o">]</span> <span class="o">=</span> <span class="s">"asd"</span><span class="o">;</span> <span class="c1">// with OO</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre>
+</div>
+
+
+<h1>Installation</h1>
+
+<h2>Eclipse IDE update site</h2>
+
+<p>Click in menu: Help - Install New Software. Enter in "Work with" field:</p>
+
+<pre><code>http://amelentev.github.com/eclipse.jdt-oo-site/
+</code></pre>
+
+<p>Tested on 3.7.2, 4.2M7.</p>
+
+<h2>Netbeans IDE</h2>
+
+<p>Add <a href="http://amelentev.github.com/mvnrepo/java-oo/javac-oo-plugin/0.1/javac-oo-plugin-0.1.jar">javac-oo-plugin.jar</a> as compile or processor library to Netbeans and enable "Annotation Processing in Editor" (Project Properties-Build-Compiling). Tested on 7.1.1, 7.2-dev</p>
+
+<h2>javac, ant, etc</h2>
+
+<p>Just add <a href="http://amelentev.github.com/mvnrepo/java-oo/javac-oo-plugin/0.1/javac-oo-plugin-0.1.jar">javac-oo-plugin.jar</a> to classpath:</p>
+
+<pre><code>javac -cp javac-oo-plugin.jar &lt;sources&gt;
+</code></pre>
+
+<p>Demo at <a href="https://github.com/amelentev/java-oo/blob/master/examples/compile.sh">examples/compile.sh</a></p>
+
+<h2>Maven</h2>
+
+<p>Look at <a href="https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/pom.xml">javac-oo-mvndemo/pom.xml</a></p>
+
+<h1>Details</h1>
+
+<p>Supported operators (operator to method map):</p>
+
+<p>binary:</p>
+
+<pre><code>| OPERATOR | METHOD    |
+------------------------
+| +        | add       |
+| -        | subtract  |
+| *        | multiply  |
+| /        | divide    |
+| %        | remainder |
+| &amp;        | and       |
+| |        | or        |
+| ^        | xor       |
+| &lt;&lt;       | shiftLeft |
+| &gt;&gt;       | shiftRight|
+</code></pre>
+
+<p>unary:</p>
+
+<pre><code>| - | negate |
+| ~ | not    |
+</code></pre>
+
+<p>comparison:</p>
+
+<pre><code>| &lt;, &lt;=, &gt;, &gt;= | compareTo  | example: `a &lt; b` &lt;=&gt; `a.compareTo(b)&lt;0`
+`==` and `!=` is not overloadable because it will break things
+</code></pre>
+
+<p>index:</p>
+
+<pre><code>| []  | get       | `v = lst[i]` &lt;=&gt; `v = lst.get(i)`
+| []= | set, put  | `map[s] = v` &lt;=&gt; `map.put(s,v)`,  `lst[i] = v` &lt;=&gt; `lst.set(i,v)`
+</code></pre>
+
+<p>These methods exists in many java classes (ex:BigInteger,BigDecimal) so you can
+use operators on them "out of the box". Or you can add these methods to your classes to use OO (see <a href="https://github.com/amelentev/java-oo/blob/master/examples/Vector.java">examples/Vector.java</a>).</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Java-OO maintained by <a href="https://github.com/amelentev">amelentev</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-31894853-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+
+  </body>
+</html>
