@@ -7,6 +7,7 @@
  * 
  * Contributors:
  *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
+ *     some code from org.eclipse.jdt.code
  ******************************************************************************/
 package javaoo.eclipse;
 
