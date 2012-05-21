@@ -33,6 +33,8 @@ Click in menu: Help - Install New Software. Enter in "Work with" field:
 
 	http://amelentev.github.com/eclipse.jdt-oo-site/
 
+Tested on 3.7.2, 4.2M7.
+
 ## Netbeans IDE ##
 Add [javac-oo-plugin.jar] as compile or processor library to Netbeans and enable "Annotation Processing in Editor" (Project Properties-Build-Compiling). Tested on 7.1.1, 7.2-dev
 
