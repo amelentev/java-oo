@@ -3,7 +3,7 @@
 Implementation of ([Scala-like]) [Operator Overloading] for Java language.
 Works with JavaC and Netbeans IDE.
 
-Example (see also at: examples/*.java):
+Example (see other examples at [examples/](https://github.com/amelentev/java-oo/tree/master/examples) dir):
 
 ```java
 import java.math.*;
