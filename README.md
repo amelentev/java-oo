@@ -3,7 +3,7 @@
 Implementation of ([Scala-like]) [Operator Overloading] for Java language.
 Works with JavaC and Netbeans IDE.
 
-Example (see also: javac-oo/sample/*.java):
+Example (see also at: examples/*.java):
 
 ```java
 import java.math.*;
@@ -25,8 +25,6 @@ public class Test {
 	}
 }
 ```
-
-Here `a+b*a` will be transformed to `a.add(b.multiply(a))`.
 
 # Installation #
 
