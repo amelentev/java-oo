@@ -83,7 +83,7 @@ index:
 	| []= | set, put  | `map[s] = v` <=> `map.put(s,v)`,  `lst[i] = v` <=> `lst.set(i,v)`
 
 These methods exists in many java classes (ex:BigInteger,BigDecimal) so you can
-use operators on them "out of the box". Or you can add these methods to your classes to use OO.
+use operators on them "out of the box". Or you can add these methods to your classes to use OO (see [examples/Vector.java](https://github.com/amelentev/java-oo/blob/master/examples/Vector.java)).
 
 
 ## Subprojects
