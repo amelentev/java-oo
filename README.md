@@ -1,7 +1,7 @@
 # Java Operator Overloading #
 
 Implementation of ([Scala-like]) [Operator Overloading] for Java language.
-Works with JavaC and Netbeans IDE.
+Works with standard JavaC compiler, Netbeans IDE, Eclipse IDE and any build tools.
 
 Example (see other examples at [examples/](https://github.com/amelentev/java-oo/tree/master/examples) dir):
 
