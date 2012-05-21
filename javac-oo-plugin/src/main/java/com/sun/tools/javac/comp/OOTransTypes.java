@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Artem Melentyev <amelentev@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the 
+ * GNU Public License v2.0 + OpenJDK assembly exception.
+ * 
+ * Contributors:
+ *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
+ ******************************************************************************/
 package com.sun.tools.javac.comp;
 
 import com.sun.tools.javac.code.Symtab;

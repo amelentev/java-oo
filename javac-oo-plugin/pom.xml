@@ -37,6 +37,12 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+	<distributionManagement>
+		<repository>
+			<id>deploy</id> <!-- for releases -->
+			<url>file:///home/mart/src/my/mvnrepo</url>
+		</repository>
+	</distributionManagement>
 	<scm>
 		<connection>scm:git:git@github.com:amelentev/java-oo.git</connection>
 	</scm>

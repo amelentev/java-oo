@@ -1,3 +1,12 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Artem Melentyev <amelentev@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the 
+ * GNU Public License v2.0 + OpenJDK assembly exception.
+ * 
+ * Contributors:
+ *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
+ ******************************************************************************/
 package javaoo.javac;
 
 import com.sun.source.util.TaskEvent;

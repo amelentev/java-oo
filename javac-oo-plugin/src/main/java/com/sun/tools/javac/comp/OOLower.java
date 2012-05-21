@@ -1,3 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2012 Artem Melentyev <amelentev@gmail.com>.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the 
+ * GNU Public License v2.0 + OpenJDK assembly exception.
+ * 
+ * Contributors:
+ *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
+ *     some code from from OpenJDK langtools (GPL2 + assembly exception)
+ ******************************************************************************/
 package com.sun.tools.javac.comp;
 
 import com.sun.source.tree.Tree;
