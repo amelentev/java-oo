@@ -1,6 +1,11 @@
 CompoundAssignment overload:
 	a += b		<=>		a.mutableAdd(b)  or  a = a.add(b)
 
+increment/decrement:
+	a++  => a.postInc()
+	--a  => a.preDec()
+	a+=b => a.addAssign(b) or a = a.add(b) 
+
 implict valueOf:
 	BigInteger a = 1	<=>	BigInteger a = BigInteger.valueOf(1)
 
@@ -12,9 +17,11 @@ bug:
 
 extension methods
 	str.iterator() -> static Iterator<Char> iterator(String s)
+	import static StringUtils.iterator;
+	@Extension public static Iterator<Character> iterator(String s);
 
 Flow dependent typing
-	Object a = ...; if (a instanceof BigInteger) c = a.add(b)
+	Object a = ...; if (a instanceof BigInteger) c = a.add(b) // without ((BigInteger)a).add(b)
 
 null operators:
 	obj?.method()  -> obj==null ? null : obj.method()
