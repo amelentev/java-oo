@@ -1,3 +1,5 @@
+todo: ! = #not(), ~ = #complement()
+
 CompoundAssignment overload:
 	a += b		<=>		a.mutableAdd(b)  or  a = a.add(b)
 
@@ -21,7 +23,7 @@ extension methods
 	@Extension public static Iterator<Character> iterator(String s);
 
 Flow dependent typing
-	Object a = ...; if (a instanceof BigInteger) c = a.add(b) // without ((BigInteger)a).add(b)
+	final Object a = ...; if (a instanceof BigInteger) c = a.add(b) // without ((BigInteger)a).add(b)
 
 null operators:
 	obj?.method()  -> obj==null ? null : obj.method()
