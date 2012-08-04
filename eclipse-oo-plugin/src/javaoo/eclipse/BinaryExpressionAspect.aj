@@ -34,7 +34,7 @@ public aspect BinaryExpressionAspect {
 	@SuppressWarnings("serial")
 	public final static java.util.Map<String, String> binaryOperators = new java.util.HashMap<String, String>() {{
 		put("+", "add");
-		put("-", "substract");
+		put("-", "subtract");
 		put("*", "multiply");
 		put("/", "divide");
 		put("%", "remainder");

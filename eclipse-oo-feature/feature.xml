@@ -27,16 +27,15 @@ http://www.eclipse.org/legal/epl-v10.html
    </license>
 
    <url>
-      <update label="Java Operator Overload" url="https://raw.github.com/amelentev/eclipse.jdt-oo-site/master/"/>
-      <discovery label="AJDT" url="http://download.eclipse.org/tools/ajdt/37/update"/>
+      <update label="Java Operator Overload" url="http://amelentev.github.com/eclipse.jdt-oo-site/"/>
    </url>
 
    <requires>
-      <import plugin="org.aspectj.runtime"/>
       <import plugin="org.eclipse.jdt.core" version="3.7.0" match="greaterOrEqual"/>
-      <import plugin="org.aspectj.weaver"/>
-      <import plugin="org.eclipse.equinox.weaving.aspectj"/>
-      <import plugin="org.eclipse.equinox.weaving.caching"/>
+      <import plugin="org.aspectj.runtime" version="1.5.3" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.osgi"/>
+      <import plugin="org.eclipse.osgi" version="3.2.0" match="compatible"/>
+      <import plugin="org.eclipse.equinox.common"/>
    </requires>
 
    <plugin
@@ -67,6 +66,21 @@ http://www.eclipse.org/legal/epl-v10.html
 
    <plugin
          id="org.eclipse.equinox.weaving.caching"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.weaving.hook"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         fragment="true"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.equinox.concurrent"
          download-size="0"
          install-size="0"
          version="0.0.0"
