@@ -7,7 +7,7 @@ public class Math {
         // without OO:
         BigInteger r1 = a.negate().add(b.multiply(b)).subtract(b.divide(a));
         // with OO:
-        BigInteger r2 = -a + b * b - b/a;
+        final BigInteger r2 = -a + b * b - b/a;
         return r1.equals(r2);
     }
     public static void main(String[] args) {

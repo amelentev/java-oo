@@ -13,6 +13,7 @@ import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.tools.javac.comp.Attr;
 import com.sun.tools.javac.comp.Lower;
+import com.sun.tools.javac.comp.MemberEnter;
 import com.sun.tools.javac.comp.Resolve;
 import com.sun.tools.javac.comp.TransTypes;
 import com.sun.tools.javac.main.JavaCompiler;
@@ -114,12 +115,13 @@ public class OOProcessor extends AbstractProcessor {
             Class<?> resolveClass = reloadClass("com.sun.tools.javac.comp.OOResolve", pcl, Resolve.class.getClassLoader());
             Class<?> lowerClass = reloadClass("com.sun.tools.javac.comp.OOLower", pcl, Lower.class.getClassLoader());
             Class<?> transTypesClass = reloadClass("com.sun.tools.javac.comp.OOTransTypes", pcl, TransTypes.class.getClassLoader());
-            Object resolve = resolveClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
+            resolveClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
             Object lower = lowerClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
             Object transTypes = transTypesClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
             Object attr = attrClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
 
             set(compiler, "attr", attr);
+            set(MemberEnter.instance(context), "attr", attr);
             set(compiler, "lower", lower);
             set(compiler, "transTypes", transTypes);
         } catch (Exception e) {
