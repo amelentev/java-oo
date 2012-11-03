@@ -50,6 +50,12 @@ public aspect BinaryExpressionAspect {
 	}};
 	
 	public MessageSend BinaryExpression.overloadMethod;
+	public static MessageSend getOverloadMethod(BinaryExpression x) {
+		return (MessageSend) Utils.get(x, "overloadMethod");
+	}
+	public static void setOverloadMethod(BinaryExpression x, MessageSend y) { // TODO: aspectj doesn't see overloadMethod: that.overloadMethod = ms;
+		Utils.set(x, "overloadMethod", y);
+	}
 	
 	public static TypeBinding overloadBinaryOperator(BinaryExpression that, BlockScope scope) {
 		// try operator overloading
@@ -76,13 +82,20 @@ public aspect BinaryExpressionAspect {
 						return that.resolvedType = TypeBinding.BOOLEAN;
 					}
 				} else {
-					Utils.set(that, "overloadMethod", ms); // TODO: aspectj doesn't see overloadMethod: that.overloadMethod = ms;
+					setOverloadMethod(that, ms);
 					that.constant = Constant.NotAConstant;
 					return that.resolvedType = ms.resolvedType;
 				}
 			}
 		}
 		return null;
+	}
+
+	pointcut isCompactableOperation(BinaryExpression that):
+		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.isCompactableOperation()) && this(that);
+
+	boolean around(BinaryExpression that): isCompactableOperation(that) {
+		return getOverloadMethod(that)==null;
 	}
 
 	pointcut generateCode(BinaryExpression that, BlockScope scope, CodeStream stream, boolean valueRequired):
@@ -92,7 +105,7 @@ public aspect BinaryExpressionAspect {
 	
 	void around(BinaryExpression that, BlockScope scope, CodeStream codeStream, boolean valueRequired): 
 			generateCode(that, scope, codeStream, valueRequired) {
-		MessageSend ms = (MessageSend) Utils.get(that, "overloadMethod"); // TODO: aspectj doesn't see overloadMethod
+		MessageSend ms = (MessageSend) getOverloadMethod(that);
 		if (ms==null) {
 			proceed(that, scope, codeStream, valueRequired);
 			return;

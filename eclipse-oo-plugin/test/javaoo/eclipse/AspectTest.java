@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 
 import org.eclipse.jdt.core.compiler.batch.BatchCompiler;
 
+/** Run with AspectJ load-time weaving. LTW aspect path = this project */
 public class AspectTest {
 	public static void compile(String clas) throws Exception {
 		compile(clas, "../examples/");
@@ -21,6 +22,6 @@ public class AspectTest {
         compile("ListIndexGet");
         compile("ListIndexSet");
         compile("MapIndex");
-        compile("CompAssBug", "test/");
+        compile("CompAssBug", "tests/");
     }
 }
