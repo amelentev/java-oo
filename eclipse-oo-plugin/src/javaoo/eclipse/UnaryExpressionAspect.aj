@@ -47,26 +47,7 @@ public aspect UnaryExpressionAspect {
 		}
 		return null;
 	}
-	
-	pointcut generateCode(UnaryExpression that, BlockScope scope, CodeStream stream, boolean valueRequired):
-		this(that) && within(org.eclipse.jdt.internal.compiler.ast.UnaryExpression) &&
-		execution(* org.eclipse.jdt.internal.compiler.ast.UnaryExpression.generateCode(BlockScope, CodeStream, boolean)) &&
-		args(scope, stream, valueRequired);
 
-	// same as in BinaryExpressionAspect
-	void around(UnaryExpression that, BlockScope scope, CodeStream codeStream, boolean valueRequired): 
-			generateCode(that, scope, codeStream, valueRequired) {
-		if (that.translate == null) {
-			proceed(that, scope, codeStream, valueRequired);
-			return;
-		}
-		Utils.removeAndGetTranslate(that).generateCode(scope, codeStream, valueRequired);
-		if (valueRequired)
-			codeStream.generateImplicitConversion(that.implicitConversion);
-		codeStream.recordPositionsFrom(codeStream.position, that.sourceStart);
-		return;
-	}
-	
 	pointcut resolveType(UnaryExpression that, BlockScope scope):
 		this(that) && within(org.eclipse.jdt.internal.compiler.ast.UnaryExpression) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.UnaryExpression.resolveType(BlockScope)) &&

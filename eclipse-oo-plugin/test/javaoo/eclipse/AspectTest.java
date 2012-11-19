@@ -22,6 +22,7 @@ public class AspectTest {
         compile("ListIndexGet");
         compile("ListIndexSet");
         compile("MapIndex");
+        compile("ValueOf");
         compile("CompAssBug", "tests/");
     }
 }

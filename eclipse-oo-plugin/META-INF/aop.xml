@@ -7,5 +7,6 @@
         <aspect name="javaoo.eclipse.UnaryExpressionAspect" />
         <aspect name="javaoo.eclipse.ArrayReferenceAspect" />
         <aspect name="javaoo.eclipse.AssignmentAspect" />
+        <aspect name="javaoo.eclipse.StatementAspect" />
     </aspects>
 </aspectj>

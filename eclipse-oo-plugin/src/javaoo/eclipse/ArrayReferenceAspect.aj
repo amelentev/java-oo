@@ -27,6 +27,8 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
 
 @SuppressWarnings("restriction")
 public aspect ArrayReferenceAspect implements TypeIds {
+	declare precedence: ExpressionAspect;
+
 	pointcut resolveType(ArrayReference that, BlockScope scope):
 		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.resolveType(BlockScope)) &&

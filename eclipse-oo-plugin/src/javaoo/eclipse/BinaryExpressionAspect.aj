@@ -90,24 +90,6 @@ public aspect BinaryExpressionAspect {
 		return that.translate==null;
 	}
 
-	pointcut generateCode(BinaryExpression that, BlockScope scope, CodeStream stream, boolean valueRequired):
-		this(that) && within(org.eclipse.jdt.internal.compiler.ast.BinaryExpression) &&
-		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.generateCode(BlockScope, CodeStream, boolean)) &&
-		args(scope, stream, valueRequired);
-	
-	void around(BinaryExpression that, BlockScope scope, CodeStream codeStream, boolean valueRequired): 
-			generateCode(that, scope, codeStream, valueRequired) {
-		if (that.translate==null) {
-			proceed(that, scope, codeStream, valueRequired);
-			return;
-		}
-		Utils.removeAndGetTranslate(that).generateCode(scope, codeStream, valueRequired);
-		if (valueRequired)
-			codeStream.generateImplicitConversion(that.implicitConversion);
-		codeStream.recordPositionsFrom(codeStream.position, that.sourceStart);
-		return;
-	}
-	
 	pointcut resolveType(BinaryExpression be, BlockScope scope):
 		this(be) && within(org.eclipse.jdt.internal.compiler.ast.BinaryExpression) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.resolveType(BlockScope)) &&
