@@ -37,4 +37,10 @@ public class Utils {
 		}
 		return null;
 	}
+
+	public static Expression removeAndGetTranslate(Expression x) {
+		Expression e = x.translate;
+		x.translate = null; // to prevent loop
+		return e;
+	}
 }

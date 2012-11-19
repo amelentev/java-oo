@@ -97,12 +97,11 @@ public aspect BinaryExpressionAspect {
 	
 	void around(BinaryExpression that, BlockScope scope, CodeStream codeStream, boolean valueRequired): 
 			generateCode(that, scope, codeStream, valueRequired) {
-		Expression ms = that.translate;
-		if (ms==null) {
+		if (that.translate==null) {
 			proceed(that, scope, codeStream, valueRequired);
 			return;
 		}
-		ms.generateCode(scope, codeStream, valueRequired);
+		Utils.removeAndGetTranslate(that).generateCode(scope, codeStream, valueRequired);
 		if (valueRequired)
 			codeStream.generateImplicitConversion(that.implicitConversion);
 		codeStream.recordPositionsFrom(codeStream.position, that.sourceStart);

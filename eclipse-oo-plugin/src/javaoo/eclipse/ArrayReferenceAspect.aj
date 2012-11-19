@@ -47,7 +47,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 				TypeBinding elementType = ((ArrayBinding) arrayType).elementsType();
 				that.resolvedType = ((that.bits & ASTNode.IsStrictlyAssigned) == 0) ? elementType.capture(scope, that.sourceEnd) : elementType;
 			} else {
-				TypeBinding positionType = that.position.resolveType(scope);
+				that.position.resolveType(scope);
 				MessageSend ms = Utils.findMethod(scope, that.receiver, "get", new Expression[]{that.position}); //$NON-NLS-1$
 				if (ms == null)
 					scope.problemReporter().referenceMustBeArrayTypeAt(arrayType, that);
@@ -71,11 +71,11 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	
 	void around(ArrayReference that, BlockScope currentScope, CodeStream codeStream, Assignment assignment, boolean valueRequired):
 			generateAssignment(that, currentScope, codeStream, assignment, valueRequired) {
-		Expression ms = that.translate;
-		if (ms==null) {
+		if (that.translate==null) {
 			proceed(that, currentScope, codeStream, assignment, valueRequired);
-		} else
-			ms.generateCode(currentScope, codeStream, valueRequired);
+		} else {
+			Utils.removeAndGetTranslate(that).generateCode(currentScope, codeStream, valueRequired);
+		}
 	}
 	
 	pointcut generateCode(ArrayReference that, BlockScope currentScope, CodeStream codeStream, boolean valueRequired):
@@ -85,10 +85,10 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	
 	void around(ArrayReference that, BlockScope currentScope, CodeStream codeStream, boolean valueRequired):
 			generateCode(that, currentScope, codeStream, valueRequired) {
-		Expression ms = that.translate;
-		if (ms == null) {
+		if (that.translate == null) {
 			proceed(that, currentScope, codeStream, valueRequired);
 		} else {
+			Expression ms = Utils.removeAndGetTranslate(that);
 			ms.generateCode(currentScope, codeStream, valueRequired);
 			codeStream.checkcast(ms.resolvedType);
 			// remaining code from #generateCode
