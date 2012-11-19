@@ -2,6 +2,7 @@
 <!-- is this really needed? seems true for < v4.2 and old equanox -->
 <aspectj>
     <aspects>
+        <aspect name="javaoo.eclipse.ExpressionAspect"/>
         <aspect name="javaoo.eclipse.BinaryExpressionAspect" />
         <aspect name="javaoo.eclipse.UnaryExpressionAspect" />
         <aspect name="javaoo.eclipse.ArrayReferenceAspect" />

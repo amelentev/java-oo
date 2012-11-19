@@ -4,7 +4,7 @@
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
- * 
+ *
  * Contributors:
  *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
  ******************************************************************************/
@@ -17,20 +17,6 @@ import org.eclipse.jdt.internal.compiler.lookup.Scope;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
 public class Utils {
-	public static Object get(Object o, String field) {
-		try {
-			return o.getClass().getField(field).get(o);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
-	public static void set(Object o, String field, Object val) {
-		try {
-			o.getClass().getField(field).set(o, val);
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-	}
 	public static MessageSend findMethod(Scope scope, Expression receiver, String selector, Expression[] args) {
 		char[] s = selector.toCharArray();
 		MessageSend ms = new MessageSend();

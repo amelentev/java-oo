@@ -32,9 +32,7 @@ public aspect UnaryExpressionAspect {
 		put("-", "negate");
 		put("~", "not");
 	}};
-	
-	public MessageSend UnaryExpression.overloadMethod;
-	
+
 	public static TypeBinding overloadUnaryOperator(UnaryExpression that, BlockScope scope) {
 		// similar to BinaryExpression#overloadBinaryOperator
 		String method = (String) unaryOperators.get(that.operatorToString());
@@ -42,7 +40,7 @@ public aspect UnaryExpressionAspect {
 			// find method
 			MessageSend ms = Utils.findMethod(scope, that.expression, method, new Expression[0]);
 			if (ms != null) {
-				Utils.set(that, "overloadMethod", ms);
+				that.translate = ms;
 				that.constant = Constant.NotAConstant;
 				return that.resolvedType = ms.resolvedType;
 			}
@@ -58,7 +56,7 @@ public aspect UnaryExpressionAspect {
 	// same as in BinaryExpressionAspect
 	void around(UnaryExpression that, BlockScope scope, CodeStream codeStream, boolean valueRequired): 
 			generateCode(that, scope, codeStream, valueRequired) {
-		MessageSend ms = (MessageSend) Utils.get(that, "overloadMethod"); // TODO: aspectj doesn't see overloadMethod
+		Expression ms = that.translate;
 		if (ms==null) {
 			proceed(that, scope, codeStream, valueRequired);
 			return;

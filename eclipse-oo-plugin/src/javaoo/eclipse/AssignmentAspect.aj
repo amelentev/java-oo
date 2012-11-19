@@ -71,7 +71,7 @@ public privileged aspect AssignmentAspect {
 				if (ms==null)
 					scope.problemReporter().referenceMustBeArrayTypeAt(alhs.receiver.resolvedType, alhs);
 				else {
-					Utils.set(alhs, "overloadMethod", ms);
+					alhs.translate = ms;
 					that.resolvedType = ms.resolvedType;
 				}
 			}

@@ -27,8 +27,6 @@ import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
 
 @SuppressWarnings("restriction")
 public aspect ArrayReferenceAspect implements TypeIds {
-	public MessageSend ArrayReference.overloadMethod;
-	
 	pointcut resolveType(ArrayReference that, BlockScope scope):
 		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.resolveType(BlockScope)) &&
@@ -54,7 +52,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 				if (ms == null)
 					scope.problemReporter().referenceMustBeArrayTypeAt(arrayType, that);
 				else {
-					Utils.set(that, "overloadMethod", ms);
+					that.translate = ms;
 					return that.resolvedType = ms.resolvedType;
 				}
 			}
@@ -73,7 +71,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	
 	void around(ArrayReference that, BlockScope currentScope, CodeStream codeStream, Assignment assignment, boolean valueRequired):
 			generateAssignment(that, currentScope, codeStream, assignment, valueRequired) {
-		MessageSend ms = (MessageSend) Utils.get(that, "overloadMethod");
+		Expression ms = that.translate;
 		if (ms==null) {
 			proceed(that, currentScope, codeStream, assignment, valueRequired);
 		} else
@@ -87,7 +85,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	
 	void around(ArrayReference that, BlockScope currentScope, CodeStream codeStream, boolean valueRequired):
 			generateCode(that, currentScope, codeStream, valueRequired) {
-		MessageSend ms = (MessageSend) Utils.get(that, "overloadMethod");
+		Expression ms = that.translate;
 		if (ms == null) {
 			proceed(that, currentScope, codeStream, valueRequired);
 		} else {
