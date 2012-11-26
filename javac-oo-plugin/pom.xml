@@ -3,7 +3,7 @@
 
     <groupId>java-oo</groupId>
     <artifactId>javac-oo-plugin</artifactId>
-    <version>0.2-SNAPSHOT</version>
+    <version>0.2</version>
     <packaging>jar</packaging>
     <name>Java Operator Overloading plugin for javac</name>
     <url>http://amelentev.github.com/java-oo/</url>
