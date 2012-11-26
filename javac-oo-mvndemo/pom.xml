@@ -7,7 +7,7 @@
     <dependency>
       <groupId>java-oo</groupId>
       <artifactId>javac-oo-plugin</artifactId>
-      <version>0.2-SNAPSHOT</version>
+      <version>${project.version}</version> <!-- replace ${} to oo release version -->
       <scope>compile</scope>
     </dependency>
   </dependencies>
@@ -31,4 +31,11 @@
       <url>http://amelentev.github.com/mvnrepo/</url>
     </repository>
   </repositories>
+  <!-- not needed for usage -->
+  <distributionManagement>
+    <repository>
+      <id>deploy</id>
+      <url>file:///home/mart/src/my/gitmvnrepo</url>
+    </repository>
+  </distributionManagement>
 </project>

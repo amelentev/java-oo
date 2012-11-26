@@ -1,9 +1,12 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
-    <groupId>java-oo</groupId>
+    <parent>
+        <groupId>java-oo</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.2-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
     <artifactId>javac-oo-plugin</artifactId>
-    <version>0.3-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>Java Operator Overloading plugin for javac</name>
     <url>http://amelentev.github.com/java-oo/</url>
@@ -27,7 +30,6 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>2.3.2</version>
                 <configuration>
                     <source>1.7</source>
                     <target>1.7</target>
@@ -36,16 +38,4 @@
             </plugin>
         </plugins>
     </build>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-	<distributionManagement>
-		<repository>
-			<id>deploy</id> <!-- for releases -->
-			<url>file:///home/mart/src/my/mvnrepo</url>
-		</repository>
-	</distributionManagement>
-	<scm>
-		<connection>scm:git:git@github.com:amelentev/java-oo.git</connection>
-	</scm>
 </project>

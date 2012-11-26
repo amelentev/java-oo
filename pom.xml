@@ -4,7 +4,7 @@
 
     <groupId>java-oo</groupId>
     <artifactId>parent</artifactId>
-    <version>0-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://amelentev.github.com/java-oo/</url>
 
@@ -16,7 +16,19 @@
     <repositories>
         <repository>
             <id>amelentev</id>
-            <url>https://bitbucket.org/amelentev/mvnrepo/raw/tip/</url>
+	    <url>http://amelentev.github.com/mvnrepo/</url>
         </repository>
     </repositories>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<distributionManagement>
+		<repository>
+			<id>deploy</id> <!-- for releases -->
+			<url>file:///home/mart/src/my/gitmvnrepo</url>
+		</repository>
+	</distributionManagement>
+	<scm>
+		<connection>scm:git:git@github.com:amelentev/java-oo.git</connection>
+	</scm>
 </project>
