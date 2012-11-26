@@ -21,13 +21,26 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
+
+	<!-- release specific -->
 	<distributionManagement>
 		<repository>
-			<id>deploy</id> <!-- for releases -->
+			<id>deploy</id>
 			<url>file:///home/mart/src/my/gitmvnrepo</url>
 		</repository>
 	</distributionManagement>
 	<scm>
 		<connection>scm:git:git@github.com:amelentev/java-oo.git</connection>
 	</scm>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<configuration>
+					<tagNameFormat>@{project.version}</tagNameFormat>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>
