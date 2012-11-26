@@ -84,7 +84,9 @@ public aspect BinaryExpressionAspect {
 	}
 
 	pointcut isCompactableOperation(BinaryExpression that):
-		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.isCompactableOperation()) && this(that);
+		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.isCompactableOperation()) &&
+		within(org.eclipse.jdt.internal.compiler.ast.BinaryExpression) &&
+		this(that);
 
 	boolean around(BinaryExpression that): isCompactableOperation(that) {
 		return that.translate==null;

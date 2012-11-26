@@ -4,6 +4,7 @@ import org.eclipse.jdt.internal.compiler.ast.Expression;
 import org.eclipse.jdt.internal.compiler.codegen.CodeStream;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 
+@SuppressWarnings("restriction")
 public aspect ExpressionAspect {
 	public Expression Expression.translate;
 

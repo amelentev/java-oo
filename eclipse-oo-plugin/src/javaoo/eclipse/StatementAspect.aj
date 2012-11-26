@@ -18,6 +18,7 @@ import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.Scope;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
+@SuppressWarnings("restriction")
 public aspect StatementAspect {
 	pointcut isBoxingCompatible(Statement that, TypeBinding expressionType, TypeBinding targetType, Expression expression, Scope scope):
 		this(that) && within(org.eclipse.jdt.internal.compiler.ast.Statement) &&
