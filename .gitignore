@@ -3,6 +3,7 @@
 bin
 target
 javac-oo-plugin/.??*
+javac-oo-plugin/javac-oo-plugin.iml
 /.project
 /.settings
 /javac-oo

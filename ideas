@@ -8,9 +8,6 @@ increment/decrement:
 	--a  => a.preDec()
 	a+=b => a.addAssign(b) or a = a.add(b) 
 
-implict valueOf:
-	BigInteger a = 1	<=>	BigInteger a = BigInteger.valueOf(1)
-
 translate to pure java. like delombok
 	via pe.getFiler(), after Attr phase
 
