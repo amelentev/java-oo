@@ -34,7 +34,9 @@ public class OOResolve extends Resolve {
     protected OOResolve(Context context) {
         super(context);
     }
-    public static OOResolve hook(Context context) {
+    public static OOResolve instance(Context context) {
+        Resolve res = context.get(resolveKey);
+        if (res instanceof OOResolve) return (OOResolve)res;
         context.put(resolveKey, (Resolve)null);
         return new OOResolve(context);
     }

@@ -115,10 +115,10 @@ public class OOProcessor extends AbstractProcessor {
             Class<?> resolveClass = reloadClass("com.sun.tools.javac.comp.OOResolve", pcl, Resolve.class.getClassLoader());
             Class<?> lowerClass = reloadClass("com.sun.tools.javac.comp.OOLower", pcl, Lower.class.getClassLoader());
             Class<?> transTypesClass = reloadClass("com.sun.tools.javac.comp.OOTransTypes", pcl, TransTypes.class.getClassLoader());
-            resolveClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
-            Object lower = lowerClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
-            Object transTypes = transTypesClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
-            Object attr = attrClass.getDeclaredMethod("hook", Context.class).invoke(null, context);
+            resolveClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
+            Object attr = attrClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
+            Object lower = lowerClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
+            Object transTypes = transTypesClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
 
             set(compiler, "attr", attr);
             set(MemberEnter.instance(context), "attr", attr);
