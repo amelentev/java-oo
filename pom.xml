@@ -3,7 +3,7 @@
 
     <groupId>java-oo</groupId>
     <artifactId>parent</artifactId>
-    <version>0.2</version>
+    <version>0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://amelentev.github.com/java-oo/</url>
 
