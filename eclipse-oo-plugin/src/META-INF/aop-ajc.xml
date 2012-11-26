@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <aspectj>
 	<aspects>
-		<aspect name="javaoo.eclipse.ExpressionAspect"/>
 		<aspect name="javaoo.eclipse.UnaryExpressionAspect"/>
+		<aspect name="javaoo.eclipse.StatementAspect"/>
+		<aspect name="javaoo.eclipse.ExpressionAspect"/>
 		<aspect name="javaoo.eclipse.BinaryExpressionAspect"/>
 		<aspect name="javaoo.eclipse.AssignmentAspect"/>
 		<aspect name="javaoo.eclipse.ArrayReferenceAspect"/>
-		<aspect name="javaoo.eclipse.StatementAspect"/>
 	</aspects>
 </aspectj>
