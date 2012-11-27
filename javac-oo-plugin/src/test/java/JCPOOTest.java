@@ -25,6 +25,9 @@ public class JCPOOTest {
     @Test public void testDemo() throws Exception {
         compile("Demo");
     }
+    @Test public void testVector() throws Exception {
+        compile("Vector");
+    }
     @Test public void testCompAss() throws Exception {
         compile("CompAss", "../tests");
     }

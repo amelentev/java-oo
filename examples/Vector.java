@@ -21,10 +21,13 @@ public class Vector {
 	public String toString() {
 		return Arrays.toString(d);
 	}
+	public static Vector valueOf(int[] d) {
+		return new Vector(d);
+	}
 	
 	public static boolean test() {
 		Vector a = new Vector(1,2),
-				b = new Vector(2,3),
+				b = new int[]{2,3},
 				c = a + b*2;
 		return "[5, 8]".equals(c.toString());
 	}
