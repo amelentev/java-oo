@@ -1,1 +1,0 @@
-../../../../examples/MapIndex.java
