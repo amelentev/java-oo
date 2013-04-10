@@ -1,9 +1,13 @@
 *~
 *.class
 bin
+out
 target
-javac-oo-plugin/.??*
-javac-oo-plugin/javac-oo-plugin.iml
-/.project
-/.settings
+**/.idea/workspace.xml
+.idea/workspace.xml
+**/.idea/libraries
+.idea/libraries
+.project
+.settings
+.classpath
 /javac-oo

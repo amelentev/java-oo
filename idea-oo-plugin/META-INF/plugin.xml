@@ -1,0 +1,38 @@
+<idea-plugin version="2">
+  <id>javaoo.idea</id>
+  <name>Java Operator Overloading support</name>
+  <version>0.3-SNAPSHOT</version>
+  <vendor email="amelentev at gmail dot com" url="amelentev.github.com/java-oo/">Artem Melentyev</vendor>
+
+  <description><![CDATA[
+      Plugin for Java Operator Overloading.
+      ]]></description>
+  <category>Custom Languages</category>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
+  <idea-version since-build="107.105"/>
+
+  <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+       on how to target different products -->
+  <depends>com.intellij.modules.java</depends>
+
+  <project-components>
+      <component>
+          <implementation-class>javaoo.idea.OOComponent</implementation-class>
+      </component>
+  </project-components>
+
+  <actions>
+    <!-- Add your actions here -->
+  </actions>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <highlightVisitor implementation="javaoo.idea.OOHighlightVisitorImpl"/>
+  </extensions>
+
+  <change-notes><![CDATA[
+        0.3 Initial release.
+        No index OO and implicit type conversion yet.
+      ]]>
+  </change-notes>
+</idea-plugin>
