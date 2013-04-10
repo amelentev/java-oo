@@ -19,6 +19,7 @@ import com.sun.tools.javac.tree.TreeMaker;
 import com.sun.tools.javac.util.Context;
 import com.sun.tools.javac.util.JCDiagnostic;
 import com.sun.tools.javac.util.List;
+import javaoo.OOMethods;
 
 import java.lang.reflect.Field;
 
@@ -79,7 +80,7 @@ public class OOLower extends Lower {
                 meth.sym = ms;
                 result = make.Apply(null, meth, List.of(tree.rhs))
                         .setType( ((Type.MethodType)ms.type).restype ); // tree.type may be != ms.type.restype. see below
-                if (ms.name.contentEquals("compareTo")) {
+                if (ms.name.contentEquals(OOMethods.compareTo)) {
                     // rewrite to `left.compareTo(right) </> 0`
                     JCLiteral zero = make.Literal(0);
                     JCBinary r = make.Binary(tree.getTag(), (JCExpression) result, zero);

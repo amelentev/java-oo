@@ -18,9 +18,9 @@ import com.sun.tools.javac.jvm.ByteCodes;
 import com.sun.tools.javac.util.Context;
 import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
+import javaoo.OOMethods;
 
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 
 import static com.sun.tools.javac.code.Flags.*;
@@ -122,16 +122,16 @@ public class OOResolve extends Resolve {
             String opname = null;
             List<Type> args = List.nil();
             if (argtypes.size() == 2) {
-                opname = binaryOperators.get(name.toString());
+                opname = OOMethods.binary.get(name.toString());
                 args = List.of(argtypes.get(1));
             } else if (argtypes.size() == 1)
-                opname = unaryOperators.get(name.toString());
+                opname = OOMethods.unary.get(name.toString());
             if (opname != null) {
                 Symbol method = findMethod(env, argtypes.get(0), names.fromString(opname),
                         args, null, false, false, false);
                 if (method.kind == Kinds.MTH) {
                     bestSoFar = new Symbol.OperatorSymbol(method.name, method.type, ByteCodes.error+1, method);
-                    if ("compareTo".equals(opname)) { // change result type to boolean if </>
+                    if (OOMethods.compareTo.equals(opname)) { // change result type to boolean if </>
                         Type.MethodType oldmt = (Type.MethodType) method.type;
                         bestSoFar.type = new Type.MethodType(oldmt.argtypes, syms.booleanType, oldmt.thrown, oldmt.tsym);
                     }
@@ -139,28 +139,5 @@ public class OOResolve extends Resolve {
             }
         }
         return bestSoFar;
-    }
-
-    java.util.Map<String, String> binaryOperators = new java.util.HashMap<String, String>();
-    java.util.Map<String, String> unaryOperators = new java.util.HashMap<String, String>();
-    {
-        Map<String, String> m = binaryOperators;
-        m.put("+", "add");
-        m.put("-", "subtract");
-        m.put("*", "multiply");
-        m.put("/", "divide");
-        m.put("%", "remainder");
-        m.put("&", "and");
-        m.put("|", "or");
-        m.put("^", "xor");
-        m.put("<<", "shiftLeft");
-        m.put(">>", "shiftRight");
-        m.put("<", "compareTo");
-        m.put(">", "compareTo");
-        m.put("<=", "compareTo");
-        m.put(">=", "compareTo");
-        m = unaryOperators;
-        m.put("-", "negate");
-        m.put("~", "not");
     }
 }

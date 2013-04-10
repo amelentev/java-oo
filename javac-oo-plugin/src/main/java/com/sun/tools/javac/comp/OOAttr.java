@@ -16,9 +16,8 @@ import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.tree.JCTree;
 import com.sun.tools.javac.util.Context;
-import com.sun.tools.javac.util.JCDiagnostic;
 import com.sun.tools.javac.util.List;
-import com.sun.tools.javac.util.Warner;
+import javaoo.OOMethods;
 
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -62,7 +61,7 @@ public class OOAttr extends Attr {
         // construct "<req>.valueOf(tree)" static method call
         tree.type = owntype;
         JCTree.JCMethodInvocation valueOf = make.Apply(null,
-                make.Select(make.Ident(pt.tsym), names.fromString("valueOf")),
+                make.Select(make.Ident(pt.tsym), names.fromString(OOMethods.valueOf)),
                 List.of(param == null ? (JCTree.JCExpression)tree : param));
         valueOf.type = attribTree(valueOf, env, pkind, pt);
         return types.isAssignable(valueOf.type, req) ? valueOf : null;
@@ -101,12 +100,16 @@ public class OOAttr extends Attr {
             attribExpr(tree.index, env);
             boolean ok = false;
             if (env.tree.getKind() == Tree.Kind.ASSIGNMENT && ((JCTree.JCAssign)env.tree).lhs == tree) {
+                // index set
                 JCTree.JCAssign ass = (JCTree.JCAssign) env.tree;
                 Type rhstype = attribExpr(ass.rhs, env);
                 List<Type> argtypes = List.of(tree.index.type, rhstype);
-                Symbol m = rs.findMethod(env, atype, names.fromString("set"), argtypes, null, true, false, false);
-                if (m.kind != Kinds.MTH)
-                    m = rs.findMethod(env, atype, names.fromString("put"), argtypes, null, true, false, false); // Map#put
+                Symbol m = null;
+                for (String indexSet : OOMethods.indexSet) {
+                    m = rs.findMethod(env, atype, names.fromString(indexSet), argtypes, null, true, false, false);
+                    if (m.kind == Kinds.MTH)
+                        break;
+                }
                 if (m.kind == Kinds.MTH) {
                     JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(tree.indexed, m), List.of(tree.index, ass.rhs));
                     mi.type = attribExpr(mi, env);
@@ -115,8 +118,9 @@ public class OOAttr extends Attr {
                     ok = true;
                 }
             } else {
+                // index get
                 List<Type> argtypes = List.of(tree.index.type);
-                Symbol m = rs.findMethod(env, atype, names.fromString("get"), argtypes, null, true, false, false);
+                Symbol m = rs.findMethod(env, atype, names.fromString(OOMethods.indexGet), argtypes, null, true, false, false);
                 if (m.kind == Kinds.MTH) {
                     //owntype = rs.instantiate(env, atype, m, argtypes, null, true, false, noteWarner).getReturnType();
                     JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(tree.indexed, m), List.of(tree.index));

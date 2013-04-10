@@ -115,6 +115,10 @@ public class OOProcessor extends AbstractProcessor {
             Class<?> resolveClass = reloadClass("com.sun.tools.javac.comp.OOResolve", pcl, Resolve.class.getClassLoader());
             Class<?> lowerClass = reloadClass("com.sun.tools.javac.comp.OOLower", pcl, Lower.class.getClassLoader());
             Class<?> transTypesClass = reloadClass("com.sun.tools.javac.comp.OOTransTypes", pcl, TransTypes.class.getClassLoader());
+            reloadClass("javaoo.OOMethods", pcl, TransTypes.class.getClassLoader());
+            reloadClass("javaoo.OOMethods$1", pcl, TransTypes.class.getClassLoader());
+            reloadClass("javaoo.OOMethods$2", pcl, TransTypes.class.getClassLoader());
+
             resolveClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
             Object attr = attrClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
             Object lower = lowerClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
