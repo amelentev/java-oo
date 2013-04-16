@@ -15,6 +15,7 @@
 package javaoo.idea;
 
 import com.intellij.psi.*;
+import com.intellij.psi.impl.source.tree.java.PsiMethodCallExpressionImpl;
 import com.intellij.psi.util.TypeConversionUtil;
 import javaoo.OOMethods;
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +28,10 @@ public class OOResolver {
     }
     public static @NotNull PsiType getOOType(PsiType ltype, PsiType rtype, @NotNull PsiJavaToken op) {
         String methodname =  OOMethods.binary.get(op.getText());
-        if (methodname!=null && rtype!=null && ltype instanceof PsiClassType) {
-            PsiMethod oomethod = resolveMethod((PsiClassType)ltype, methodname, rtype);
-            if (oomethod!=null)
-                return oomethod.getReturnType();
+        if (methodname!=null && rtype!=null) {
+            PsiType res = resolveMethod(ltype, methodname, rtype);
+            if (res!=null)
+                return res;
         }
         return TypeConversionUtil.NULL_TYPE;
     }
@@ -38,24 +39,32 @@ public class OOResolver {
     public static @NotNull PsiType getOOType(@NotNull PsiPrefixExpression e) {
         PsiType optype = e.getOperand().getType();
         String methodname = OOMethods.unary.get(e.getOperationSign().getText());
-        if (methodname!=null && optype instanceof PsiClassType) {
-            PsiMethod oomethod = resolveMethod((PsiClassType)optype, methodname);
-            if (oomethod!=null)
-                return oomethod.getReturnType();
+        if (methodname!=null) {
+            PsiType res = resolveMethod(optype, methodname);
+            if (res!=null)
+                return res;
         }
         return TypeConversionUtil.NULL_TYPE;
     }
 
+    public static @NotNull PsiType indexGet(@NotNull PsiArrayAccessExpression e) {
+        PsiType res = OOResolver.resolveMethod(e.getArrayExpression().getType(), "get", e.getIndexExpression().getType());
+        return res!=null ? res : TypeConversionUtil.NULL_TYPE;
+    }
+
     // TODO: find a better way to do it
-    public static @Nullable PsiMethod resolveMethod(@NotNull PsiClassType clas, @NotNull String methodName, @NotNull PsiType... argTypes) {
+    public static @Nullable PsiType resolveMethod(@NotNull PsiType type, @NotNull String methodName, @NotNull PsiType... argTypes) {
+        if (!(type instanceof PsiClassType)) return null;
+        PsiClassType clas = ((PsiClassType) type);
+        PsiSubstitutor subst = clas.resolveGenerics().getSubstitutor();
         PsiMethod methods[] = clas.resolve().findMethodsByName(methodName, true);
         for (PsiMethod method : methods) {
             PsiParameter[] pars = method.getParameterList().getParameters();
             if (pars.length == argTypes.length) {
                 boolean ok = true;
                 for (int i = 0; i < pars.length; i++)
-                    ok &= pars[i].getType().isAssignableFrom(argTypes[i]);
-                if (ok) return method;
+                    ok &= subst.substitute(pars[i].getType()).isAssignableFrom(argTypes[i]);
+                if (ok) return subst.substitute(method.getReturnType());
             }
         }
         return null;

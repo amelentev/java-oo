@@ -24,6 +24,7 @@ import com.intellij.openapi.extensions.impl.ExtensionComponentAdapter;
 import com.intellij.openapi.extensions.impl.ExtensionPointImpl;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.impl.source.tree.JavaElementType;
+import com.intellij.psi.impl.source.tree.java.PsiArrayAccessExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiBinaryExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiPolyadicExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiPrefixExpressionImpl;
@@ -51,6 +52,7 @@ public class OOComponent implements ProjectComponent, OOMethods {
         Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiOOBinaryExpressionImpl.class);
         Util.setJavaElementConstructor(JavaElementType.PREFIX_EXPRESSION, PsiOOPrefixExpressionImpl.class);
         Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiOOPolyadicExpressionImpl.class);
+        Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiOOArrayAccessExpressionImpl.class);
 
         ExtensionPoint<HighlightVisitor> ep = Extensions.getArea(project).getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
         Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl) ep, "myExtensionAdapters");
@@ -67,6 +69,7 @@ public class OOComponent implements ProjectComponent, OOMethods {
         Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiBinaryExpressionImpl.class);
         Util.setJavaElementConstructor(JavaElementType.PREFIX_EXPRESSION, PsiPrefixExpressionImpl.class);
         Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiPolyadicExpressionImpl.class);
+        Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiArrayAccessExpressionImpl.class);
     }
 
     public void projectOpened() {}

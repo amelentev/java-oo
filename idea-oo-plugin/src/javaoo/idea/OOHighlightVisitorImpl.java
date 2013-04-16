@@ -55,6 +55,16 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         }
     }
 
+    @Override
+    public void visitExpression(PsiExpression expression) {
+        super.visitExpression(expression);
+        if (expression instanceof PsiArrayAccessExpression) {
+            PsiArrayAccessExpression paa = (PsiArrayAccessExpression) expression;
+            if (isHighlighted(paa.getArrayExpression()) && OOResolver.indexGet((PsiArrayAccessExpression) expression)!=TypeConversionUtil.NULL_TYPE)
+                removeLastHighlight();
+        }
+    }
+
     private HighlightInfoHolder getMyHolder() {
         return (HighlightInfoHolder) Util.get(HighlightVisitorImpl.class, this, "myHolder");
     }
