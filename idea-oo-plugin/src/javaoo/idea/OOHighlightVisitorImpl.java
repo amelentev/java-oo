@@ -65,16 +65,28 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         }
     }
 
-    @Override // Index-Set OO
-    public void visitAssignmentExpression(PsiAssignmentExpression assignment) {
-        super.visitAssignmentExpression(assignment);
-        if ("=".equals(assignment.getOperationSign().getText())
-                && assignment.getLExpression() instanceof PsiArrayAccessExpression
-                && isHighlighted(assignment.getLExpression())) {
-            PsiArrayAccessExpression paa = (PsiArrayAccessExpression) assignment.getLExpression();
-            if (OOResolver.indexSet(paa, assignment.getRExpression())!=TypeConversionUtil.NULL_TYPE)
+    @Override
+    public void visitAssignmentExpression(PsiAssignmentExpression ass) {
+        super.visitAssignmentExpression(ass);
+        if ("=".equals(ass.getOperationSign().getText())) {
+            // Index-Set OO
+            if (ass.getLExpression() instanceof PsiArrayAccessExpression
+                    && isHighlighted(ass.getLExpression())) {
+                PsiArrayAccessExpression paa = (PsiArrayAccessExpression) ass.getLExpression();
+                if (OOResolver.indexSet(paa, ass.getRExpression())!=TypeConversionUtil.NULL_TYPE)
+                    removeLastHighlight();
+            }
+            // Implicit type conversion in assignment
+            if (isHighlighted(ass) && OOResolver.isTypeConvertible(ass.getLExpression().getType(), ass.getRExpression()))
                 removeLastHighlight();
         }
+    }
+
+    @Override // Implicit type conversion in variable declaration
+    public void visitVariable(PsiVariable var) {
+        super.visitVariable(var);
+        if (var.hasInitializer() && isHighlighted(var) && OOResolver.isTypeConvertible(var.getType(), var.getInitializer()))
+            removeLastHighlight();
     }
 
     private HighlightInfoHolder getMyHolder() {
@@ -85,14 +97,19 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         HighlightInfoHolder myHolder = getMyHolder();
         if (myHolder.hasErrorResults()) {
             HighlightInfo hi = myHolder.get(myHolder.size()-1);
+            if (expression instanceof PsiVariable) { // workaround for variable declaration incompatible types highlight
+                PsiVariable v = (PsiVariable) expression;
+                return hi.startOffset==v.getTypeElement().getTextRange().getStartOffset()  && hi.endOffset==v.getTextRange().getEndOffset();
+            }
             TextRange tr = expression.getTextRange();
             return hi.startOffset==tr.getStartOffset() && hi.endOffset==tr.getEndOffset();
         }
         return false;
     }
 
+    // TODO: what highlightinfo to delete?
     private void removeLastHighlight() {
-        List myInfos = (List) Util.get(HighlightInfoHolder.class, getMyHolder(), "myInfos");
+        List<HighlightInfo> myInfos = (List) Util.get(HighlightInfoHolder.class, getMyHolder(), "myInfos");
         myInfos.remove(getMyHolder().size()-1);
     }
 }

@@ -60,6 +60,10 @@ public class OOResolver {
         return TypeConversionUtil.NULL_TYPE;
     }
 
+    public static boolean isTypeConvertible(PsiType to, PsiExpression from) {
+        return OOResolver.resolveMethod(to, OOMethods.valueOf, from.getType())!=null;
+    }
+
     public static @Nullable PsiType resolveMethod(@NotNull PsiExpression clas, @NotNull String methodName, @NotNull PsiExpression... args) {
         PsiType[] argTypes = new PsiType[args.length];
         for (int i = 0; i < args.length; i++)
