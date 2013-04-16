@@ -34,7 +34,7 @@
         <h1>Java Operator Overloading</h1>
 
 <p>Implementation of (<a href="http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973">Scala-like</a>) <a href="http://en.wikipedia.org/wiki/Operator_overloading">Operator Overloading</a> for Java language.
-Works with standard JavaC compiler, Netbeans IDE, Eclipse IDE and any build tools.</p>
+Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans IDE</a>, <a href="http://eclipse.org/">Eclipse IDE</a>, <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> IDE and any build tools.</p>
 
 <p>Example (see other examples at <a href="https://github.com/amelentev/java-oo/tree/master/examples">examples/</a> dir):</p>
 
@@ -60,26 +60,47 @@ Works with standard JavaC compiler, Netbeans IDE, Eclipse IDE and any build tool
 
 <h1>News</h1>
 
-<p>26 Nov 2012. <a href="https://github.com/amelentev/java-oo/issues?milestone=1&amp;state=closed">Version 0.2</a> released. New feature: <a href="#4">Implicit type conversion</a> via static <em>#valueOf</em> method.</p>
+<p>17 Apr 2013. <a href="#intellij-idea-ide">IntelliJ IDEA</a> IDE plugin.</p>
+
+<p>26 Nov 2012. <a href="https://github.com/amelentev/java-oo/issues?milestone=1&amp;state=closed">Version 0.2</a> released. New feature: <a href="https://github.com/amelentev/java-oo/issues/4">Implicit type conversion</a> via static <em>#valueOf</em> method.</p>
 
 <h1>Installation</h1>
 
-<h2>Eclipse IDE update site</h2>
+<h2>
+<a href="http://eclipse.org/">Eclipse IDE</a> update site</h2>
 
 <p>Click in menu: Help - Install New Software. Enter in "Work with" field:</p>
 
-<pre><code>http://amelentev.github.com/eclipse.jdt-oo-site/
+<pre><code>http://amelentev.github.io/eclipse.jdt-oo-site/
 </code></pre>
 
-<p>Tested on 4.2.1.</p>
+<p>Tested on 4.2.1</p>
 
-<h2>Netbeans IDE</h2>
+<h2><a href="http://www.netbeans.org/">Netbeans IDE</a></h2>
 
-<p>Add <a href="http://amelentev.github.com/mvnrepo/java-oo/javac-oo-plugin/0.1/javac-oo-plugin-0.1.jar">javac-oo-plugin.jar</a> as compile or processor library to Netbeans and enable "Annotation Processing in Editor" (Project Properties-Build-Compiling). Tested on 7.2.1</p>
+<ol>
+<li>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.2/javac-oo-plugin-0.2.jar">javac-oo-plugin.jar</a> as compile or processor library to Netbeans.</li>
+<li>Enable "Annotation Processing in Editor" (Project Properties -&gt; Build -&gt; Compiling).</li>
+</ol><p>Tested on 7.2.1</p>
 
-<h2>javac, ant, etc</h2>
+<h2>
+<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> IDE</h2>
 
-<p>Just add <a href="http://amelentev.github.com/mvnrepo/java-oo/javac-oo-plugin/0.1/javac-oo-plugin-0.1.jar">javac-oo-plugin.jar</a> to classpath:</p>
+<ol>
+<li>Install <a href="http://plugins.jetbrains.com/plugin?pr=&amp;pluginId=7224">idea-oo-plugin</a>
+(mirror: <a href="http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.jar">idea-oo-plugin.jar</a>) <br>
+For <a href="#maven">Maven projects</a> installation is done. IDEA should setup everything according to pom.xml. <br>
+For other project types: <br>
+</li>
+<li>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.2/javac-oo-plugin-0.2.jar">javac-oo-plugin.jar</a> as compile or processor library.</li>
+<li>Enable Annotation Processing:
+<code>Menu File -&gt; Settings -&gt; Compiler -&gt; Annotation Processing -&gt; Enable annotation processing</code>
+</li>
+<li>Make sure you use <code>javac</code> compiler in <code>Settings -&gt; Compiler -&gt; Use compiler</code>. <br>
+Tested on IDEA Commutity Edition 12.1.1</li>
+</ol><h2>javac, ant, etc</h2>
+
+<p>Just add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.2/javac-oo-plugin-0.2.jar">javac-oo-plugin.jar</a> to classpath:</p>
 
 <pre><code>javac -cp javac-oo-plugin.jar &lt;sources&gt;
 </code></pre>
@@ -94,7 +115,7 @@ Works with standard JavaC compiler, Netbeans IDE, Eclipse IDE and any build tool
 
 <p>Supported operators (operator to method map):</p>
 
-<h3>binary:</h3>
+<p>binary:</p>
 
 <pre><code>| OPERATOR | METHOD    |
 ------------------------
@@ -110,31 +131,31 @@ Works with standard JavaC compiler, Netbeans IDE, Eclipse IDE and any build tool
 | &gt;&gt;       | shiftRight|
 </code></pre>
 
-<h3>unary:</h3>
+<p>unary:</p>
 
 <pre><code>| - | negate |
 | ~ | not    |
 </code></pre>
 
-<h3>comparison:</h3>
+<p>comparison:</p>
 
 <pre><code>| &lt;, &lt;=, &gt;, &gt;= | compareTo  | example: `a &lt; b` &lt;=&gt; `a.compareTo(b)&lt;0`
 `==` and `!=` is not overloadable because it will break things
 </code></pre>
 
-<h3>index:</h3>
+<p>index:</p>
 
 <pre><code>| []  | get       | `v = lst[i]` &lt;=&gt; `v = lst.get(i)`
 | []= | set, put  | `map[s] = v` &lt;=&gt; `map.put(s,v)`,  `lst[i] = v` &lt;=&gt; `lst.set(i,v)`
 </code></pre>
 
-<h3>Implicit type conversion:</h3>
+<p>Implicit type conversion:</p>
 
-<p>if <em>expression</em> has type <em>ExpressionType</em> and there are static method <em>RequredType RequredType#valueOf(ExpressionType)</em>
-then <em>expression</em> can be assigned to <em>RequredType</em>. <br>
-example: <em>BigInteger a = 1</em> translates to <em>BigInteger a = BigInteger.valueOf(1)</em></p>
+<p>if <em>expression</em> has type <em>ExpressionType</em> and there are static method <em>RequredType RequredType#valueOf(ExpressionType)</em><br> 
+then <em>expression</em> can be assigned to <em>RequredType</em>.
+example: <br><code>BigInteger a = 1</code> translates to <code>BigInteger a = BigInteger.valueOf(1)</code></p>
 
-<p>These methods exists in many java classes (ex:BigInteger,BigDecimal) so you can
+<p>These methods exists in many java classes (example: BigInteger, BigDecimal) so you can
 use operators on them "out of the box". Or you can add these methods to your classes to use OO (see <a href="https://github.com/amelentev/java-oo/blob/master/examples/Vector.java">examples/Vector.java</a>).</p>
       </section>
     </div>
