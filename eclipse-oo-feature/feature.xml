@@ -27,7 +27,7 @@ http://www.eclipse.org/legal/epl-v10.html
    </license>
 
    <url>
-      <update label="Java Operator Overload" url="http://amelentev.github.com/eclipse.jdt-oo-site/"/>
+      <update label="Java Operator Overload" url="http://amelentev.github.io/eclipse.jdt-oo-site/"/>
    </url>
 
    <requires>

@@ -1,12 +1,11 @@
-<idea-plugin version="2">
+<idea-plugin version="2" url="http://amelentev.github.io/java-oo/">
   <id>javaoo.idea</id>
   <name>Java Operator Overloading support</name>
   <version>0.2</version>
-  <vendor email="amelentev_@_gmail.com" url="http://amelentev.github.com/java-oo/">Artem Melentyev</vendor>
+  <vendor email="amelentev_@_gmail.com" url="http://amelentev.github.io/java-oo/">Artem Melentyev</vendor>
 
   <description><![CDATA[
       Plugin for Java Operator Overloading support.
-      See http://amelentev.github.com/java-oo/#IDEA for setup and details.
       ]]></description>
   <category>Custom Languages</category>
 
