@@ -48,12 +48,26 @@ public class OOResolver {
     }
 
     public static @NotNull PsiType indexGet(@NotNull PsiArrayAccessExpression e) {
-        PsiType res = OOResolver.resolveMethod(e.getArrayExpression().getType(), "get", e.getIndexExpression().getType());
+        PsiType res = OOResolver.resolveMethod(e.getArrayExpression().getType(), OOMethods.indexGet, e.getIndexExpression().getType());
         return res!=null ? res : TypeConversionUtil.NULL_TYPE;
     }
 
+    public static PsiType indexSet(PsiArrayAccessExpression paa, PsiExpression value) {
+        for (String method : OOMethods.indexSet) {
+            PsiType res = OOResolver.resolveMethod(paa.getArrayExpression(), method, paa.getIndexExpression(), value);
+            if (res!=null) return res;
+        }
+        return TypeConversionUtil.NULL_TYPE;
+    }
+
+    public static @Nullable PsiType resolveMethod(@NotNull PsiExpression clas, @NotNull String methodName, @NotNull PsiExpression... args) {
+        PsiType[] argTypes = new PsiType[args.length];
+        for (int i = 0; i < args.length; i++)
+            argTypes[i] = args[i].getType();
+        return resolveMethod(clas.getType(), methodName, argTypes);
+    }
     // TODO: find a better way to do it
-    public static @Nullable PsiType resolveMethod(@NotNull PsiType type, @NotNull String methodName, @NotNull PsiType... argTypes) {
+    public static @Nullable PsiType resolveMethod(PsiType type, @NotNull String methodName, @NotNull PsiType... argTypes) {
         if (!(type instanceof PsiClassType)) return null;
         PsiClassType clas = ((PsiClassType) type);
         PsiSubstitutor subst = clas.resolveGenerics().getSubstitutor();

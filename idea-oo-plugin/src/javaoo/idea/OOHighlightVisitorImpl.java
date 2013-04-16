@@ -29,7 +29,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         super(resolveHelper);
     }
 
-    @Override
+    @Override // Binary OO
     public void visitPolyadicExpression(PsiPolyadicExpression expression) {
         super.visitPolyadicExpression(expression);
         if (isHighlighted(expression)) {
@@ -46,7 +46,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         }
     }
 
-    @Override
+    @Override // Unary OO
     public void visitPrefixExpression(PsiPrefixExpression expression) {
         super.visitPrefixExpression(expression);
         if (isHighlighted(expression)
@@ -55,12 +55,24 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         }
     }
 
-    @Override
+    @Override // Index-Get OO
     public void visitExpression(PsiExpression expression) {
         super.visitExpression(expression);
         if (expression instanceof PsiArrayAccessExpression) {
             PsiArrayAccessExpression paa = (PsiArrayAccessExpression) expression;
             if (isHighlighted(paa.getArrayExpression()) && OOResolver.indexGet((PsiArrayAccessExpression) expression)!=TypeConversionUtil.NULL_TYPE)
+                removeLastHighlight();
+        }
+    }
+
+    @Override // Index-Set OO
+    public void visitAssignmentExpression(PsiAssignmentExpression assignment) {
+        super.visitAssignmentExpression(assignment);
+        if ("=".equals(assignment.getOperationSign().getText())
+                && assignment.getLExpression() instanceof PsiArrayAccessExpression
+                && isHighlighted(assignment.getLExpression())) {
+            PsiArrayAccessExpression paa = (PsiArrayAccessExpression) assignment.getLExpression();
+            if (OOResolver.indexSet(paa, assignment.getRExpression())!=TypeConversionUtil.NULL_TYPE)
                 removeLastHighlight();
         }
     }
