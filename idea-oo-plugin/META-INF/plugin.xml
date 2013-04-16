@@ -32,7 +32,6 @@
 
   <change-notes><![CDATA[
         0.3 Initial release.
-        No index OO and implicit type conversion yet.
       ]]>
   </change-notes>
 </idea-plugin>

@@ -17,9 +17,9 @@ package javaoo.idea;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightVisitorImpl;
+import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
-import com.intellij.psi.util.TypeConversionUtil;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -41,7 +41,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
                 // TODO: case A + A + int ? A.add(A) : int
                 lType = OOResolver.getOOType(lType, rType, expression.getTokenBeforeOperand(operand));
             }
-            if (lType != TypeConversionUtil.NULL_TYPE)
+            if (lType != OOResolver.NoType)
                 removeLastHighlight();
         }
     }
@@ -50,7 +50,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
     public void visitPrefixExpression(PsiPrefixExpression expression) {
         super.visitPrefixExpression(expression);
         if (isHighlighted(expression)
-                && OOResolver.getOOType(expression) != TypeConversionUtil.NULL_TYPE) {
+                && OOResolver.getOOType(expression) != OOResolver.NoType) {
             removeLastHighlight();
         }
     }
@@ -60,7 +60,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         super.visitExpression(expression);
         if (expression instanceof PsiArrayAccessExpression) {
             PsiArrayAccessExpression paa = (PsiArrayAccessExpression) expression;
-            if (isHighlighted(paa.getArrayExpression()) && OOResolver.indexGet((PsiArrayAccessExpression) expression)!=TypeConversionUtil.NULL_TYPE)
+            if (isHighlighted(paa.getArrayExpression()) && OOResolver.indexGet((PsiArrayAccessExpression) expression)!=OOResolver.NoType)
                 removeLastHighlight();
         }
     }
@@ -73,7 +73,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
             if (ass.getLExpression() instanceof PsiArrayAccessExpression
                     && isHighlighted(ass.getLExpression())) {
                 PsiArrayAccessExpression paa = (PsiArrayAccessExpression) ass.getLExpression();
-                if (OOResolver.indexSet(paa, ass.getRExpression())!=TypeConversionUtil.NULL_TYPE)
+                if (OOResolver.indexSet(paa, ass.getRExpression())!=OOResolver.NoType)
                     removeLastHighlight();
             }
             // Implicit type conversion in assignment
@@ -97,6 +97,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         HighlightInfoHolder myHolder = getMyHolder();
         if (myHolder.hasErrorResults()) {
             HighlightInfo hi = myHolder.get(myHolder.size()-1);
+            if (hi.getSeverity() != HighlightSeverity.ERROR) return false;
             if (expression instanceof PsiVariable) { // workaround for variable declaration incompatible types highlight
                 PsiVariable v = (PsiVariable) expression;
                 return hi.startOffset==v.getTypeElement().getTextRange().getStartOffset()  && hi.endOffset==v.getTextRange().getEndOffset();
@@ -107,9 +108,14 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         return false;
     }
 
-    // TODO: what highlightinfo to delete?
+    // TODO: what highlightInfo to delete?
     private void removeLastHighlight() {
-        List<HighlightInfo> myInfos = (List) Util.get(HighlightInfoHolder.class, getMyHolder(), "myInfos");
+        HighlightInfoHolder holder = getMyHolder();
+        // remove highlight
+        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, holder, "myInfos");
         myInfos.remove(getMyHolder().size()-1);
+        // update error count
+        Util.set(HighlightInfoHolder.class, holder, "myErrorCount",
+                ((Integer)Util.get(HighlightInfoHolder.class, holder, "myErrorCount"))-1);
     }
 }

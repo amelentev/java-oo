@@ -18,7 +18,6 @@ import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.impl.source.resolve.JavaResolveCache;
 import com.intellij.psi.impl.source.tree.java.PsiBinaryExpressionImpl;
-import com.intellij.psi.util.TypeConversionUtil;
 import com.intellij.util.Function;
 
 public class PsiOOBinaryExpressionImpl extends PsiBinaryExpressionImpl {
@@ -29,7 +28,7 @@ public class PsiOOBinaryExpressionImpl extends PsiBinaryExpressionImpl {
                     new Class[]{PsiBinaryExpressionImpl.class},
                     new Object[]{expression});
             PsiType lType = expression.getLOperand().getType();
-            if (type != null && type != TypeConversionUtil.NULL_TYPE
+            if (type != null && type != OOResolver.NoType
                     && (type != PsiType.INT || lType instanceof PsiPrimitiveType || PsiPrimitiveType.getUnboxedType(lType)!=null))
                 return type;
             return OOResolver.getOOType(expression);
