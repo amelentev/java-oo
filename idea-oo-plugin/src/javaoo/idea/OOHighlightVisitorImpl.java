@@ -25,8 +25,10 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
+    @NotNull PsiResolveHelper myResolveHelper;
     public OOHighlightVisitorImpl(@NotNull PsiResolveHelper resolveHelper) {
         super(resolveHelper);
+        myResolveHelper = resolveHelper;
     }
 
     @Override // Binary OO
@@ -117,5 +119,11 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         // update error count
         Util.set(HighlightInfoHolder.class, holder, "myErrorCount",
                 ((Integer)Util.get(HighlightInfoHolder.class, holder, "myErrorCount"))-1);
+    }
+
+    @Override
+    @NotNull
+    public OOHighlightVisitorImpl clone() {
+        return new OOHighlightVisitorImpl(myResolveHelper);
     }
 }
