@@ -27,9 +27,10 @@ public class Test {
 ```
 
 # News #
-17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin.
+17 Apr 2013. [IntelliJ IDEA](#IntelliJ-IDEA-IDE) IDE plugin.
 
-26 Nov 2012. [Version 0.2](https://github.com/amelentev/java-oo/issues?milestone=1&state=closed) released. New feature: [Implicit type conversion](https://github.com/amelentev/java-oo/issues/4) via static `#valueOf` method.
+26 Nov 2012. [Version 0.2] released. New feature: [Implicit type conversion](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
+[Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
 
 # Installation #
 
@@ -46,10 +47,10 @@ Tested on 4.2.1
 
 Tested on 7.2.1
 
-## <a id='IDEA'></a> [IntelliJ IDEA] IDE ##
+## [IntelliJ IDEA] IDE ##
 1. Install [idea-oo-plugin](http://plugins.jetbrains.com/plugin?pr=&pluginId=7224)
 (mirror: [idea-oo-plugin.jar]) <br/>
-For [Maven projects](#maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
+For [Maven projects](#Maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
 For other project types: <br/>
 2. Add [javac-oo-plugin.jar] as compile or processor library.
 3. Enable Annotation Processing:
@@ -64,7 +65,7 @@ javac -cp javac-oo-plugin.jar <sources>
 ```
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/examples/compile.sh)
 
-## <a id='maven'></a> Maven ##
+## Maven ##
 Look at [javac-oo-mvndemo/pom.xml](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/pom.xml)
 
 # Details #
@@ -103,8 +104,8 @@ index:
 
 Implicit type conversion:
 
-if `expression` has type `ExpressionType` and there are static method `RequredType RequredType#valueOf(ExpressionType)`<br/> 
-then `expression` can be assigned to `RequredType`.
+if _expression_ has type _ExpressionType_ and there are static method _RequredType RequredType#valueOf(ExpressionType)_<br/> 
+then _expression_ can be assigned to _RequredType_.
 example: <br/>
 `BigInteger a = 1` translates to `BigInteger a = BigInteger.valueOf(1)`
 
