@@ -27,7 +27,7 @@ public class Test {
 ```
 
 # News #
-17 Apr 2013. [IntelliJ IDEA](#IntelliJ-IDEA-IDE) IDE plugin.
+17 Apr 2013. [IntelliJ IDEA](#intellij-idea-ide) IDE plugin.
 
 26 Nov 2012. [Version 0.2] released. New feature: [Implicit type conversion](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
 [Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
@@ -50,7 +50,7 @@ Tested on 7.2.1
 ## [IntelliJ IDEA] IDE ##
 1. Install [idea-oo-plugin](http://plugins.jetbrains.com/plugin?pr=&pluginId=7224)
 (mirror: [idea-oo-plugin.jar]) <br/>
-For [Maven projects](#Maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
+For [Maven projects](#maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
 For other project types: <br/>
 2. Add [javac-oo-plugin.jar] as compile or processor library.
 3. Enable Annotation Processing:
