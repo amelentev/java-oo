@@ -27,7 +27,7 @@ public class Test {
 ```
 
 # News #
-17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin.
+17 Apr 2013. [IntelliJ IDEA](#intellij-idea-ide) IDE plugin.
 
 26 Nov 2012. [Version 0.2] released. New feature: [Implicit type conversion](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
 [Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
@@ -47,7 +47,7 @@ Tested on 4.2.1
 
 Tested on 7.2.1
 
-<a id='IDEA' />
+<a id='intellij-idea-ide'></a>
 ## [IntelliJ IDEA] IDE ##
 1. Install [Java Operator Overloading support](http://plugins.jetbrains.com/plugin?pr=&pluginId=7224) plugin: `File -> Settings -> Plugins -> Browse repositories`. Mirror: [idea-oo-plugin.jar]) <br/>
 For [Maven projects](#maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
@@ -65,7 +65,7 @@ javac -cp javac-oo-plugin.jar <sources>
 ```
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/examples/compile.sh)
 
-<a id='maven' />
+<a id='maven'></a>
 ## Maven ##
 Look at [javac-oo-mvndemo/pom.xml](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/pom.xml)
 
