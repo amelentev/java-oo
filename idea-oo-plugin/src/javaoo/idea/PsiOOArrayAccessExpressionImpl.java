@@ -21,6 +21,6 @@ public class PsiOOArrayAccessExpressionImpl extends PsiArrayAccessExpressionImpl
     @Override
     public PsiType getType() {
         PsiType res = super.getType();
-        return res!=null ? res : OOResolver.indexGet(this);
+        return res != null ? res : OOResolver.indexGet(this);
     }
 }

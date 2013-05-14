@@ -14,6 +14,7 @@
  */
 package javaoo.idea;
 
+import com.intellij.psi.PsiBinaryExpression;
 import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.impl.source.resolve.JavaResolveCache;
@@ -21,22 +22,19 @@ import com.intellij.psi.impl.source.tree.java.PsiBinaryExpressionImpl;
 import com.intellij.util.Function;
 
 public class PsiOOBinaryExpressionImpl extends PsiBinaryExpressionImpl {
-    private static final Function<PsiBinaryExpressionImpl,PsiType> OO_TYPE_EVALUATOR = new Function<PsiBinaryExpressionImpl, PsiType>() {
-        @Override
-        public PsiType fun(PsiBinaryExpressionImpl expression) {
-            PsiType type = (PsiType) Util.invoke(PsiBinaryExpressionImpl.class, null, "doGetType",
-                    new Class[]{PsiBinaryExpressionImpl.class},
-                    new Object[]{expression});
-            PsiType lType = expression.getLOperand().getType();
-            if (type != null && type != OOResolver.NoType
-                    && (type != PsiType.INT || lType instanceof PsiPrimitiveType || PsiPrimitiveType.getUnboxedType(lType)!=null))
-                return type;
-            return OOResolver.getOOType(expression);
-        }
-    };
-
+    private final PsiBinaryExpressionImpl cache = new PsiBinaryExpressionImpl();
     @Override
     public PsiType getType() {
-        return JavaResolveCache.getInstance(getProject()).getType(this, OO_TYPE_EVALUATOR);
+        return JavaResolveCache.getInstance(getProject()).getType(cache, new Function<PsiBinaryExpression, PsiType>() {
+            @Override
+            public PsiType fun(PsiBinaryExpression psiOOBinaryExpression) {
+                PsiType type = PsiOOBinaryExpressionImpl.super.getType();
+                PsiType lType = getLOperand().getType();
+                if (type != null && type != OOResolver.NoType
+                        && (type != PsiType.INT || lType instanceof PsiPrimitiveType || PsiPrimitiveType.getUnboxedType(lType) != null))
+                    return type;
+                return OOResolver.getOOType(PsiOOBinaryExpressionImpl.this);
+            }
+        });
     }
 }

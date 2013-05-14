@@ -21,6 +21,6 @@ public class PsiOOPrefixExpressionImpl extends PsiPrefixExpressionImpl {
     @Override
     public PsiType getType() {
         PsiType res = super.getType();
-        return res!=null ? res : OOResolver.getOOType(this);
+        return res != null ? res : OOResolver.getOOType(this);
     }
 }

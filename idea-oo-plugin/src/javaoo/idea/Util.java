@@ -15,55 +15,53 @@
 package javaoo.idea;
 
 import com.intellij.lang.ASTNode;
-import com.intellij.openapi.progress.ProcessCanceledException;
 import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.tree.IElementType;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.Arrays;
 
 public class Util {
-    public static <T> Object get(Class<T> clas, T obj, String field) {
+    private Util() {}
+
+    private static @NotNull Field findField(Class clas, String... fields) {
+        for (String field : fields) {
+            try {
+                Field f = clas.getDeclaredField(field);
+                f.setAccessible(true);
+                return f;
+            } catch (NoSuchFieldException e) {
+                // continue
+            }
+        }
+        throw new RuntimeException(String.format("Can't find %s fields in %s class", Arrays.toString(fields), clas.getName()));
+    }
+
+    public static <T> Object get(Class<T> clas, T obj, String... fields) {
         try {
-            Field f = clas.getDeclaredField(field);
-            f.setAccessible(true);
-            return f.get(obj);
+            return findField(clas, fields).get(obj);
         } catch (Exception e) {
             throw sneakyThrow(e);
         }
     }
-    public static void set(Class<?> cl, Object obj, String field, Object val) {
+
+    public static void set(Class<?> clas, Object obj, Object val, String... fields) {
         try {
-            Field f = cl.getDeclaredField(field);
-            f.setAccessible(true);
-            f.set(obj, val);
-        } catch (Exception e) {
-            throw sneakyThrow(e);
-        }
-    }
-    public static Object invoke(Class cl, Object obj, String method, Class[] targs, Object[] args) {
-        try {
-            Method m = cl.getDeclaredMethod(method, targs);
-            m.setAccessible(true);
-            return m.invoke(obj, args);
-        } catch (InvocationTargetException e) {
-            if (e.getTargetException() instanceof ProcessCanceledException)
-                return null; // cancelled?
-            throw sneakyThrow(e);
+            findField(clas, fields).set(obj, val);
         } catch (Exception e) {
             throw sneakyThrow(e);
         }
     }
     public static void setJavaElementConstructor(IElementType et, Class<? extends ASTNode> clas) {
         try {
-            set(JavaElementType.JavaCompositeElementType.class, et, "myConstructor", clas.getConstructor());
+            set(JavaElementType.JavaCompositeElementType.class, et, clas.getConstructor(), "myConstructor", "a");
         } catch (NoSuchMethodException e) {
             throw sneakyThrow(e);
         }
     }
     public static RuntimeException sneakyThrow(Throwable ex) {
-        return Util.<RuntimeException>sneakyThrowInner(ex);
+        return Util.sneakyThrowInner(ex);
     }
     private static <T extends Throwable> T sneakyThrowInner(Throwable ex) throws T {
         throw (T) ex;

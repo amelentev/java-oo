@@ -25,10 +25,23 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
-    @NotNull PsiResolveHelper myResolveHelper;
-    public OOHighlightVisitorImpl(@NotNull PsiResolveHelper resolveHelper) {
+
+    private final @NotNull PsiResolveHelper myResolveHelper;
+    private HighlightInfoHolder myHolder;
+
+    private OOHighlightVisitorImpl(@NotNull PsiResolveHelper resolveHelper) {
         super(resolveHelper);
         myResolveHelper = resolveHelper;
+    }
+
+    @Override
+    public boolean analyze(@NotNull PsiFile file, boolean updateWholeFile, @NotNull HighlightInfoHolder holder, @NotNull Runnable action) {
+        myHolder = holder;
+        try {
+            return super.analyze(file, updateWholeFile, holder, action);
+        } finally {
+            myHolder = null;
+        }
     }
 
     @Override // Binary OO
@@ -62,7 +75,8 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
         super.visitExpression(expression);
         if (expression instanceof PsiArrayAccessExpression) {
             PsiArrayAccessExpression paa = (PsiArrayAccessExpression) expression;
-            if (isHighlighted(paa.getArrayExpression()) && OOResolver.indexGet((PsiArrayAccessExpression) expression)!=OOResolver.NoType)
+            if (isHighlighted(paa.getArrayExpression())
+                    && OOResolver.indexGet((PsiArrayAccessExpression) expression) != OOResolver.NoType)
                 removeLastHighlight();
         }
     }
@@ -75,7 +89,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
             if (ass.getLExpression() instanceof PsiArrayAccessExpression
                     && isHighlighted(ass.getLExpression())) {
                 PsiArrayAccessExpression paa = (PsiArrayAccessExpression) ass.getLExpression();
-                if (OOResolver.indexSet(paa, ass.getRExpression())!=OOResolver.NoType)
+                if (OOResolver.indexSet(paa, ass.getRExpression()) != OOResolver.NoType)
                     removeLastHighlight();
             }
             // Implicit type conversion in assignment
@@ -91,36 +105,38 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
             removeLastHighlight();
     }
 
-    private HighlightInfoHolder getMyHolder() {
-        return (HighlightInfoHolder) Util.get(HighlightVisitorImpl.class, this, "myHolder");
-    }
-
-    private boolean isHighlighted(PsiElement expression) {
-        HighlightInfoHolder myHolder = getMyHolder();
+    private boolean isHighlighted(@NotNull PsiElement expression) {
         if (myHolder.hasErrorResults()) {
             HighlightInfo hi = myHolder.get(myHolder.size()-1);
             if (hi.getSeverity() != HighlightSeverity.ERROR) return false;
             if (expression instanceof PsiVariable) { // workaround for variable declaration incompatible types highlight
                 PsiVariable v = (PsiVariable) expression;
-                return hi.startOffset==v.getTypeElement().getTextRange().getStartOffset()  && hi.endOffset==v.getTextRange().getEndOffset();
+                PsiTypeElement pte = v.getTypeElement();
+                if (pte == null)
+                    return false;
+                TextRange tetr = pte.getTextRange();
+                TextRange tr = v.getTextRange();
+                return tr != null && tetr != null
+                        && hi.startOffset == tetr.getStartOffset()
+                        && hi.endOffset == tr.getEndOffset();
             }
             TextRange tr = expression.getTextRange();
-            return hi.startOffset==tr.getStartOffset() && hi.endOffset==tr.getEndOffset();
+            return hi.startOffset == tr.getStartOffset() && hi.endOffset == tr.getEndOffset();
         }
         return false;
     }
 
     // TODO: what highlightInfo to delete?
     private void removeLastHighlight() {
-        HighlightInfoHolder holder = getMyHolder();
         // remove highlight
-        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, holder, "myInfos");
-        myInfos.remove(getMyHolder().size()-1);
+        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, myHolder, "myInfos", "e");
+        myInfos.remove(myHolder.size() - 1);
         // update error count
-        Util.set(HighlightInfoHolder.class, holder, "myErrorCount",
-                ((Integer)Util.get(HighlightInfoHolder.class, holder, "myErrorCount"))-1);
+        int myErrorCount = (Integer)Util.get(HighlightInfoHolder.class, myHolder, "myErrorCount", "d");
+        Util.set(HighlightInfoHolder.class, myHolder, myErrorCount-1, "myErrorCount", "d");
     }
 
+    @SuppressWarnings("CloneDoesntCallSuperClone")
     @Override
     @NotNull
     public OOHighlightVisitorImpl clone() {

@@ -1,7 +1,7 @@
 <idea-plugin version="2" url="http://amelentev.github.io/java-oo/">
   <id>javaoo.idea</id>
   <name>Java Operator Overloading support</name>
-  <version>0.2</version>
+  <version>0.2.1</version>
   <vendor email="amelentev_@_gmail.com" url="http://amelentev.github.io/java-oo/">Artem Melentyev</vendor>
 
   <description><![CDATA[
@@ -31,7 +31,13 @@
   </extensions>
 
   <change-notes><![CDATA[
-        0.2 Initial release.
-      ]]>
+    <ul>
+        <li>0.2.1
+            <ol><a href="https://github.com/amelentev/java-oo/issues/7">#7: IntelliJ IDEA Ultimate Edition support</a></ol>
+        </li>
+        <li>0.2
+            <ol>Initial release.</ol>
+        </li>
+    </ul>   ]]>
   </change-notes>
 </idea-plugin>

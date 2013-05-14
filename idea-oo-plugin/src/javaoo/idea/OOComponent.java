@@ -36,7 +36,8 @@ import java.util.Set;
 public class OOComponent implements ProjectComponent, OOMethods {
     private static final Logger LOG = Logger.getInstance("#"+OOComponent.class.getName());
 
-    private Project project;
+    private final Project project;
+
     public OOComponent(Project project) {
         this.project = project;
     }
@@ -55,7 +56,7 @@ public class OOComponent implements ProjectComponent, OOMethods {
         Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiOOArrayAccessExpressionImpl.class);
 
         ExtensionPoint<HighlightVisitor> ep = Extensions.getArea(project).getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
-        Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl) ep, "myExtensionAdapters");
+        Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, "myExtensionAdapters");
         for (ExtensionComponentAdapter ca : hadapters) {
             if (ca.isAssignableTo(HighlightVisitorImpl.class)) {
                 hadapters.remove(ca);
