@@ -27,7 +27,9 @@ public class Test {
 ```
 
 # News #
-17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin.
+14 May 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.1 with IDEA Ultimate Edition support.
+
+17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.
 
 26 Nov 2012. [Version 0.2] released. New feature: [Implicit type conversion](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
 [Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
@@ -56,7 +58,7 @@ For other project types: <br/>
 3. Enable Annotation Processing:
 `Menu File -> Settings -> Compiler -> Annotation Processing -> Enable annotation processing`
 4. Make sure you use `javac` compiler in `Settings -> Compiler -> Use compiler`. <br/>
-Tested on IDEA Commutity Edition 12.1.1
+Tested on IDEA 12.1.3 Community and Ultimate Editions.
 
 ## javac, ant, etc ##
 Just add [javac-oo-plugin.jar] to classpath:
@@ -147,4 +149,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [Operator Overloading]: http://en.wikipedia.org/wiki/Operator_overloading
 
 [javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.2/javac-oo-plugin-0.2.jar
-[idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.jar
+[idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.1.jar
