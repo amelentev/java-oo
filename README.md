@@ -60,6 +60,21 @@ For other project types: <br/>
 4. Make sure you use `javac` compiler in `Settings -> Compiler -> Use compiler`. <br/>
 Tested on IDEA 12.1.3 Community and Ultimate Editions.
 
+### Android project in IDEA 12 ###
+Add [javac-oo-plugin.jar] to `File - Settings - Compiler - Annotation Processors - Processor path` 
+
+### Android Studio (IDEA 13) / Gradle ###
+add to `build.gradle`:
+
+```
+repositories {
+	maven { url 'http://amelentev.github.io/mvnrepo/' }
+}
+dependencies {
+	compile 'java-oo:javac-oo-plugin:0.2'
+}
+```
+
 ## javac, ant, etc ##
 Just add [javac-oo-plugin.jar] to classpath:
 ```
