@@ -5,7 +5,7 @@
     <artifactId>parent</artifactId>
     <version>0.3-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <url>http://amelentev.github.com/java-oo/</url>
+    <url>http://amelentev.github.io/java-oo/</url>
 
     <modules>
         <module>javac-oo-plugin</module>
@@ -15,7 +15,7 @@
     <repositories>
         <repository>
             <id>amelentev</id>
-	    <url>http://amelentev.github.com/mvnrepo/</url>
+	    <url>http://amelentev.github.io/mvnrepo/</url>
         </repository>
     </repositories>
 	<properties>

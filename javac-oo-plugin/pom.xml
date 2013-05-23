@@ -9,7 +9,7 @@
     <artifactId>javac-oo-plugin</artifactId>
     <packaging>jar</packaging>
     <name>Java Operator Overloading plugin for javac</name>
-    <url>http://amelentev.github.com/java-oo/</url>
+    <url>http://amelentev.github.io/java-oo/</url>
     <dependencies>
         <dependency>
             <groupId>junit</groupId>

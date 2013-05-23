@@ -30,7 +30,7 @@
   <repositories>
     <repository>
       <id>amelentev</id>
-      <url>http://amelentev.github.com/mvnrepo/</url>
+      <url>http://amelentev.github.io/mvnrepo/</url>
     </repository>
   </repositories>
   <!-- not needed for usage -->
