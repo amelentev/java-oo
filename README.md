@@ -36,8 +36,15 @@ public class Test {
 
 # Installation #
 
+## javac, ant, etc ##
+Just add [javac-oo-plugin.jar] to classpath:
+```
+javac -cp javac-oo-plugin.jar <sources>
+```
+Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/examples/compile.sh)
+
 ## [Eclipse IDE] update site ##
-Click in menu: Help - Install New Software. Enter in "Work with" field:
+Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
 	http://amelentev.github.io/eclipse.jdt-oo-site/
 
@@ -45,7 +52,7 @@ Tested on 4.2.1
 
 ## [Netbeans IDE] ##
 1. Add [javac-oo-plugin.jar] as compile or processor library to Netbeans.
-2. Enable "Annotation Processing in Editor" (Project Properties -> Build -> Compiling).
+2. Enable "Annotation Processing in Editor": `Project Properties -> Build -> Compiling`.
 
 Tested on 7.2.1
 
@@ -74,13 +81,6 @@ dependencies {
 	compile 'java-oo:javac-oo-plugin:0.2'
 }
 ```
-
-## javac, ant, etc ##
-Just add [javac-oo-plugin.jar] to classpath:
-```
-javac -cp javac-oo-plugin.jar <sources>
-```
-Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/examples/compile.sh)
 
 <a name="maven" />
 ## Maven ##
@@ -134,22 +134,27 @@ use operators on them "out of the box". Or you can add these methods to your cla
 ## Subprojects / Implementation details
 
 - javac-oo-plugin
-	- plugin to JavaC 1.7 and [Netbeans IDE] for operator overloading. Based on [javac-oo].
+	- Plugin to JavaC 1.7 and [Netbeans IDE] for operator overloading. Based on [javac-oo].
+	- Building via [maven] at top level: `cd java-oo; mvn clean install`. Or import maven settings in your IDE.
 
 - eclipse-oo-plugin
-	- [Eclipse IDE] (JDT) plugin for OO support.
-	- Patch Eclipse Java Compiler to allow OO.
+	- [Eclipse IDE](JDT) plugin for OO support.
+	- Patching Eclipse Java Compiler to allow OO.
+	- Build in Eclipse with [PDE], [AJDT and Equanox Weaving] plugins. Run as Eclipse application.
 
 - idea-oo-plugin
 	- [IntelliJ IDEA] IDE plugin for OO support. 
 	- Modify Java frontend in IDEA to allow OO. Need javac-oo-plugin to actually compile.
+	- Build in IDEA. Run as IDEA plugin.
 
-- [javac-oo]
-	- patched version of JavaC 1.7 for Operator Overloading support. If you need standalone javac compiler with OO.
-
-- [eclipse-oo]
-	- Eclipse [Java Developer Tools] fork for Operator Overloading.
-	- use it if you need native [Eclipse IDE] support, or Eclipse Java Compiler support.
+- by-products:
+	- [javac-oo]
+		- Patched version of JavaC 1.7 for Operator Overloading support. If you need standalone javac compiler with OO.
+		- Build via ant or netbeans: http://openjdk.java.net/groups/compiler/README.html#build
+	- [eclipse-oo]
+		- Eclipse [Java Developer Tools] fork for Operator Overloading.
+		- Use it if you need native [Eclipse IDE] support, or Eclipse Java Compiler support.
+		- Build in Eclipse with [PDE]. Run as Eclipse application.
 
 
 [Scala-like]: http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973
@@ -162,6 +167,9 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [Java Developer Tools]: http://eclipse.org/jdt/
 [eclipse-oo]: https://github.com/amelentev/eclipse.jdt-oo
 [Operator Overloading]: http://en.wikipedia.org/wiki/Operator_overloading
+[AJDT and Equanox Weaving]: http://wiki.eclipse.org/Equinox_Weaving_QuickStart
+[PDE]: http://www.eclipse.org/pde/
+[maven]: https://maven.apache.org/
 
 [javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.2/javac-oo-plugin-0.2.jar
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.1.jar
