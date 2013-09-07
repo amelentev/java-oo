@@ -16,9 +16,8 @@ import org.eclipse.jdt.internal.compiler.ast.Expression;
 import org.eclipse.jdt.internal.compiler.ast.MessageSend;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 
-// TODO: remove privileged
 @SuppressWarnings("restriction")
-public privileged aspect AssignmentAspect {
+public aspect AssignmentAspect {
 	static ThreadLocal<BlockScope> _scope = new ThreadLocal<BlockScope>();
 	// catch scope param
 	before(BlockScope scope):

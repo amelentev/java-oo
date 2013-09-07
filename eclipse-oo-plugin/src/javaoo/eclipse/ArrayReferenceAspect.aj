@@ -11,60 +11,48 @@
  ******************************************************************************/
 package javaoo.eclipse;
 
-import org.eclipse.jdt.internal.compiler.ast.ASTNode;
+import org.eclipse.jdt.internal.compiler.ast.ArrayReference;
 import org.eclipse.jdt.internal.compiler.ast.Assignment;
-import org.eclipse.jdt.internal.compiler.ast.CastExpression;
 import org.eclipse.jdt.internal.compiler.ast.Expression;
 import org.eclipse.jdt.internal.compiler.ast.MessageSend;
-import org.eclipse.jdt.internal.compiler.ast.ArrayReference;
-import org.eclipse.jdt.internal.compiler.ast.NullLiteral;
 import org.eclipse.jdt.internal.compiler.codegen.CodeStream;
-import org.eclipse.jdt.internal.compiler.impl.Constant;
-import org.eclipse.jdt.internal.compiler.lookup.ArrayBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 import org.eclipse.jdt.internal.compiler.lookup.TypeIds;
+import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 
 @SuppressWarnings("restriction")
 public aspect ArrayReferenceAspect implements TypeIds {
 	declare precedence: ExpressionAspect;
 
-	pointcut resolveType(ArrayReference that, BlockScope scope):
-		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
-		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.resolveType(BlockScope)) &&
-		args(scope);
-	
-	TypeBinding around(ArrayReference that, BlockScope scope):
-			resolveType(that, scope) {
-		that.constant = Constant.NotAConstant;
-		if (that.receiver instanceof CastExpression	// no cast check for ((type[])null)[0]
-				&& ((CastExpression)that.receiver).innermostCastedExpression() instanceof NullLiteral) {
-			that.receiver.bits |= ASTNode.DisableUnnecessaryCastCheck; // will check later on
+	ThreadLocal<BlockScope> _scope = new ThreadLocal<BlockScope>();
+	TypeBinding around(BlockScope scope):
+		execution(* ArrayReference.resolveType(BlockScope)) && args(scope)
+	{
+		try {
+			_scope.set(scope);
+			return proceed(scope);
+		} catch (ReturnException e) {
+			return (TypeBinding) e.getReturn();
 		}
-		TypeBinding arrayType = that.receiver.resolveType(scope);
-		if (arrayType != null) {
-			that.receiver.computeConversion(scope, arrayType, arrayType);
-			if (arrayType.isArrayType()) {
-				TypeBinding elementType = ((ArrayBinding) arrayType).elementsType();
-				that.resolvedType = ((that.bits & ASTNode.IsStrictlyAssigned) == 0) ? elementType.capture(scope, that.sourceEnd) : elementType;
-			} else {
-				that.position.resolveType(scope);
-				MessageSend ms = Utils.findMethod(scope, that.receiver, "get", new Expression[]{that.position}); //$NON-NLS-1$
-				if (ms == null)
-					scope.problemReporter().referenceMustBeArrayTypeAt(arrayType, that);
-				else {
-					ExpressionAspect.setTranslate(that, ms);
-					return that.resolvedType = ms.resolvedType;
-				}
-			}
-		}
-		TypeBinding positionType = that.position.resolveTypeExpecting(scope, TypeBinding.INT);
-		if (positionType != null) {
-			that.position.computeConversion(scope, TypeBinding.INT, positionType);
-		}
-		return that.resolvedType;
 	}
 	
+	void around(ArrayReference that):
+		withincode(* ArrayReference.resolveType(BlockScope))
+		&& call(* ProblemReporter.referenceMustBeArrayTypeAt(TypeBinding, ArrayReference)) && args(*, that)
+	{
+		BlockScope scope = _scope.get();
+		that.position.resolveType(scope);
+		MessageSend ms = Utils.findMethod(scope, that.receiver, "get", new Expression[]{that.position}); //$NON-NLS-1$
+		if (ms == null)
+			proceed(that);
+		else {
+			ExpressionAspect.setTranslate(that, ms);
+			that.resolvedType = ms.resolvedType;
+			throw new ReturnException(that.resolvedType);
+		}
+	}
+
 	pointcut generateAssignment(ArrayReference that, BlockScope currentScope, CodeStream codeStream, Assignment assignment, boolean valueRequired):
 		this(that) && within(org.eclipse.jdt.internal.compiler.ast.ArrayReference) &&
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.generateAssignment(BlockScope, CodeStream, Assignment, boolean)) &&
