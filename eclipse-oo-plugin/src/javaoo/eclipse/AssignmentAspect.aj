@@ -18,7 +18,7 @@ import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 
 @SuppressWarnings("restriction")
 public aspect AssignmentAspect {
-	static ThreadLocal<BlockScope> _scope = new ThreadLocal<BlockScope>();
+	ThreadLocal<BlockScope> _scope = new ThreadLocal<BlockScope>();
 	// catch scope param
 	before(BlockScope scope):
 		execution(* org.eclipse.jdt.internal.compiler.ast.Assignment.resolveType(BlockScope))
