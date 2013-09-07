@@ -7,7 +7,4 @@ target
 .idea/workspace.xml
 **/.idea/libraries
 .idea/libraries
-.project
-.settings
-.classpath
 /javac-oo

@@ -16,6 +16,7 @@ import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.lookup.Scope;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
+@SuppressWarnings("restriction")
 public class Utils {
 	public static MessageSend findMethod(Scope scope, Expression receiver, String selector, Expression[] args) {
 		char[] s = selector.toCharArray();
@@ -36,11 +37,5 @@ public class Utils {
 			return ms;
 		}
 		return null;
-	}
-
-	public static Expression removeAndGetTranslate(Expression x) {
-		Expression e = x.translate;
-		x.translate = null; // to prevent loop
-		return e;
 	}
 }

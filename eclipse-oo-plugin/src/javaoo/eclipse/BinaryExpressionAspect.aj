@@ -22,7 +22,6 @@ import org.eclipse.jdt.internal.compiler.ast.MessageSend;
 import org.eclipse.jdt.internal.compiler.ast.OperatorExpression;
 import org.eclipse.jdt.internal.compiler.ast.OperatorIds;
 import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
-import org.eclipse.jdt.internal.compiler.codegen.CodeStream;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.lookup.ArrayBinding;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
@@ -74,7 +73,7 @@ public aspect BinaryExpressionAspect {
 						return that.resolvedType = TypeBinding.BOOLEAN;
 					}
 				} else {
-					that.translate = ms;
+					ExpressionAspect.setTranslate(that, ms);
 					that.constant = Constant.NotAConstant;
 					return that.resolvedType = ms.resolvedType;
 				}
@@ -89,7 +88,7 @@ public aspect BinaryExpressionAspect {
 		this(that);
 
 	boolean around(BinaryExpression that): isCompactableOperation(that) {
-		return that.translate==null;
+		return ExpressionAspect.getTranslate(that) == null;
 	}
 
 	pointcut resolveType(BinaryExpression be, BlockScope scope):

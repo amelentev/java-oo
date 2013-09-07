@@ -40,7 +40,7 @@ public aspect UnaryExpressionAspect {
 			// find method
 			MessageSend ms = Utils.findMethod(scope, that.expression, method, new Expression[0]);
 			if (ms != null) {
-				that.translate = ms;
+				ExpressionAspect.setTranslate(that, ms);
 				that.constant = Constant.NotAConstant;
 				return that.resolvedType = ms.resolvedType;
 			}

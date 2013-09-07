@@ -38,7 +38,7 @@ public aspect StatementAspect {
 		MessageSend ms = Utils.findMethod(bscope, receiver, "valueOf", new Expression[]{expression}); //$NON-NLS-1$
 		if (ms != null && ms.resolvedType == targetType) {
 			ms.resolve(bscope);
-			expression.translate = ms;
+			ExpressionAspect.setTranslate(expression, ms);
 			expression.resolvedType = ms.resolvedType;
 			return true;
 		}

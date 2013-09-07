@@ -34,7 +34,6 @@ public aspect ArrayReferenceAspect implements TypeIds {
 		execution(* org.eclipse.jdt.internal.compiler.ast.ArrayReference.resolveType(BlockScope)) &&
 		args(scope);
 	
-	// TODO: after receiver.resolveType
 	TypeBinding around(ArrayReference that, BlockScope scope):
 			resolveType(that, scope) {
 		that.constant = Constant.NotAConstant;
@@ -54,7 +53,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 				if (ms == null)
 					scope.problemReporter().referenceMustBeArrayTypeAt(arrayType, that);
 				else {
-					that.translate = ms;
+					ExpressionAspect.setTranslate(that, ms);
 					return that.resolvedType = ms.resolvedType;
 				}
 			}
@@ -73,10 +72,10 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	
 	void around(ArrayReference that, BlockScope currentScope, CodeStream codeStream, Assignment assignment, boolean valueRequired):
 			generateAssignment(that, currentScope, codeStream, assignment, valueRequired) {
-		if (that.translate==null) {
+		if (ExpressionAspect.getTranslate(that)==null) {
 			proceed(that, currentScope, codeStream, assignment, valueRequired);
 		} else {
-			Utils.removeAndGetTranslate(that).generateCode(currentScope, codeStream, valueRequired);
+			ExpressionAspect.removeAndGetTranslate(that).generateCode(currentScope, codeStream, valueRequired);
 		}
 	}
 	
@@ -87,10 +86,10 @@ public aspect ArrayReferenceAspect implements TypeIds {
 	
 	void around(ArrayReference that, BlockScope currentScope, CodeStream codeStream, boolean valueRequired):
 			generateCode(that, currentScope, codeStream, valueRequired) {
-		if (that.translate == null) {
+		if (ExpressionAspect.getTranslate(that) == null) {
 			proceed(that, currentScope, codeStream, valueRequired);
 		} else {
-			Expression ms = Utils.removeAndGetTranslate(that);
+			Expression ms = ExpressionAspect.removeAndGetTranslate(that);
 			ms.generateCode(currentScope, codeStream, valueRequired);
 			codeStream.checkcast(ms.resolvedType);
 			// remaining code from #generateCode
