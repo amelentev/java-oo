@@ -7,23 +7,15 @@
  * 
  * Contributors:
  *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
- *     some code from org.eclipse.jdt.code
  ******************************************************************************/
 package javaoo.eclipse;
 
-import org.eclipse.jdt.internal.compiler.ast.CastExpression;
 import org.eclipse.jdt.internal.compiler.ast.Expression;
 import org.eclipse.jdt.internal.compiler.ast.MessageSend;
 import org.eclipse.jdt.internal.compiler.ast.UnaryExpression;
-import org.eclipse.jdt.internal.compiler.classfmt.ClassFileConstants;
-import org.eclipse.jdt.internal.compiler.codegen.CodeStream;
-import org.eclipse.jdt.internal.compiler.impl.BooleanConstant;
-import org.eclipse.jdt.internal.compiler.impl.Constant;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
-import static org.eclipse.jdt.internal.compiler.ast.ASTNode.*;
-import static org.eclipse.jdt.internal.compiler.ast.OperatorIds.*;
-import static org.eclipse.jdt.internal.compiler.ast.OperatorExpression.*;
+import org.eclipse.jdt.internal.compiler.problem.ProblemReporter;
 
 @SuppressWarnings("restriction")
 public aspect UnaryExpressionAspect {
@@ -41,111 +33,32 @@ public aspect UnaryExpressionAspect {
 			MessageSend ms = Utils.findMethod(scope, that.expression, method, new Expression[0]);
 			if (ms != null) {
 				ExpressionAspect.setTranslate(that, ms);
-				that.constant = Constant.NotAConstant;
 				return that.resolvedType = ms.resolvedType;
 			}
 		}
 		return null;
 	}
 
-	pointcut resolveType(UnaryExpression that, BlockScope scope):
-		this(that) && within(org.eclipse.jdt.internal.compiler.ast.UnaryExpression) &&
-		execution(* org.eclipse.jdt.internal.compiler.ast.UnaryExpression.resolveType(BlockScope)) &&
-		args(scope);
+	ThreadLocal<BlockScope> _scope = new ThreadLocal<BlockScope>();
 
-	// nothing interesting here
-	// TODO:
-	TypeBinding around(UnaryExpression that, BlockScope scope): resolveType(that, scope) {
-		boolean expressionIsCast;
-		if ((expressionIsCast = that.expression instanceof CastExpression) == true) that.expression.bits |= DisableUnnecessaryCastCheck; // will check later on
-		TypeBinding expressionType = that.expression.resolveType(scope);
-		if (expressionType == null) {
-			that.constant = Constant.NotAConstant;
-			return null;
+	TypeBinding around(BlockScope scope):
+		execution(* UnaryExpression.resolveType(BlockScope)) && args(scope)
+	{
+		try {
+			_scope.set(scope);
+			return proceed(scope);
+		} catch (ReturnException e) {
+			return (TypeBinding) e.getReturn();
 		}
-		int expressionTypeID = expressionType.id;
-		// autoboxing support
-		boolean use15specifics = scope.compilerOptions().sourceLevel >= ClassFileConstants.JDK1_5;
-		if (use15specifics) {
-			if (!expressionType.isBaseType()) {
-				expressionTypeID = scope.environment().computeBoxingType(expressionType).id;
-			}
-		}
-		if (expressionTypeID > 15) {
-			TypeBinding res = overloadUnaryOperator(that, scope);
-			if (res != null)
-				return res;
-			that.constant = Constant.NotAConstant;
-			scope.problemReporter().invalidOperator(that, expressionType);
-			return null;
-		}
+	}
 
-		int tableId;
-		switch ((that.bits & OperatorMASK) >> OperatorSHIFT) {
-			case NOT :
-				tableId = AND_AND;
-				break;
-			case TWIDDLE :
-				tableId = LEFT_SHIFT;
-				break;
-			default :
-				tableId = MINUS;
-		} //+ and - cases
-
-		// the code is an int
-		// (cast)  left   Op (cast)  rigth --> result
-		//  0000   0000       0000   0000      0000
-		//  <<16   <<12       <<8    <<4       <<0
-		int operatorSignature = OperatorSignatures[tableId][(expressionTypeID << 4) + expressionTypeID];
-		that.expression.computeConversion(scope, TypeBinding.wellKnownType(scope, (operatorSignature >>> 16) & 0x0000F), expressionType);
-		that.bits |= operatorSignature & 0xF;
-		switch (operatorSignature & 0xF) { // only switch on possible result type.....
-			case T_boolean :
-				that.resolvedType = TypeBinding.BOOLEAN;
-				break;
-			case T_byte :
-				that.resolvedType = TypeBinding.BYTE;
-				break;
-			case T_char :
-				that.resolvedType = TypeBinding.CHAR;
-				break;
-			case T_double :
-				that.resolvedType = TypeBinding.DOUBLE;
-				break;
-			case T_float :
-				that.resolvedType = TypeBinding.FLOAT;
-				break;
-			case T_int :
-				that.resolvedType = TypeBinding.INT;
-				break;
-			case T_long :
-				that.resolvedType = TypeBinding.LONG;
-				break;
-			default : //error........
-				that.constant = Constant.NotAConstant;
-				if (expressionTypeID != T_undefined)
-					scope.problemReporter().invalidOperator(that, expressionType);
-				return null;
-		}
-		// compute the constant when valid
-		if (that.expression.constant != Constant.NotAConstant) {
-			that.constant =
-				Constant.computeConstantOperation(
-					that.expression.constant,
-					expressionTypeID,
-					(that.bits & OperatorMASK) >> OperatorSHIFT);
-		} else {
-			that.constant = Constant.NotAConstant;
-			if (((that.bits & OperatorMASK) >> OperatorSHIFT) == NOT) {
-				Constant cst = that.expression.optimizedBooleanConstant();
-				if (cst != Constant.NotAConstant)
-					that.optimizedBooleanConstant = BooleanConstant.fromValue(!cst.booleanValue());
-			}
-		}
-		if (expressionIsCast) {
-		// check need for operand cast
-			CastExpression.checkNeedForArgumentCast(scope, tableId, operatorSignature, that.expression, expressionTypeID);
-		}
-		return that.resolvedType;
+	void around(UnaryExpression that):
+		withincode(* UnaryExpression.resolveType(BlockScope))
+		&& call(* ProblemReporter.invalidOperator(UnaryExpression, TypeBinding)) && args(that, ..)
+	{
+		TypeBinding res = overloadUnaryOperator(that, _scope.get());
+		if (res != null)
+			throw new ReturnException(res);
+		proceed(that);
 	}
 }

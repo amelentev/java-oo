@@ -85,16 +85,14 @@ public aspect BinaryExpressionAspect {
 		return ExpressionAspect.getTranslate(that) == null;
 	}
 
-	pointcut resolveType(BinaryExpression be, BlockScope scope):
-		this(be) && within(org.eclipse.jdt.internal.compiler.ast.BinaryExpression) &&
-		execution(* org.eclipse.jdt.internal.compiler.ast.BinaryExpression.resolveType(BlockScope)) &&
-		args(scope);
-	
+	pointcut resolveType(BlockScope scope):
+		execution(* BinaryExpression.resolveType(BlockScope)) && args(scope);
+
 	ThreadLocal<BlockScope> _scope = new ThreadLocal<BlockScope>();
-	TypeBinding around(BinaryExpression that, BlockScope scope): resolveType(that, scope) {
+	TypeBinding around(BlockScope scope): resolveType(scope) {
 		try {
 			_scope.set(scope);
-			return proceed(that, scope);
+			return proceed(scope);
 		} catch (ReturnException e) {
 			return (TypeBinding) e.getReturn();
 		}
@@ -102,8 +100,7 @@ public aspect BinaryExpressionAspect {
 
 	void around(BinaryExpression that):
 		withincode(* BinaryExpression.resolveType(BlockScope))
-		&& call(* ProblemReporter.invalidOperator(BinaryExpression, TypeBinding, TypeBinding))
-		&& args(that, ..)
+		&& call(* ProblemReporter.invalidOperator(BinaryExpression, TypeBinding, TypeBinding)) && args(that, ..)
 	{
 		BlockScope scope = _scope.get();
 		TypeBinding res = overloadBinaryOperator(that, scope);
