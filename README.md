@@ -25,8 +25,16 @@ public class Test {
 	}
 }
 ```
+# Versions #
+
+	Javac/Netbeans:	0.2
+	Eclipse:	0.3
+	IntelliJ IDEA:	0.2.1
 
 # News #
+8 Sep 2013. Eclipse plugin version 0.3 released.
+Removed copypasta from Eclipse Compiler. Plugin should be more steady agains compiler changes.
+
 14 May 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.1 with IDEA Ultimate Edition support.
 
 17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.
@@ -48,7 +56,7 @@ Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
 	http://amelentev.github.io/eclipse.jdt-oo-site/
 
-Tested on 4.2.1
+Tested on Eclipse Standard 4.3. Should work with older versions.
 
 ## [Netbeans IDE] ##
 1. Add [javac-oo-plugin.jar] as compile or processor library to Netbeans.
