@@ -2,7 +2,7 @@
 <feature
       id="eclipse.jdt_oo"
       label="Java Operator Overloading for Eclipse"
-      version="0.2.0.qualifier">
+      version="0.3.0.qualifier">
 
    <description url="http://amelentev.github.com/java-oo/">
       Plugin for Java Operator Overloading support in Eclipse IDE
@@ -31,30 +31,11 @@ http://www.eclipse.org/legal/epl-v10.html
    </url>
 
    <requires>
-      <import plugin="org.eclipse.jdt.core" version="3.7.0" match="greaterOrEqual"/>
+      <import plugin="org.eclipse.jdt.core" version="3.8.0" match="greaterOrEqual"/>
    </requires>
 
    <plugin
          id="eclipse-oo-plugin"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="org.aspectj.runtime"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.aspectj.weaver"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"/>
-
-   <plugin
-         id="org.eclipse.equinox.weaving.aspectj"
          download-size="0"
          install-size="0"
          version="0.0.0"
@@ -76,7 +57,21 @@ http://www.eclipse.org/legal/epl-v10.html
          unpack="false"/>
 
    <plugin
-         id="org.eclipse.equinox.concurrent"
+         id="org.eclipse.equinox.weaving.aspectj"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.aspectj.runtime"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.aspectj.weaver"
          download-size="0"
          install-size="0"
          version="0.0.0"

@@ -1,0 +1,30 @@
+## XXX: set org.eclipse.equinox.weaving.aspectj to autostart level 2  
+
+#create a requirement on the IU fragment we are creating
+requires.2.namespace=org.eclipse.equinox.p2.iu
+requires.2.name=configure.org.eclipse.equinox.weaving.aspectj
+requires.2.range=[$version$,$version$]
+requires.2.greedy=true
+
+#create a IU frament named configure.org.eclipse.equinox.common
+units.0.id=configure.org.eclipse.equinox.weaving.aspectj
+units.0.version=$version$
+units.0.provides.1.namespace=org.eclipse.equinox.p2.iu
+units.0.provides.1.name=configure.org.eclipse.equinox.weaving.aspectj
+units.0.provides.1.version=$version$
+units.0.instructions.install=installBundle(bundle:${artifact});
+units.0.instructions.uninstall=uninstallBundle(bundle:${artifact});
+units.0.instructions.unconfigure=setStartLevel(startLevel:-1);markStarted(started:false);
+units.0.instructions.configure=setStartLevel(startLevel:2);markStarted(started:true);
+units.0.hostRequirements.1.namespace=osgi.bundle
+units.0.hostRequirements.1.name=org.eclipse.equinox.weaving.aspectj
+units.0.hostRequirements.1.range=[1.0.300.v20130327-1442,1.0.300.v20130327-1442]
+units.0.hostRequirements.1.greedy=false
+units.0.hostRequirements.2.namespace=org.eclipse.equinox.p2.eclipse.type
+units.0.hostRequirements.2.name=bundle
+units.0.hostRequirements.2.range=[1.0.0,2.0.0)
+units.0.hostRequirements.2.greedy=false
+units.0.requires.1.namespace=osgi.bundle
+units.0.requires.1.name=org.eclipse.equinox.weaving.aspectj
+units.0.requires.1.range=[1.0.300.v20130327-1442,1.0.300.v20130327-1442]
+units.0.requires.1.greedy=false
