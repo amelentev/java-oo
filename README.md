@@ -27,9 +27,9 @@ public class Test {
 ```
 # Versions #
 
-	Javac/Netbeans:	0.2
-	Eclipse:	0.3
-	IntelliJ IDEA:	0.2.1
+	Javac/Netbeans: 0.2
+	Eclipse:        0.3
+	IntelliJ IDEA:  0.2.1
 
 # News #
 8 Sep 2013. Eclipse plugin version 0.3 released.
