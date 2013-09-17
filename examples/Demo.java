@@ -2,8 +2,8 @@ import java.math.*;
 import java.util.*;
 public class Demo {
 	public static void main(String[] args) {
-		BigInteger  a = BigInteger.valueOf(1),
-				b = BigInteger.valueOf(2),
+		BigInteger  a = BigInteger.valueOf(1),	// without OO
+				b = 2,	// with OO
 
 				c1 = a.negate().add(b.multiply(b)).add(b.divide(a)), // without OO
 				c2 = -a + b*b + b/a; // with OO

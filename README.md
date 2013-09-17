@@ -72,7 +72,7 @@ For other project types: <br/>
 2. Add [javac-oo-plugin.jar] as compile or processor library.
 3. Enable Annotation Processing:
 `Menu File -> Settings -> Compiler -> Annotation Processing -> Enable annotation processing`
-4. Make sure you use `javac` compiler in `Settings -> Compiler -> Use compiler`. <br/>
+4. Make sure you use `javac` compiler in `Settings -> Java Compiler -> Use compiler`. <br/>
 Tested on IDEA 12.1.3 Community and Ultimate Editions.
 
 ### Android project in IDEA 12 ###
