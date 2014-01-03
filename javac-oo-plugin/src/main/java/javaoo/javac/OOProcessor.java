@@ -113,7 +113,6 @@ public class OOProcessor extends AbstractProcessor {
             // hack: load classes to the same classloader as Resolve&Lower so they will be able to use and override default accessor members
             Class<?> attrClass = reloadClass("com.sun.tools.javac.comp.OOAttr", pcl, Attr.class.getClassLoader());
             Class<?> resolveClass = reloadClass("com.sun.tools.javac.comp.OOResolve", pcl, Resolve.class.getClassLoader());
-            Class<?> lowerClass = reloadClass("com.sun.tools.javac.comp.OOLower", pcl, Lower.class.getClassLoader());
             Class<?> transTypesClass = reloadClass("com.sun.tools.javac.comp.OOTransTypes", pcl, TransTypes.class.getClassLoader());
             reloadClass("javaoo.OOMethods", pcl, TransTypes.class.getClassLoader());
             reloadClass("javaoo.OOMethods$1", pcl, TransTypes.class.getClassLoader());
@@ -121,12 +120,10 @@ public class OOProcessor extends AbstractProcessor {
 
             resolveClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
             Object attr = attrClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
-            Object lower = lowerClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
             Object transTypes = transTypesClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
 
             set(compiler, "attr", attr);
             set(MemberEnter.instance(context), "attr", attr);
-            set(compiler, "lower", lower);
             set(compiler, "transTypes", transTypes);
         } catch (Exception e) {
             throw new RuntimeException(e);

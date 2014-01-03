@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static com.sun.tools.javac.code.Flags.*;
-import static com.sun.tools.javac.code.Flags.ABSTRACT;
 import static com.sun.tools.javac.code.Kinds.ERR;
 import static com.sun.tools.javac.code.Kinds.MTH;
 import static com.sun.tools.javac.code.TypeTags.CLASS;

@@ -1,11 +1,9 @@
-import static org.junit.Assert.assertEquals;
-
+import com.sun.tools.javac.Main;
 import org.junit.Test;
 
-import com.sun.tools.javac.Main;
-import sun.misc.Unsafe;
-
 import java.io.File;
+
+import static org.junit.Assert.assertEquals;
 
 public class JCPOOTest {
     @Test public void testMath() throws Exception {
@@ -33,7 +31,9 @@ public class JCPOOTest {
     @Test public void testCompAss() throws Exception {
         compile("CompAss", "../tests");
     }
-
+    @Test public void testVecMat() throws Exception {
+        compile("VecMat", "../tests");
+    }
     void compile(String clas) throws Exception {
         compile(clas, "../examples/");
     }
