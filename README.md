@@ -27,11 +27,14 @@ public class Test {
 ```
 # Versions #
 
-	Javac/Netbeans: 0.2
+	Javac/Netbeans: 0.3
 	Eclipse:        0.3
 	IntelliJ IDEA:  0.2.1
 
 # News #
+3 Jan 2014. JavaC plugin version 0.3 released.
+Fixed [#10 javac: binary operator adds erroneous cast on 1st operand](https://github.com/amelentev/java-oo/issues/10).
+
 8 Sep 2013. Eclipse plugin version 0.3 released.
 Removed copypasta from Eclipse Compiler. Plugin should be more steady agains compiler changes.
 
@@ -179,5 +182,5 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [PDE]: http://www.eclipse.org/pde/
 [maven]: https://maven.apache.org/
 
-[javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.2/javac-oo-plugin-0.2.jar
+[javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.3.jar
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.1.jar
