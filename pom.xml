@@ -3,7 +3,7 @@
 
     <groupId>java-oo</groupId>
     <artifactId>parent</artifactId>
-    <version>0.3</version>
+    <version>0.4-SNAPSHOT</version>
     <packaging>pom</packaging>
     <url>http://amelentev.github.io/java-oo/</url>
 
@@ -31,7 +31,7 @@
 	</distributionManagement>
 	<scm>
 		<connection>scm:git:git@github.com:amelentev/java-oo.git</connection>
-	  <tag>javac-0.3</tag>
+	  <tag>HEAD</tag>
   </scm>
 	<build>
 		<plugins>
