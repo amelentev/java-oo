@@ -112,9 +112,8 @@ public class OOAttr extends Attr {
                 }
                 if (m.kind == Kinds.MTH) {
                     JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(tree.indexed, m), List.of(tree.index, ass.rhs));
-                    mi.type = attribExpr(mi, env);
+                    owntype = mi.type = attribExpr(mi, env);
                     translateMap.put(ass, mi);
-                    owntype = rhstype;
                     ok = true;
                 }
             } else {
