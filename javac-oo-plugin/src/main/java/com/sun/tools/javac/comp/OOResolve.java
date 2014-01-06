@@ -127,7 +127,7 @@ public class OOResolve extends Resolve {
                 opname = OOMethods.unary.get(name.toString());
             if (opname != null) {
                 Symbol method = findMethod(env, argtypes.get(0), names.fromString(opname),
-                        args, null, false, false, false);
+                        args, null, true, false, false);
                 if (method.kind == Kinds.MTH) {
                     bestSoFar = new Symbol.OperatorSymbol(method.name, method.type, ByteCodes.error+1, method);
                     if (OOMethods.compareTo.equals(opname)) { // change result type to boolean if </>
