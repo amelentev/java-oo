@@ -22,6 +22,7 @@ import javaoo.OOMethods;
 import java.util.Map;
 import java.util.WeakHashMap;
 
+import static com.sun.tools.javac.code.Kinds.VAL;
 import static com.sun.tools.javac.code.Kinds.VAR;
 import static com.sun.tools.javac.code.TypeTags.*;
 
@@ -38,7 +39,17 @@ public class OOAttr extends Attr {
     }
 
     /** WeakHashMap to allow GC collect entries. Because we don't need them then they are gone */
-    public Map<JCTree, JCTree.JCExpression> translateMap = new WeakHashMap<>();
+    Map<JCTree, JCTree.JCExpression> translateMap = new WeakHashMap<>();
+
+    private Symbol findMethods(Type site, List<Type> argts, String... methodNames) {
+        for (String methodName : methodNames) {
+            Symbol m = rs.findMethod(env, site, names.fromString(methodName), argts, null, false, false, false); // without boxing
+            if (m.kind == Kinds.MTH) return m;
+            m = rs.findMethod(env, site, names.fromString(methodName), argts, null, true, false, false); // with boxing
+            if (m.kind == Kinds.MTH) return m;
+        }
+        return null;
+    }
 
     @Override
     Type check(JCTree tree, Type owntype, int ownkind, int pkind, Type pt) {
@@ -60,6 +71,7 @@ public class OOAttr extends Attr {
         JCTree.JCExpression param = translateMap.get(tree);
         // construct "<req>.valueOf(tree)" static method call
         tree.type = owntype;
+        make.pos = tree.pos;
         JCTree.JCMethodInvocation valueOf = make.Apply(null,
                 make.Select(make.Ident(pt.tsym), names.fromString(OOMethods.valueOf)),
                 List.of(param == null ? (JCTree.JCExpression)tree : param));
@@ -86,7 +98,30 @@ public class OOAttr extends Attr {
             //log.error(pos, "assignment.to.extends-bound", req);
             return false; //types.createErrorType(found);
         }
-        return true;
+        return findMethods(req, List.of(found), OOMethods.valueOf) != null;
+    }
+
+    @Override
+    public void visitAssign(JCTree.JCAssign tree) {
+        if (tree.lhs.getKind() == Tree.Kind.ARRAY_ACCESS) { // index-set OO: "a[i] = v"
+            JCTree.JCArrayAccess aa = (JCTree.JCArrayAccess) tree.lhs;
+            Type atype = attribExpr(aa.indexed, env);
+            if (!atype.isErroneous() && !types.isArray(atype)) {
+                Type itype = attribExpr(aa.index, env);
+                Type rhstype = attribExpr(tree.rhs, env);
+                Symbol m = findMethods(atype, List.of(itype, rhstype), "set", "put");
+                if (m != null) {
+                    JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(aa.indexed, m), List.of(aa.index, tree.rhs));
+                    Type owntype = attribExpr(mi, env);
+                    translateMap.put(tree, mi);
+                    aa.type = rhstype;
+                    check(aa, aa.type, VAR, VAR, Type.noType);
+                    result = check(tree, owntype, VAL, pkind, pt);
+                    return;
+                }
+            }
+        }
+        super.visitAssign(tree);
     }
 
     @Override
@@ -96,40 +131,15 @@ public class OOAttr extends Attr {
         if (types.isArray(atype)) {
             attribExpr(tree.index, env, syms.intType);
             owntype = types.elemtype(atype);
-        } else if (atype.tag != ERROR) {
+        } else if (!atype.isErroneous()) { // index get
             attribExpr(tree.index, env);
-            boolean ok = false;
-            if (env.tree.getKind() == Tree.Kind.ASSIGNMENT && ((JCTree.JCAssign)env.tree).lhs == tree) {
-                // index set
-                JCTree.JCAssign ass = (JCTree.JCAssign) env.tree;
-                Type rhstype = attribExpr(ass.rhs, env);
-                List<Type> argtypes = List.of(tree.index.type, rhstype);
-                Symbol m = null;
-                for (String indexSet : OOMethods.indexSet) {
-                    m = rs.findMethod(env, atype, names.fromString(indexSet), argtypes, null, true, false, false);
-                    if (m.kind == Kinds.MTH)
-                        break;
-                }
-                if (m.kind == Kinds.MTH) {
-                    JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(tree.indexed, m), List.of(tree.index, ass.rhs));
-                    owntype = mi.type = attribExpr(mi, env);
-                    translateMap.put(ass, mi);
-                    ok = true;
-                }
-            } else {
-                // index get
-                List<Type> argtypes = List.of(tree.index.type);
-                Symbol m = rs.findMethod(env, atype, names.fromString(OOMethods.indexGet), argtypes, null, true, false, false);
-                if (m.kind == Kinds.MTH) {
-                    //owntype = rs.instantiate(env, atype, m, argtypes, null, true, false, noteWarner).getReturnType();
-                    JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(tree.indexed, m), List.of(tree.index));
-                    attribExpr(mi, env);
-                    translateMap.put(tree, mi);
-                    owntype = mi.type;
-                    ok = true;
-                }
-            }
-            if (!ok)
+            Symbol m = findMethods(atype, List.of(tree.index.type), OOMethods.indexGet);
+            if (m != null) {
+                JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(tree.indexed, m), List.of(tree.index));
+                attribExpr(mi, env);
+                translateMap.put(tree, mi);
+                owntype = mi.type;
+            } else
                 log.error(tree.pos(), "array.req.but.found", atype);
         }
         if ((pkind & VAR) == 0) owntype = types.capture(owntype);

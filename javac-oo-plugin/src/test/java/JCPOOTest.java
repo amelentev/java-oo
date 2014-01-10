@@ -34,6 +34,9 @@ public class JCPOOTest {
     @Test public void testVecMat() throws Exception {
         compile("VecMat", "../tests");
     }
+    @Test public void testVec() throws Exception {
+        compile("Vec", "../tests");
+    }
     @Test public void testBoxing() throws Exception {
         compile("Boxing", "../tests");
     }
