@@ -23,6 +23,6 @@ class Boxing {
 	public static boolean wtest() {
 		WVec v = new WVec(1.,2.,3.);
 		double d = (v[2] = 4.0);
-		return 4 == v[2] && (v+1.)==1.;
+		return d == 4. && 4 == v[2] && (v+1.)==1.;
 	}
 }
