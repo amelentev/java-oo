@@ -62,13 +62,17 @@ Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans 
 <h1>
 <a name="versions" class="anchor" href="#versions"><span class="octicon octicon-link"></span></a>Versions</h1>
 
-<pre><code>Javac/Netbeans: 0.3
-Eclipse:        0.3
+<pre><code>Javac/Netbeans: 0.4
+Eclipse:        0.4
 IntelliJ IDEA:  0.2.1
 </code></pre>
 
 <h1>
 <a name="news" class="anchor" href="#news"><span class="octicon octicon-link"></span></a>News</h1>
+
+<p>12 Jan 2014. JavaC plugin version 0.4 and Eclipse plugin version 0.4 released.
+Now operator overloading perform autoboxing/autounboxing primitive to/from wrapper types where appropriate.
+Fixed <a href="https://github.com/amelentev/java-oo/issues/13">javac plugin bug with index-set OO</a>.</p>
 
 <p>3 Jan 2014. JavaC plugin version 0.3 released.
 Fixed <a href="https://github.com/amelentev/java-oo/issues/10">#10 javac: binary operator adds erroneous cast on 1st operand</a>.</p>
@@ -88,7 +92,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <h2>
 <a name="javac-ant-etc" class="anchor" href="#javac-ant-etc"><span class="octicon octicon-link"></span></a>javac, ant, etc</h2>
 
-<p>Just add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.3.jar">javac-oo-plugin.jar</a> to classpath:</p>
+<p>Just add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.4.jar">javac-oo-plugin.jar</a> to classpath:</p>
 
 <pre><code>javac -cp javac-oo-plugin.jar &lt;sources&gt;
 </code></pre>
@@ -103,14 +107,14 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <pre><code>http://amelentev.github.io/eclipse.jdt-oo-site/
 </code></pre>
 
-<p>Tested on Eclipse Standard 4.3. Should work with older versions.</p>
+<p>Tested on Eclipse Standard 4.3.1. Should work with older versions.</p>
 
 <h2>
 <a name="netbeans-ide" class="anchor" href="#netbeans-ide"><span class="octicon octicon-link"></span></a><a href="http://www.netbeans.org/">Netbeans IDE</a>
 </h2>
 
 <ol>
-<li>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.3.jar">javac-oo-plugin.jar</a> as compile or processor library to Netbeans.</li>
+<li>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.4.jar">javac-oo-plugin.jar</a> as compile or processor library to Netbeans.</li>
 <li>Enable "Annotation Processing in Editor": <code>Project Properties -&gt; Build -&gt; Compiling</code>.</li>
 </ol><p>Tested on 7.2.1</p>
 
@@ -124,16 +128,16 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 For <a href="#maven">Maven projects</a> installation is done. IDEA should setup everything according to pom.xml. <br>
 For other project types: <br>
 </li>
-<li>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.3.jar">javac-oo-plugin.jar</a> as compile or processor library.</li>
+<li>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.4.jar">javac-oo-plugin.jar</a> as compile or processor library.</li>
 <li>Enable Annotation Processing:
 <code>Menu File -&gt; Settings -&gt; Compiler -&gt; Annotation Processing -&gt; Enable annotation processing</code>
 </li>
-<li>Make sure you use <code>javac</code> compiler in <code>Settings -&gt; Compiler -&gt; Use compiler</code>. <br>
+<li>Make sure you use <code>javac</code> compiler in <code>Settings -&gt; Java Compiler -&gt; Use compiler</code>. <br>
 Tested on IDEA 12.1.3 Community and Ultimate Editions.</li>
 </ol><h3>
 <a name="android-project-in-idea-12" class="anchor" href="#android-project-in-idea-12"><span class="octicon octicon-link"></span></a>Android project in IDEA 12</h3>
 
-<p>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.3.jar">javac-oo-plugin.jar</a> to <code>File - Settings - Compiler - Annotation Processors - Processor path</code> </p>
+<p>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.4.jar">javac-oo-plugin.jar</a> to <code>File - Settings - Compiler - Annotation Processors - Processor path</code> </p>
 
 <h3>
 <a name="android-studio-idea-13--gradle" class="anchor" href="#android-studio-idea-13--gradle"><span class="octicon octicon-link"></span></a>Android Studio (IDEA 13) / Gradle</h3>
@@ -144,7 +148,7 @@ Tested on IDEA 12.1.3 Community and Ultimate Editions.</li>
     maven { url 'http://amelentev.github.io/mvnrepo/' }
 }
 dependencies {
-    compile 'java-oo:javac-oo-plugin:0.2'
+    compile 'java-oo:javac-oo-plugin:0.4'
 }
 </code></pre>
 
