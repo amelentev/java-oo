@@ -1,3 +1,4 @@
 javac-oo = ssh://hg@bitbucket.org/amelentev/javac-oo
+javac8-oo = ssh://hg@bitbucket.org/amelentev/javac8-oo
 eclipse.jdt-oo = [git]git@github.com:amelentev/eclipse.jdt-oo.git
 lombok-oo = [git]git@github.com:amelentev/lombok-oo.git
