@@ -1,4 +1,4 @@
-class Boxing {
+public class Boxing {
 	static class Vec {
 		double d[];
 		Vec(double... d) { this.d = d; }

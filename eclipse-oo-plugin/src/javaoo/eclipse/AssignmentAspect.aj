@@ -15,6 +15,8 @@ import org.eclipse.jdt.internal.compiler.ast.Assignment;
 import org.eclipse.jdt.internal.compiler.ast.Expression;
 import org.eclipse.jdt.internal.compiler.ast.MessageSend;
 import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
+import org.eclipse.jdt.internal.compiler.lookup.Scope;
+import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
 @SuppressWarnings("restriction")
 public aspect AssignmentAspect {
@@ -49,5 +51,17 @@ public aspect AssignmentAspect {
 				}
 			}
 		}
+	}
+
+	void around(Assignment that, Scope scope, TypeBinding runtimeType, TypeBinding compileTimeType):
+		target(Assignment)
+		&& execution(* org.eclipse.jdt.internal.compiler.ast.Expression.computeConversion(..))
+		&& this(that) && args(scope, runtimeType, compileTimeType)
+	{
+		Expression translate = ExpressionAspect.getTranslate(that.lhs);
+		if (translate != null)
+			translate.computeConversion(scope, runtimeType, compileTimeType);
+		else
+			proceed(that, scope, runtimeType, compileTimeType);
 	}
 }

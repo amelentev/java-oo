@@ -10,15 +10,17 @@
  ******************************************************************************/
 package javaoo.eclipse;
 
+import org.eclipse.jdt.internal.compiler.ast.ASTNode;
+import org.eclipse.jdt.internal.compiler.ast.CastExpression;
 import org.eclipse.jdt.internal.compiler.ast.Expression;
 import org.eclipse.jdt.internal.compiler.ast.MessageSend;
 import org.eclipse.jdt.internal.compiler.impl.Constant;
-import org.eclipse.jdt.internal.compiler.lookup.Scope;
+import org.eclipse.jdt.internal.compiler.lookup.BlockScope;
 import org.eclipse.jdt.internal.compiler.lookup.TypeBinding;
 
 @SuppressWarnings("restriction")
 public class Utils {
-	public static MessageSend findMethod(Scope scope, Expression receiver, String selector, Expression[] args) {
+	public static MessageSend findMethod(BlockScope scope, Expression receiver, String selector, Expression[] args) {
 		char[] s = selector.toCharArray();
 		MessageSend ms = new MessageSend();
 		ms.receiver = receiver;
@@ -30,6 +32,11 @@ public class Utils {
 			targs[i] = args[i].resolvedType;
 		ms.binding = scope.getMethod(ms.actualReceiverType, s, targs, ms);
 		if (ms.binding != null && ms.binding.isValidBinding()) {
+			boolean argsContainCast = false;
+			for (Expression e : args)
+				argsContainCast |= e instanceof CastExpression;
+			if (ASTNode.checkInvocationArguments(scope, ms.receiver, ms.actualReceiverType, ms.binding, ms.arguments, targs, argsContainCast, ms))
+				ms.bits |= ASTNode.Unchecked;
 			ms.resolvedType = ms.binding.returnType;
 			ms.constant = Constant.NotAConstant;
 			ms.sourceStart = receiver.sourceStart;

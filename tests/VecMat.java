@@ -1,4 +1,4 @@
-class VecMat {
+public class VecMat {
     static class Vec {
         Vec multiply(Mat A) { return this; }
     }

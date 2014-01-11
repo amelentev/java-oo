@@ -77,27 +77,7 @@ public aspect ArrayReferenceAspect implements TypeIds {
 		if (ExpressionAspect.getTranslate(that) == null) {
 			proceed(that, currentScope, codeStream, valueRequired);
 		} else {
-			Expression ms = ExpressionAspect.removeAndGetTranslate(that);
-			ms.generateCode(currentScope, codeStream, valueRequired);
-			codeStream.checkcast(ms.resolvedType);
-			// remaining code from #generateCode
-			// Generating code for the potential runtime type checking
-			if (valueRequired) {
-				codeStream.generateImplicitConversion(that.implicitConversion);
-			} else {
-				boolean isUnboxing = (that.implicitConversion & TypeIds.UNBOXING) != 0;
-				// conversion only generated if unboxing
-				if (isUnboxing) codeStream.generateImplicitConversion(that.implicitConversion);
-				switch (isUnboxing ? that.postConversionType(currentScope).id : that.resolvedType.id) {
-					case T_long :
-					case T_double :
-						codeStream.pop2();
-						break;
-					default :
-						codeStream.pop();
-				}
-			}
-			codeStream.recordPositionsFrom(codeStream.position, that.sourceStart);
+			ExpressionAspect.removeAndGetTranslate(that).generateCode(currentScope, codeStream, valueRequired);
 		}
 	}
 }
