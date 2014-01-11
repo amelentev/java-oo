@@ -27,11 +27,15 @@ public class Test {
 ```
 # Versions #
 
-	Javac/Netbeans: 0.3
-	Eclipse:        0.3
+	Javac/Netbeans: 0.4
+	Eclipse:        0.4
 	IntelliJ IDEA:  0.2.1
 
 # News #
+12 Jan 2014. JavaC plugin version 0.4 and Eclipse plugin version 0.4 released.
+Now operator overloading perform autoboxing/autounboxing primitive to/from wrapper types where appropriate.
+Fixed [javac plugin bug with index-set OO](https://github.com/amelentev/java-oo/issues/13).
+
 3 Jan 2014. JavaC plugin version 0.3 released.
 Fixed [#10 javac: binary operator adds erroneous cast on 1st operand](https://github.com/amelentev/java-oo/issues/10).
 
@@ -59,7 +63,7 @@ Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
 	http://amelentev.github.io/eclipse.jdt-oo-site/
 
-Tested on Eclipse Standard 4.3. Should work with older versions.
+Tested on Eclipse Standard 4.3.1. Should work with older versions.
 
 ## [Netbeans IDE] ##
 1. Add [javac-oo-plugin.jar] as compile or processor library to Netbeans.
@@ -89,7 +93,7 @@ repositories {
 	maven { url 'http://amelentev.github.io/mvnrepo/' }
 }
 dependencies {
-	compile 'java-oo:javac-oo-plugin:0.2'
+	compile 'java-oo:javac-oo-plugin:0.4'
 }
 ```
 
@@ -182,5 +186,5 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [PDE]: http://www.eclipse.org/pde/
 [maven]: https://maven.apache.org/
 
-[javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.3.jar
+[javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.4.jar
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.1.jar
