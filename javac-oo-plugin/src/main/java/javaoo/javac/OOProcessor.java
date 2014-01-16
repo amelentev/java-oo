@@ -112,7 +112,7 @@ public class OOProcessor extends AbstractProcessor {
                 compiler = delCompiler; // javac has delegateCompiler. netbeans hasn't
             Context context = (Context) get(compiler, "context");
 
-            // hack: load classes to the same classloader as Resolve&Lower so they will be able to use and override default accessor members
+            // hack: load classes to the same classloader so they will be able to use and override default accessor members
             Class<?> attrClass = reloadClass("com.sun.tools.javac.comp.OOAttr", pcl, Attr.class.getClassLoader());
             Class<?> resolveClass = reloadClass("com.sun.tools.javac.comp.OOResolve", pcl, Resolve.class.getClassLoader());
             Class<?> transTypesClass = reloadClass("com.sun.tools.javac.comp.OOTransTypes", pcl, TransTypes.class.getClassLoader());

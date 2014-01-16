@@ -36,7 +36,8 @@ public interface OOMethods {
         put(">=",   compareTo);
     }};
     Map<String, String> unary = new java.util.HashMap<String, String>() {{
-        put("-", "negate");
+        put("-", "negate");     // jdk7
+        put("---", "negate");   // jdk8
         put("~", "not");
     }};
     String   compareTo = "compareTo";
