@@ -12,7 +12,6 @@ package javaoo.javac;
 import com.sun.source.util.TaskEvent;
 import com.sun.source.util.TaskListener;
 import com.sun.tools.javac.comp.Attr;
-import com.sun.tools.javac.comp.Lower;
 import com.sun.tools.javac.comp.MemberEnter;
 import com.sun.tools.javac.comp.Resolve;
 import com.sun.tools.javac.comp.TransTypes;
@@ -92,15 +91,18 @@ public class OOProcessor extends AbstractProcessor {
         }
     }
 
-    static Object get(Object obj, String field) throws NoSuchFieldException, IllegalAccessException {
+    static Object get(Object obj, String field) throws ReflectiveOperationException {
         Field f = obj.getClass().getDeclaredField(field);
         f.setAccessible(true);
         return f.get(obj);
     }
-    static void set(Object obj, String field, Object val) throws NoSuchFieldException, IllegalAccessException {
+    static void set(Object obj, String field, Object val) throws ReflectiveOperationException {
         Field f = obj.getClass().getDeclaredField(field);
         f.setAccessible(true);
         f.set(obj, val);
+    }
+    static Object getInstance(Class<?> clas, Context context) throws ReflectiveOperationException {
+        return clas.getDeclaredMethod("instance", Context.class).invoke(null, context);
     }
 
     static void patch(JavaCompiler compiler, ClassLoader pcl) {
@@ -118,9 +120,9 @@ public class OOProcessor extends AbstractProcessor {
             reloadClass("javaoo.OOMethods$1", pcl, TransTypes.class.getClassLoader());
             reloadClass("javaoo.OOMethods$2", pcl, TransTypes.class.getClassLoader());
 
-            resolveClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
-            Object attr = attrClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
-            Object transTypes = transTypesClass.getDeclaredMethod("instance", Context.class).invoke(null, context);
+            getInstance(resolveClass, context);
+            Object attr = getInstance(attrClass, context);
+            Object transTypes = getInstance(transTypesClass, context);
 
             set(compiler, "attr", attr);
             set(MemberEnter.instance(context), "attr", attr);
