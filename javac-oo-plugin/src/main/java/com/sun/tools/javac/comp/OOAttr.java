@@ -109,7 +109,7 @@ public class OOAttr extends Attr {
             if (!atype.isErroneous() && !types.isArray(atype)) {
                 Type itype = attribExpr(aa.index, env);
                 Type rhstype = attribExpr(tree.rhs, env);
-                Symbol m = findMethods(atype, List.of(itype, rhstype), "set", "put");
+                Symbol m = findMethods(atype, List.of(itype, rhstype), OOMethods.indexSet);
                 if (m != null) {
                     JCTree.JCMethodInvocation mi = make.Apply(null, make.Select(aa.indexed, m), List.of(aa.index, tree.rhs));
                     Type owntype = attribExpr(mi, env);

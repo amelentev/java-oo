@@ -6,12 +6,10 @@
  * 
  * Contributors:
  *     Artem Melentyev <amelentev@gmail.com> - initial API and implementation
- *     some code from from OpenJDK langtools (GPL2 + assembly exception)
  ******************************************************************************/
 package com.sun.tools.javac.comp;
 
 import com.sun.tools.javac.code.Kinds;
-import com.sun.tools.javac.code.Scope;
 import com.sun.tools.javac.code.Symbol;
 import com.sun.tools.javac.code.Type;
 import com.sun.tools.javac.jvm.ByteCodes;
@@ -20,14 +18,7 @@ import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
 import javaoo.OOMethods;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import static com.sun.tools.javac.code.Flags.*;
 import static com.sun.tools.javac.code.Kinds.ERR;
-import static com.sun.tools.javac.code.Kinds.MTH;
-import static com.sun.tools.javac.code.TypeTags.CLASS;
-import static com.sun.tools.javac.code.TypeTags.TYPEVAR;
 
 public class OOResolve extends Resolve {
     protected OOResolve(Context context) {
@@ -49,74 +40,7 @@ public class OOResolve extends Resolve {
                       boolean allowBoxing,
                       boolean useVarargs,
                       boolean operator) {
-        Symbol bestSoFar = methodNotFound;
-        return findMethod(env,
-                site,
-                name,
-                argtypes,
-                typeargtypes,
-                site.tsym.type,
-                true,
-                bestSoFar,
-                allowBoxing,
-                useVarargs,
-                operator,
-                new HashSet<Symbol.TypeSymbol>());
-    }
-
-    private Symbol findMethod(Env<AttrContext> env,
-                              Type site,
-                              Name name,
-                              List<Type> argtypes,
-                              List<Type> typeargtypes,
-                              Type intype,
-                              boolean abstractok,
-                              Symbol bestSoFar,
-                              boolean allowBoxing,
-                              boolean useVarargs,
-                              boolean operator,
-                              Set<Symbol.TypeSymbol> seen) {
-        for (Type ct = intype; ct.tag == CLASS || ct.tag == TYPEVAR; ct = types.supertype(ct)) {
-            while (ct.tag == TYPEVAR)
-                ct = ct.getUpperBound();
-            Symbol.ClassSymbol c = (Symbol.ClassSymbol)ct.tsym;
-            if (!seen.add(c)) return bestSoFar;
-            if ((c.flags() & (ABSTRACT | INTERFACE | ENUM)) == 0)
-                abstractok = false;
-            for (Scope.Entry e = c.members().lookup(name);
-                 e.scope != null;
-                 e = e.next()) {
-                //- System.out.println(" e " + e.sym);
-                if (e.sym.kind == MTH &&
-                        (e.sym.flags_field & SYNTHETIC) == 0) {
-                    bestSoFar = selectBest(env, site, argtypes, typeargtypes,
-                            e.sym, bestSoFar,
-                            allowBoxing,
-                            useVarargs,
-                            operator);
-                }
-            }
-            if (name == names.init)
-                break;
-            //- System.out.println(" - " + bestSoFar);
-            if (abstractok) {
-                Symbol concrete = methodNotFound;
-                if ((bestSoFar.flags() & ABSTRACT) == 0)
-                    concrete = bestSoFar;
-                for (List<Type> l = types.interfaces(c.type);
-                     l.nonEmpty();
-                     l = l.tail) {
-                    bestSoFar = findMethod(env, site, name, argtypes,
-                            typeargtypes,
-                            l.head, abstractok, bestSoFar,
-                            allowBoxing, useVarargs, operator, seen);
-                }
-                if (concrete != bestSoFar &&
-                        concrete.kind < ERR  && bestSoFar.kind < ERR &&
-                        types.isSubSignature(concrete.type, bestSoFar.type))
-                    bestSoFar = concrete;
-            }
-        }
+        Symbol bestSoFar = super.findMethod(env, site, name, argtypes, typeargtypes, allowBoxing, useVarargs, operator);
         if (bestSoFar.kind >= ERR && operator) { // try operator overloading
             String opname = null;
             List<Type> args = List.nil();

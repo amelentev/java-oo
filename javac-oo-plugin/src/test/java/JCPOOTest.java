@@ -34,11 +34,14 @@ public class JCPOOTest {
     @Test public void testVecMat() throws Exception {
         compile("VecMat", "../tests");
     }
+    @Test public void testBoxing() throws Exception {
+        compile("Boxing", "../tests");
+    }
     @Test public void testVec() throws Exception {
         compile("Vec", "../tests");
     }
-    @Test public void testBoxing() throws Exception {
-        compile("Boxing", "../tests");
+    @Test public void testAbstract() throws Exception {
+        compile("Abstract", "../tests");
     }
     void compile(String clas) throws Exception {
         compile(clas, "../examples/");
