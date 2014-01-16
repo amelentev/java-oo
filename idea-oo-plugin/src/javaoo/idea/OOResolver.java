@@ -14,7 +14,10 @@
  */
 package javaoo.idea;
 
+import com.intellij.lang.java.JavaLanguage;
+import com.intellij.openapi.project.Project;
 import com.intellij.psi.*;
+import com.intellij.psi.impl.light.LightMethodBuilder;
 import com.intellij.psi.util.TypeConversionUtil;
 import javaoo.OOMethods;
 import org.jetbrains.annotations.NotNull;
@@ -31,11 +34,11 @@ public class OOResolver {
         return getOOType(e.getLOperand().getType(), e.getROperand().getType(), e.getOperationSign());
     }
 
-    public static @NotNull PsiType getOOType(PsiType ltype, PsiType rtype, PsiJavaToken op) {
+    public static @NotNull PsiType getOOType(PsiType left, PsiType right, PsiJavaToken op) {
         if (op == null) return NoType;
         String methodname =  OOMethods.binary.get(op.getText());
-        if (methodname != null && rtype != null) {
-            PsiType res = resolveMethod(ltype, methodname, rtype);
+        if (methodname != null && right != null) {
+            PsiType res = resolveMethod(left, methodname, right);
             if (res != null)
                 return res;
         }
@@ -45,10 +48,9 @@ public class OOResolver {
     public static @NotNull PsiType getOOType(PsiPrefixExpression e) {
         if (e == null || e.getOperand() == null)
             return NoType;
-        PsiType optype = e.getOperand().getType();
         String methodname = OOMethods.unary.get(e.getOperationSign().getText());
         if (methodname != null) {
-            PsiType res = resolveMethod(optype, methodname);
+            PsiType res = resolveMethod(e.getOperand(), methodname);
             if (res != null)
                 return res;
         }
@@ -58,7 +60,7 @@ public class OOResolver {
     public static @NotNull PsiType indexGet(PsiArrayAccessExpression e) {
         if (e==null || e.getIndexExpression() == null)
             return NoType;
-        PsiType res = resolveMethod(e.getArrayExpression().getType(), OOMethods.indexGet, e.getIndexExpression().getType());
+        PsiType res = resolveMethod(e.getArrayExpression(), OOMethods.indexGet, e.getIndexExpression());
         return res!=null ? res : NoType;
     }
 
@@ -72,19 +74,34 @@ public class OOResolver {
     }
 
     public static boolean isTypeConvertible(PsiType to, PsiExpression from) {
-        return from != null && resolveMethod(to, OOMethods.valueOf, from.getType())!=null;
+        return from != null && resolveMethod(from.getProject(), from.getContext(), to.getCanonicalText(), OOMethods.valueOf, from)!=null;
+    }
+    public static @Nullable PsiType resolveMethod(PsiExpression receiver, String methodName, @NotNull PsiExpression... args) {
+        return resolveMethod(receiver.getProject(), receiver.getContext(), receiver.getText(), methodName, args);
     }
 
-    public static @Nullable PsiType resolveMethod(PsiExpression clas, String methodName, @NotNull PsiExpression... args) {
-        if (clas == null || methodName == null) return null;
+    public static @Nullable PsiType resolveMethod(Project proj, PsiElement context, String clas, String methodName, @NotNull PsiExpression... args) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(clas).append(".").append(methodName).append("(");
+        boolean comma = false;
+        for (PsiExpression arg : args) {
+            if (comma)
+                sb.append(",");
+            sb.append(arg.getText());
+            comma = true;
+        }
+        sb.append(")");
+        PsiExpression exp = JavaPsiFacade.getElementFactory(proj).createExpressionFromText(sb.toString(), context);
+        return exp.getType();
+        /*if (clas == null || methodName == null) return null;
         PsiType[] argTypes = new PsiType[args.length];
         for (int i = 0; i < args.length; i++) {
             if (args[i] == null) return null;
             argTypes[i] = args[i].getType();
         }
-        return resolveMethod(clas.getType(), methodName, argTypes);
+        return resolveMethod(clas.getType(), methodName, argTypes);*/
     }
-    // TODO: find a better way to do it
+
     public static @Nullable PsiType resolveMethod(@Nullable PsiType type, String methodName, @NotNull PsiType... argTypes) {
         if (!(type instanceof PsiClassType) || methodName==null) return null;
         for (PsiType a : argTypes)
@@ -95,17 +112,10 @@ public class OOResolver {
         PsiClass psiClass = clas.resolve();
         if (psiClass == null)
             return null;
-        PsiMethod methods[] = psiClass.findMethodsByName(methodName, true);
-        for (PsiMethod method : methods) {
-            PsiParameter[] pars = method.getParameterList().getParameters();
-            if (pars.length == argTypes.length) {
-                boolean ok = true;
-                for (int i = 0; i < pars.length; i++)
-                    ok &= subst.substitute(pars[i].getType()).isAssignableFrom(argTypes[i]);
-                if (ok)
-                    return subst.substitute(method.getReturnType());
-            }
-        }
-        return null;
+        LightMethodBuilder method = new LightMethodBuilder(psiClass.getManager(), JavaLanguage.INSTANCE, methodName);
+        for (PsiType a : argTypes)
+            method.addParameter("_", a);
+        PsiMethod m = psiClass.findMethodBySignature(method, true);
+        return m==null ? null : subst.substitute(m.getReturnType());
     }
 }

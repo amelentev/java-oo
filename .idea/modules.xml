@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/idea-oo-plugin/idea-oo-plugin.iml" filepath="$PROJECT_DIR$/idea-oo-plugin/idea-oo-plugin.iml" />
-      <module fileurl="file://$PROJECT_DIR$/javac-oo-mvndemo/javac-oo-mvndemo.iml" filepath="$PROJECT_DIR$/javac-oo-mvndemo/javac-oo-mvndemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/javac-oo-plugin/javac-oo-plugin.iml" filepath="$PROJECT_DIR$/javac-oo-plugin/javac-oo-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/parent.iml" filepath="$PROJECT_DIR$/parent.iml" />
     </modules>
