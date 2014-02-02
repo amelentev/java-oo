@@ -30,11 +30,15 @@ public class Test {
 ```
 # Versions #
 
-	Javac/Netbeans: 0.4
+	JavaC/Netbeans: 0.4
+	JavaC8:         0.1
 	Eclipse:        0.4
 	IntelliJ IDEA:  0.2.1
 
 # News #
+3 Feb 2014. New JavaC8 plugin version 0.1 for JDK8 was released.
+It has the same features as JavaC plugin for JDK7 but doesn't work in Netbeans yet.
+
 12 Jan 2014. JavaC plugin version 0.4 and Eclipse plugin version 0.4 released.
 Now operator overloading perform autoboxing/autounboxing primitive to/from wrapper types where appropriate.
 Fixed [javac plugin bug with index-set OO](https://github.com/amelentev/java-oo/issues/13).
@@ -55,7 +59,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 # Installation #
 
 ## javac, ant, etc ##
-Just add [javac-oo-plugin.jar] to classpath:
+Just add [javac-oo-plugin.jar]  (for JDK7) or [javac8-oo-plugin.jar]  (for JDK8) to classpath:
 ```
 javac -cp javac-oo-plugin.jar <sources>
 ```
@@ -191,5 +195,6 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [PDE]: http://www.eclipse.org/pde/
 [maven]: https://maven.apache.org/
 
-[javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.3/javac-oo-plugin-0.4.jar
+[javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.4/javac-oo-plugin-0.4.jar
+[javac8-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.1/javac8-oo-plugin-0.1.jar
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.1.jar
