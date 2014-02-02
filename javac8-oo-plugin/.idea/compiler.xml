@@ -18,6 +18,9 @@
         <processorPath useClasspath="true" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="javac8-oo-plugin" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
 
