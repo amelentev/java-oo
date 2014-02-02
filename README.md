@@ -143,9 +143,9 @@ assignment:
 	| var = expr | var = VarClass.valueOf(expr) |
 
 if `expr` is not assignable to `var` and `var` is an instance of `VarClass` and `expr` has type `ExprType` and there are static method `VarClass#valueOf(ExprType)` <br/>
-then `var = expr` is transformed to `a = VarClass.valueOf(expr)`.
+then `var = expr` is transformed to `var = VarClass.valueOf(expr)`.
 example: <br/>
-`BigInteger a = 1` is transformed to `_BigInteger a = BigInteger.valueOf(1)`
+`BigInteger a = 1` is transformed to `BigInteger a = BigInteger.valueOf(1)`
 
 These methods exists in many java classes (example: BigInteger, BigDecimal) so you can
 use operators on them "out of the box". Or you can add these methods to your classes to use OO (see [examples/Vector.java](https://github.com/amelentev/java-oo/blob/master/examples/Vector.java)).
