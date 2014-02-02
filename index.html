@@ -34,7 +34,8 @@
         <h1>
 <a name="java-operator-overloading" class="anchor" href="#java-operator-overloading"><span class="octicon octicon-link"></span></a>Java Operator Overloading</h1>
 
-<p>Implementation of (<a href="http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973">Scala-like</a>) <a href="http://en.wikipedia.org/wiki/Operator_overloading">Operator Overloading</a> for Java language.
+<p>Java-OO is a modular extension (plugin) to Java compilers and IDEs
+for (<a href="http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973">Scala-like</a>) <a href="http://en.wikipedia.org/wiki/Operator_overloading">Operator Overloading</a> support.
 Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans IDE</a>, <a href="http://eclipse.org/">Eclipse IDE</a>, <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> IDE and any build tools.</p>
 
 <p>Example (see other examples at <a href="https://github.com/amelentev/java-oo/tree/master/examples">examples/</a> dir):</p>
@@ -42,20 +43,22 @@ Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans 
 <div class="highlight highlight-java"><pre><span class="kn">import</span> <span class="nn">java.math.*</span><span class="o">;</span>
 <span class="kn">import</span> <span class="nn">java.util.*</span><span class="o">;</span>
 <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Test</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="n">BigInteger</span>  <span class="n">a</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="c1">// without OO</span>
-                <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="c1">// with OO</span>
+  <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+    <span class="n">BigInteger</span> <span class="n">a</span> <span class="o">=</span> <span class="n">BigInteger</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="mi">1</span><span class="o">),</span> <span class="c1">// without OO</span>
+               <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="o">,</span> <span class="c1">// with OO</span>
 
-                <span class="n">c1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">negate</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">b</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">a</span><span class="o">)),</span> <span class="c1">// without OO</span>
-                <span class="n">c2</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span><span class="o">/</span><span class="n">a</span><span class="o">;</span> <span class="c1">// with OO</span>
+    <span class="n">c1</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="na">negate</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">multiply</span><span class="o">(</span><span class="n">b</span><span class="o">)).</span><span class="na">add</span><span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">divide</span><span class="o">(</span><span class="n">a</span><span class="o">)),</span> <span class="c1">// without OO</span>
+    <span class="n">c2</span> <span class="o">=</span> <span class="o">-</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">+</span> <span class="n">b</span><span class="o">/</span><span class="n">a</span><span class="o">;</span> <span class="c1">// with OO</span>
 
-        <span class="k">if</span> <span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">c2</span><span class="o">)&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">c1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">c2</span><span class="o">)&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"impossible"</span><span class="o">);</span> <span class="c1">// without OO</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">c1</span><span class="o">&lt;</span><span class="n">c2</span> <span class="o">||</span> <span class="n">c1</span><span class="o">&gt;</span><span class="n">c2</span><span class="o">)</span> <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"impossible"</span><span class="o">);</span> <span class="c1">// with OO</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">c2</span><span class="o">)&lt;</span><span class="mi">0</span> <span class="o">||</span> <span class="n">c1</span><span class="o">.</span><span class="na">compareTo</span><span class="o">(</span><span class="n">c2</span><span class="o">)&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="c1">// without OO</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"impossible"</span><span class="o">);</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">c1</span><span class="o">&lt;</span><span class="n">c2</span> <span class="o">||</span> <span class="n">c1</span><span class="o">&gt;</span><span class="n">c2</span><span class="o">)</span> <span class="c1">// with OO</span>
+      <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"impossible"</span><span class="o">);</span>
 
-        <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
-        <span class="k">if</span> <span class="o">(!</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="s">"qwe"</span><span class="o">))</span> <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"qwe"</span><span class="o">,</span> <span class="s">"asd"</span><span class="o">);</span> <span class="c1">// without OO</span>
-        <span class="k">if</span> <span class="o">(</span><span class="n">map</span><span class="o">[</span><span class="s">"qwe"</span><span class="o">]==</span><span class="kc">null</span><span class="o">)</span> <span class="n">map</span><span class="o">[</span><span class="s">"qwe"</span><span class="o">]</span> <span class="o">=</span> <span class="s">"asd"</span><span class="o">;</span> <span class="c1">// with OO</span>
-    <span class="o">}</span>
+    <span class="n">HashMap</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">String</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="k">if</span> <span class="o">(!</span><span class="n">map</span><span class="o">.</span><span class="na">containsKey</span><span class="o">(</span><span class="s">"qwe"</span><span class="o">))</span> <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="s">"qwe"</span><span class="o">,</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="s">"asd"</span><span class="o">));</span> <span class="c1">// without OO</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">map</span><span class="o">[</span><span class="s">"qwe"</span><span class="o">]==</span><span class="kc">null</span><span class="o">)</span> <span class="n">map</span><span class="o">[</span><span class="s">"qwe"</span><span class="o">]</span> <span class="o">=</span> <span class="n">map</span><span class="o">[</span><span class="s">"asd"</span><span class="o">];</span> <span class="c1">// with OO</span>
+  <span class="o">}</span>
 <span class="o">}</span>
 </pre></div>
 
@@ -84,7 +87,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 <p>17 Apr 2013. <a href="#IDEA">IntelliJ IDEA</a> IDE plugin v0.2.</p>
 
-<p>26 Nov 2012. <a href="https://github.com/amelentev/java-oo/issues?milestone=1&amp;state=closed">Version 0.2</a> released. New feature: <a href="https://github.com/amelentev/java-oo/issues/4">Implicit type conversion</a> via static <em>#valueOf</em> method.</p>
+<p>26 Nov 2012. <a href="https://github.com/amelentev/java-oo/issues?milestone=1&amp;state=closed">Version 0.2</a> released. New feature: <a href="https://github.com/amelentev/java-oo/issues/4">Assignment operator overloading</a> via static <em>#valueOf</em> method.</p>
 
 <h1>
 <a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h1>
@@ -107,7 +110,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <pre><code>http://amelentev.github.io/eclipse.jdt-oo-site/
 </code></pre>
 
-<p>Tested on Eclipse Standard 4.3.1. Should work with older versions.</p>
+<p>Tested on Eclipse Standard 4.3.1. Should work with older/newer versions too.</p>
 
 <h2>
 <a name="netbeans-ide" class="anchor" href="#netbeans-ide"><span class="octicon octicon-link"></span></a><a href="http://www.netbeans.org/">Netbeans IDE</a>
@@ -162,34 +165,34 @@ dependencies {
 <h1>
 <a name="details" class="anchor" href="#details"><span class="octicon octicon-link"></span></a>Details</h1>
 
-<p>Supported operators (operator to method map):</p>
+<p>Supported operators (operator to method name map):</p>
 
 <p>binary:</p>
 
-<pre><code>| OPERATOR | METHOD    |
-------------------------
-| +        | add       |
-| -        | subtract  |
-| *        | multiply  |
-| /        | divide    |
-| %        | remainder |
-| &amp;        | and       |
-| |        | or        |
-| ^        | xor       |
-| &lt;&lt;       | shiftLeft |
-| &gt;&gt;       | shiftRight|
+<pre><code>| OPERATOR | METHOD NAME|
+-------------------------
+| +        | add        |
+| -        | subtract   |
+| *        | multiply   |
+| /        | divide     |
+| %        | remainder  |
+| &amp;        | and        |
+| |        | or         |
+| ^        | xor        |
+| &lt;&lt;       | shiftLeft  |
+| &gt;&gt;       | shiftRight |
 </code></pre>
 
 <p>unary:</p>
 
-<pre><code>| - | negate |
-| ~ | not    |
+<pre><code>| -        | negate     |
+| ~        | not        |
 </code></pre>
 
 <p>comparison:</p>
 
 <pre><code>| &lt;, &lt;=, &gt;, &gt;= | compareTo  | example: `a &lt; b` &lt;=&gt; `a.compareTo(b)&lt;0`
-`==` and `!=` is not overloadable because it will break things
+`==` and `!=` are not overloadable because it will break things
 </code></pre>
 
 <p>index:</p>
@@ -198,11 +201,14 @@ dependencies {
 | []= | set, put  | `map[s] = v` &lt;=&gt; `map.put(s,v)`,  `lst[i] = v` &lt;=&gt; `lst.set(i,v)`
 </code></pre>
 
-<p>Implicit type conversion:</p>
+<p>assignment:</p>
 
-<p>if <em>expression</em> has type <em>ExpressionType</em> and there are static method <em>RequredType RequredType#valueOf(ExpressionType)</em><br> 
-then <em>expression</em> can be assigned to <em>RequredType</em>.
-example: <br><code>BigInteger a = 1</code> translates to <code>BigInteger a = BigInteger.valueOf(1)</code></p>
+<pre><code>| var = expr | var = VarClass.valueOf(expr) |
+</code></pre>
+
+<p>if <code>expr</code> is not assignable to <code>var</code> and <code>var</code> is an instance of <code>VarClass</code> and <code>expr</code> has type <code>ExprType</code> and there are static method <code>VarClass#valueOf(ExprType)</code> <br>
+then <code>var = expr</code> is transformed to <code>var = VarClass.valueOf(expr)</code>.
+example: <br><code>BigInteger a = 1</code> is transformed to <code>BigInteger a = BigInteger.valueOf(1)</code></p>
 
 <p>These methods exists in many java classes (example: BigInteger, BigDecimal) so you can
 use operators on them "out of the box". Or you can add these methods to your classes to use OO (see <a href="https://github.com/amelentev/java-oo/blob/master/examples/Vector.java">examples/Vector.java</a>).</p>
