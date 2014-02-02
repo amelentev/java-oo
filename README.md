@@ -1,6 +1,7 @@
 # Java Operator Overloading #
 
-Implementation of ([Scala-like]) [Operator Overloading] for Java language.
+Java-OO is a modular extension (plugin) to Java compilers and IDEs
+for ([Scala-like]) [Operator Overloading] support.
 Works with standard JavaC compiler, [Netbeans IDE], [Eclipse IDE], [IntelliJ IDEA] IDE and any build tools.
 
 Example (see other examples at [examples/](https://github.com/amelentev/java-oo/tree/master/examples) dir):
@@ -9,20 +10,22 @@ Example (see other examples at [examples/](https://github.com/amelentev/java-oo/
 import java.math.*;
 import java.util.*;
 public class Test {
-	public static void main(String[] args) {
-		BigInteger  a = BigInteger.valueOf(1), // without OO
-				b = 2, // with OO
+  public static void main(String[] args) {
+    BigInteger a = BigInteger.valueOf(1), // without OO
+               b = 2, // with OO
 
-				c1 = a.negate().add(b.multiply(b)).add(b.divide(a)), // without OO
-				c2 = -a + b*b + b/a; // with OO
+    c1 = a.negate().add(b.multiply(b)).add(b.divide(a)), // without OO
+    c2 = -a + b*b + b/a; // with OO
 
-		if (c1.compareTo(c2)<0 || c1.compareTo(c2)>0) System.out.println("impossible"); // without OO
-		if (c1<c2 || c1>c2) System.out.println("impossible"); // with OO
+    if (c1.compareTo(c2)<0 || c1.compareTo(c2)>0) // without OO
+      System.out.println("impossible");
+    if (c1<c2 || c1>c2) // with OO
+      System.out.println("impossible");
 
-		HashMap<String, String> map = new HashMap<>();
-		if (!map.containsKey("qwe")) map.put("qwe", "asd"); // without OO
-		if (map["qwe"]==null) map["qwe"] = "asd"; // with OO
-	}
+    HashMap<String, String> map = new HashMap<>();
+    if (!map.containsKey("qwe")) map.put("qwe", map.get("asd")); // without OO
+    if (map["qwe"]==null) map["qwe"] = map["asd"]; // with OO
+  }
 }
 ```
 # Versions #
@@ -46,7 +49,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.
 
-26 Nov 2012. [Version 0.2] released. New feature: [Implicit type conversion](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
+26 Nov 2012. [Version 0.2] released. New feature: [Assignment operator overloading](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
 [Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
 
 # Installation #
@@ -63,7 +66,7 @@ Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
 	http://amelentev.github.io/eclipse.jdt-oo-site/
 
-Tested on Eclipse Standard 4.3.1. Should work with older versions.
+Tested on Eclipse Standard 4.3.1. Should work with older/newer versions too.
 
 ## [Netbeans IDE] ##
 1. Add [javac-oo-plugin.jar] as compile or processor library to Netbeans.
@@ -103,44 +106,46 @@ Look at [javac-oo-mvndemo/pom.xml](https://github.com/amelentev/java-oo/blob/mas
 
 # Details #
 
-Supported operators (operator to method map):
+Supported operators (operator to method name map):
 
 binary:
 
-	| OPERATOR | METHOD    |
-	------------------------
-	| +        | add       |
-	| -        | subtract  |
-	| *        | multiply  |
-	| /        | divide    |
-	| %        | remainder |
-	| &        | and       |
-	| |        | or        |
-	| ^        | xor       |
-	| <<       | shiftLeft |
-	| >>       | shiftRight|
+	| OPERATOR | METHOD NAME|
+	-------------------------
+	| +        | add        |
+	| -        | subtract   |
+	| *        | multiply   |
+	| /        | divide     |
+	| %        | remainder  |
+	| &        | and        |
+	| |        | or         |
+	| ^        | xor        |
+	| <<       | shiftLeft  |
+	| >>       | shiftRight |
 
 unary:
 
-	| - | negate |
-	| ~ | not    |
+	| -        | negate     |
+	| ~        | not        |
 
 comparison:
 
 	| <, <=, >, >= | compareTo	| example: `a < b` <=> `a.compareTo(b)<0`
-	`==` and `!=` is not overloadable because it will break things
+	`==` and `!=` are not overloadable because it will break things
 
 index:
 
 	| []  | get       | `v = lst[i]` <=> `v = lst.get(i)`
 	| []= | set, put  | `map[s] = v` <=> `map.put(s,v)`,  `lst[i] = v` <=> `lst.set(i,v)`
 
-Implicit type conversion:
+assignment:
 
-if _expression_ has type _ExpressionType_ and there are static method _RequredType RequredType#valueOf(ExpressionType)_<br/> 
-then _expression_ can be assigned to _RequredType_.
+	| var = expr | var = VarClass.valueOf(expr) |
+
+if `expr` is not assignable to `var` and `var` is an instance of `VarClass` and `expr` has type `ExprType` and there are static method `VarClass#valueOf(ExprType)` <br/>
+then `var = expr` is transformed to `a = VarClass.valueOf(expr)`.
 example: <br/>
-`BigInteger a = 1` translates to `BigInteger a = BigInteger.valueOf(1)`
+`BigInteger a = 1` is transformed to `_BigInteger a = BigInteger.valueOf(1)`
 
 These methods exists in many java classes (example: BigInteger, BigDecimal) so you can
 use operators on them "out of the box". Or you can add these methods to your classes to use OO (see [examples/Vector.java](https://github.com/amelentev/java-oo/blob/master/examples/Vector.java)).
