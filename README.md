@@ -59,7 +59,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 # Installation #
 
 ## javac, ant, etc ##
-Just add [javac-oo-plugin.jar]  (for JDK7) or [javac8-oo-plugin.jar]  (for JDK8) to classpath:
+Just add to classpath: [javac-oo-plugin.jar] for JDK7 or [javac8-oo-plugin.jar] for JDK8.
 ```
 javac -cp javac-oo-plugin.jar <sources>
 ```
