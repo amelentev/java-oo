@@ -36,6 +36,8 @@ public class Test {
 	IntelliJ IDEA:  0.2.1
 
 # News #
+30 April 2014. [IJPLA] published a [paper] about Java-OO.
+
 3 Feb 2014. New JavaC8 plugin version 0.1 for JDK8 was released.
 It has the same features as JavaC plugin for JDK7 but doesn't work in Netbeans yet.
 
@@ -110,6 +112,7 @@ Look at [javac-oo-mvndemo/pom.xml](https://github.com/amelentev/java-oo/blob/mas
 
 # Details #
 
+Read the [paper] to learn more.
 Supported operators (operator to method name map):
 
 binary:
@@ -180,6 +183,8 @@ use operators on them "out of the box". Or you can add these methods to your cla
 		- Use it if you need native [Eclipse IDE] support, or Eclipse Java Compiler support.
 		- Build in Eclipse with [PDE]. Run as Eclipse application.
 
+## Publications
+["Java Modular Extension for Operator Overloading", IJPLA, April 2014.](https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf)
 
 [Scala-like]: http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973
 [javac-oo]: https://bitbucket.org/amelentev/javac-oo
@@ -198,3 +203,5 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.4/javac-oo-plugin-0.4.jar
 [javac8-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.1/javac8-oo-plugin-0.1.jar
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.2.1.jar
+[IJPLA]: http://airccse.org/journal/ijpla/current2014.html#apr
+[paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
