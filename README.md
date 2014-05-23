@@ -33,9 +33,11 @@ public class Test {
 	JavaC/Netbeans: 0.4
 	JavaC8:         0.1
 	Eclipse:        0.4
-	IntelliJ IDEA:  0.2.1
+	IntelliJ IDEA:  0.3
 
 # News #
+23 May 2014. [IntelliJ IDEA](#IDEA) plugin v0.3 released. Bugfix for IDEA 13 Ultimate.
+
 30 April 2014. [IJPLA] published a [paper] about Java-OO.
 
 3 Feb 2014. New JavaC8 plugin version 0.1 for JDK8 was released.
