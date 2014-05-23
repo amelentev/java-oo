@@ -19,43 +19,56 @@ import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
 public class Util {
     private Util() {}
 
-    private static @NotNull Field findField(Class clas, String... fields) {
+    public static @NotNull Field findField(Class clas, Class type, String... fields) {
         for (String field : fields) {
             try {
                 Field f = clas.getDeclaredField(field);
-                f.setAccessible(true);
-                return f;
+                if (f.getType() == type) {
+                    f.setAccessible(true);
+                    return f;
+                }
             } catch (NoSuchFieldException e) {
                 // continue
             }
         }
-        throw new RuntimeException(String.format("Can't find %s fields in %s class", Arrays.toString(fields), clas.getName()));
+        Field found = null;
+        int count = 0;
+        for (Field f : clas.getDeclaredFields()) {
+            if (f.getType() == type) {
+                count++;
+                found = f;
+            }
+        }
+        if (count != 1)
+            throw new RuntimeException(String.format("Can't find %s fields in %s class", Arrays.toString(fields), clas.getName()));
+        return found;
     }
 
-    public static <T> Object get(Class<T> clas, T obj, String... fields) {
+    public static <T> Object get(Class<T> clas, T obj, @NotNull Class<?> type, String... fields) {
         try {
-            return findField(clas, fields).get(obj);
-        } catch (Exception e) {
+            return findField(clas, type, fields).get(obj);
+        } catch (IllegalAccessException e) {
             throw sneakyThrow(e);
         }
     }
 
-    public static void set(Class<?> clas, Object obj, Object val, String... fields) {
+    public static void set(Class<?> clas, Object obj, Class type, Object val, String... fields) {
         try {
-            findField(clas, fields).set(obj, val);
+            findField(clas, type, fields).set(obj, val);
         } catch (Exception e) {
             throw sneakyThrow(e);
         }
     }
     public static void setJavaElementConstructor(IElementType et, Class<? extends ASTNode> clas) {
         try {
-            set(JavaElementType.JavaCompositeElementType.class, et, clas.getConstructor(), "myConstructor", "a");
+            set(JavaElementType.JavaCompositeElementType.class, et, Constructor.class, clas.getConstructor(), "myConstructor", "a");
         } catch (NoSuchMethodException e) {
             throw sneakyThrow(e);
         }

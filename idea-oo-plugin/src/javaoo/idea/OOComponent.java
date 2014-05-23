@@ -56,7 +56,7 @@ public class OOComponent implements ProjectComponent, OOMethods {
         Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiOOArrayAccessExpressionImpl.class);
 
         ExtensionPoint<HighlightVisitor> ep = Extensions.getArea(project).getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
-        Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, "myExtensionAdapters");
+        Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, Set.class, "myExtensionAdapters");
         for (ExtensionComponentAdapter ca : hadapters) {
             if (ca.isAssignableTo(HighlightVisitorImpl.class)) {
                 hadapters.remove(ca);

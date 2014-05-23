@@ -22,7 +22,10 @@ import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
 
+import java.lang.reflect.Field;
 import java.util.List;
+
+import static javaoo.idea.Util.sneakyThrow;
 
 public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
 
@@ -129,11 +132,15 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
     // TODO: what highlightInfo to delete?
     private void removeLastHighlight() {
         // remove highlight
-        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, myHolder, "myInfos", "e");
+        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, myHolder, List.class, "myInfos", "f");
         myInfos.remove(myHolder.size() - 1);
         // update error count
-        int myErrorCount = (Integer)Util.get(HighlightInfoHolder.class, myHolder, "myErrorCount", "d");
-        Util.set(HighlightInfoHolder.class, myHolder, myErrorCount-1, "myErrorCount", "d");
+        Field fmyErrorCount = Util.findField(HighlightInfoHolder.class, int.class, "myErrorCount", "e");
+        try {
+            fmyErrorCount.setInt(myHolder, fmyErrorCount.getInt(myHolder) - 1);
+        } catch (IllegalAccessException e) {
+            throw sneakyThrow(e);
+        }
     }
 
     @SuppressWarnings("CloneDoesntCallSuperClone")
