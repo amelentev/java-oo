@@ -40,7 +40,8 @@ public class OOResolver {
         if (methodname != null && right != null) {
             PsiType res = resolveMethod(left, methodname, right);
             if (res != null)
-                return res;
+                if (OOMethods.compareTo.equals(methodname)) return PsiType.BOOLEAN;
+                else return res;
         }
         return NoType;
     }

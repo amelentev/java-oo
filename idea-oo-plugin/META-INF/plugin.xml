@@ -1,7 +1,7 @@
 <idea-plugin version="2" url="http://amelentev.github.io/java-oo/">
   <id>javaoo.idea</id>
   <name>Java Operator Overloading support</name>
-  <version>0.3</version>
+  <version>0.3.1</version>
   <vendor email="amelentev_@_gmail.com" url="http://amelentev.github.io/java-oo/">Artem Melentyev</vendor>
 
   <description><![CDATA[

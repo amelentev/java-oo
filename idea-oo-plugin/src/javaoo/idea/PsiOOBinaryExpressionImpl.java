@@ -15,24 +15,20 @@
 package javaoo.idea;
 
 import com.intellij.psi.PsiBinaryExpression;
-import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.impl.source.resolve.JavaResolveCache;
 import com.intellij.psi.impl.source.tree.java.PsiBinaryExpressionImpl;
+import com.intellij.psi.util.TypeConversionUtil;
 import com.intellij.util.Function;
 
 public class PsiOOBinaryExpressionImpl extends PsiBinaryExpressionImpl {
-    private final PsiBinaryExpressionImpl cache = new PsiBinaryExpressionImpl();
     @Override
     public PsiType getType() {
-        return JavaResolveCache.getInstance(getProject()).getType(cache, new Function<PsiBinaryExpression, PsiType>() {
+        return JavaResolveCache.getInstance(getProject()).getType(this, new Function<PsiBinaryExpression, PsiType>() {
             @Override
-            public PsiType fun(PsiBinaryExpression psiOOBinaryExpression) {
-                PsiType type = PsiOOBinaryExpressionImpl.super.getType();
-                PsiType lType = getLOperand().getType();
-                if (type != null && type != OOResolver.NoType
-                        && (type != PsiType.INT || lType instanceof PsiPrimitiveType || PsiPrimitiveType.getUnboxedType(lType) != null))
-                    return type;
+            public PsiType fun(PsiBinaryExpression e) {
+                if (TypeConversionUtil.isBinaryOperatorApplicable(e.getOperationTokenType(), e.getLOperand(), e.getROperand(), false))
+                    return PsiOOBinaryExpressionImpl.super.getType();
                 return OOResolver.getOOType(PsiOOBinaryExpressionImpl.this);
             }
         });

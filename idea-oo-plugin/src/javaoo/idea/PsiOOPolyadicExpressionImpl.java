@@ -15,7 +15,6 @@
 package javaoo.idea;
 
 import com.intellij.psi.PsiExpression;
-import com.intellij.psi.PsiPrimitiveType;
 import com.intellij.psi.PsiType;
 import com.intellij.psi.impl.source.resolve.JavaResolveCache;
 import com.intellij.psi.impl.source.tree.java.PsiPolyadicExpressionImpl;
@@ -37,20 +36,17 @@ public class PsiOOPolyadicExpressionImpl extends PsiPolyadicExpressionImpl {
             PsiType lType = null;
 
             IElementType sign = param.getOperationTokenType();
-            for (int i = 1; i < operands.length; i++) {
+            for (int i=1; i<operands.length;i++) {
                 PsiType rType = operands[i].getType();
                 // optimization: if we can calculate type based on right type only
                 PsiType type = TypeConversionUtil.calcTypeForBinaryExpression(null, rType, sign, false);
-                if (type != TypeConversionUtil.NULL_TYPE)
-                    return type;
-                if (lType == null)
-                    lType = operands[0].getType();
+                if (type != TypeConversionUtil.NULL_TYPE) return type;
+                if (lType == null) lType = operands[0].getType();
                 PsiType oldlType = lType;
                 lType = TypeConversionUtil.calcTypeForBinaryExpression(lType, rType, sign, true);
+
                 // try OO if something wrong
-                if (lType == PsiType.INT
-                        && !(oldlType instanceof  PsiPrimitiveType)
-                        && PsiPrimitiveType.getUnboxedType(oldlType) == null)
+                if (!TypeConversionUtil.isBinaryOperatorApplicable(sign, oldlType, rType, false))
                     lType = OOResolver.getOOType(oldlType, rType, param.getTokenBeforeOperand(operands[i]));
             }
             return lType;
