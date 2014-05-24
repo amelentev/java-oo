@@ -32,6 +32,9 @@
 
   <change-notes><![CDATA[
     <ul>
+        <li>0.3.1
+            <ol><a href="https://github.com/amelentev/java-oo/issues/18">#18: bugfix in type resolution for binary expressions with primitives</a></ol></ol>
+        </li>
         <li>0.3
             <ol><a href="https://github.com/amelentev/java-oo/issues/17">#17: Bugfix for IDEA 13 Ultimate Edition</a></ol>
         </li>
