@@ -1,1 +1,1 @@
-/cygdrive/e/src/my/java-oo/javac-oo-plugin/src/main/java/javaoo/OOMethods.java
+../../../javac-oo-plugin/src/main/java/javaoo/OOMethods.java
