@@ -31,11 +31,13 @@ public class Test {
 # Versions #
 
 	JavaC/Netbeans: 0.4
-	JavaC8:         0.1
+	JavaC8:         0.1.1
 	Eclipse:        0.4
 	IntelliJ IDEA:  0.3.1
 
 # News #
+31 May 2014. Javac8 plugin version 0.1.1 released. Removed runtime depencendy on nbjavac.
+
 24 May 2014. [IntelliJ IDEA](#IDEA) plugin v0.3.1 released. Bugfixes for IDEA 13 Ultimate and for type resolution for binary expressions with primitives.
 
 30 April 2014. [IJPLA] published a [paper] about Java-OO.
@@ -203,7 +205,7 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [maven]: https://maven.apache.org/
 
 [javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.4/javac-oo-plugin-0.4.jar
-[javac8-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.1/javac8-oo-plugin-0.1.jar
+[javac8-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.1.1/javac8-oo-plugin-0.1.1.jar
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.3.1.jar
 [IJPLA]: http://airccse.org/journal/ijpla/current2014.html#apr
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
