@@ -6,9 +6,13 @@
   <dependencies>
     <dependency>
       <groupId>java-oo</groupId>
+      <!-- javac 7: -->
       <artifactId>javac-oo-plugin</artifactId>
-      <version>${project.version}</version> <!-- replace ${} to oo release version -->
-      <scope>compile</scope>
+      <version>0.4</version> 
+      <!-- javac 8:
+      <artifactId>javac8-oo-plugin</artifactId>
+      <version>0.1.1</version> -->
+      <scope>provided</scope> <!-- compile-only dep -->
     </dependency>
   </dependencies>
   <build>
@@ -17,8 +21,8 @@
       <plugins>
         <plugin>
           <groupId>org.apache.maven.plugins</groupId>
-	  <artifactId>maven-compiler-plugin</artifactId>
-	  <version>3.1</version>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.1</version>
           <configuration>
             <source>1.7</source>
             <target>1.7</target>

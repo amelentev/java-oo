@@ -3,11 +3,11 @@
     <parent>
         <groupId>java-oo</groupId>
         <artifactId>parent</artifactId>
-        <version>0.4</version>
+        <version>0.5-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>javac8-oo-plugin</artifactId>
-    <version>0.1</version>
+    <version>0.1.1</version>
     <packaging>jar</packaging>
     <name>Java Operator Overloading plugin for javac v8</name>
     <url>http://amelentev.github.io/java-oo/</url>
@@ -16,7 +16,7 @@
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-lib-nbjavac</artifactId>
             <version>RELEASE74</version>
-            <scope>compile</scope>
+            <scope>provided</scope> <!-- compile-only dep -->
         </dependency>
         <dependency>
             <groupId>junit</groupId>
