@@ -12,13 +12,13 @@ public class Vector {
 		assert d.length == a.d.length;
 		int[] n = d.clone();
 		for (int i = 0; i < a.d.length; i++)
-			n[i] += a.d[i]; 
+			n[i] += a.d[i];
 		return new Vector(n);
 	}
 	public Vector multiply(int a) {
 		int[] n = d.clone();
 		for (int i = 0; i < d.length; i++)
-			n[i] *= a; 
+			n[i] *= a;
 		return new Vector(n);
 	}
 	public int get(int i) {
@@ -53,7 +53,7 @@ public class Vector {
 		public Vector get(int i) { return new Vector(d[i]); }
 		public String toString() { return Arrays.deepToString(d); }
 	}
-	
+
 	public static boolean test() {
 		Vector a = new Vector(1,2),
 				b = new int[]{2,3},
