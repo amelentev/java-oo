@@ -1,2 +1,2 @@
 #!/bin/sh
-javac -cp ../javac-oo-plugin/target/*jar *.java
+javac -cp ../../javac-oo-plugin/target/*jar *.java
