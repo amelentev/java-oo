@@ -15,7 +15,7 @@
         <dependency>
             <groupId>org.netbeans.modules</groupId>
             <artifactId>org-netbeans-lib-nbjavac</artifactId>
-            <version>RELEASE74</version>
+            <version>RELEASE801</version>
             <scope>provided</scope> <!-- compile-only dep -->
         </dependency>
         <dependency>
