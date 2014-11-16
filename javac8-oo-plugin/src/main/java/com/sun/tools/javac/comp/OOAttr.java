@@ -90,11 +90,15 @@ public class OOAttr extends Attr {
         // construct "<req>.valueOf(tree)" static method call
         tree.type = owntype;
         make.pos = tree.pos;
-        JCTree.JCMethodInvocation valueOf = make.Apply(null,
-                make.Select(make.Ident(resultInfo.pt.tsym), names.fromString(OOMethods.valueOf)),
-                List.of(param == null ? (JCTree.JCExpression)tree : param));
-        valueOf.type = attribTree(valueOf, env, resultInfo);
-        return types.isAssignable(valueOf.type, resultInfo.pt) ? valueOf : null;
+        for (String methodName : OOMethods.valueOf) {
+            JCTree.JCMethodInvocation method = make.Apply(null,
+                    make.Select(make.Ident(resultInfo.pt.tsym), names.fromString(methodName)),
+                    List.of(param == null ? (JCTree.JCExpression) tree : param));
+            method.type = attribTree(method, env, resultInfo);
+            if (types.isAssignable(method.type, resultInfo.pt))
+                return method;
+        }
+        return null;
     }
     boolean isImplicitConversionAllowed(Type found, Type req) {
         // similar to Check#checkType

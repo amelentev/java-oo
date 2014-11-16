@@ -35,6 +35,7 @@ public interface OOMethods {
         put("<=",   compareTo);
         put(">=",   compareTo);
     }};
+    String revSuffix = "Rev";
     Map<String, String> unary = new java.util.HashMap<String, String>() {{
         put("-", "negate");     // jdk7
         put("---", "negate");   // jdk8
@@ -43,5 +44,5 @@ public interface OOMethods {
     String   compareTo = "compareTo";
     String   indexGet = "get";
     String[] indexSet = new String[]{"set", "put"};
-    String   valueOf = "valueOf";
+    String[] valueOf = new String[]{"valueOf", "of"};
 }
