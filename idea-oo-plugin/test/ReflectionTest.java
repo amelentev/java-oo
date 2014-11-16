@@ -1,10 +1,10 @@
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
 import com.intellij.openapi.extensions.impl.ExtensionPointImpl;
 import com.intellij.psi.impl.source.tree.JavaElementType;
+import com.intellij.psi.impl.source.tree.java.PsiBinaryExpressionImpl;
 import javaoo.idea.Util;
 import org.junit.Test;
 
-import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +16,7 @@ public class ReflectionTest {
         assertNotNull(Util.findField(HighlightInfoHolder.class, int.class)); // "myErrorCount"
         assertNotNull(Util.findField(ExtensionPointImpl.class, Set.class)); //"myExtensionAdapters"
         assertNotNull(Util.findField(HighlightInfoHolder.class, List.class)); //"myInfos"
-        assertNotNull(Util.findField(JavaElementType.JavaCompositeElementType.class, Constructor.class));  //"myConstructor"
+
+        Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiBinaryExpressionImpl.class);
     }
 }

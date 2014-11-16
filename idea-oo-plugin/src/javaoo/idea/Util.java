@@ -17,7 +17,9 @@ package javaoo.idea;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
+import sun.reflect.ConstructorAccessor;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -47,7 +49,7 @@ public class Util {
             }
         }
         if (count != 1)
-            throw new RuntimeException(String.format("Can't find %s fields in %s class", Arrays.toString(fields), clas.getName()));
+            sneakyThrow(new NoSuchFieldException(String.format("Can't find %s fields in %s class", Arrays.toString(fields), clas.getName())));
         return found;
     }
 
@@ -67,10 +69,12 @@ public class Util {
         }
     }
     public static void setJavaElementConstructor(IElementType et, Class<? extends ASTNode> clas) {
+        Constructor clasConstructor = ReflectionUtil.getDefaultConstructor(clas);
         try {
-            set(JavaElementType.JavaCompositeElementType.class, et, Constructor.class, clas.getConstructor(), "myConstructor", "a");
-        } catch (NoSuchMethodException e) {
-            throw sneakyThrow(e);
+            set(JavaElementType.JavaCompositeElementType.class, et, Constructor.class, clasConstructor, "myConstructor", "a"); // IDEA 13
+        } catch (Exception e) {
+            ConstructorAccessor accessor = ReflectionUtil.getConstructorAccessor(clasConstructor);
+            set(JavaElementType.JavaCompositeElementType.class, et, ConstructorAccessor.class, accessor, "myConstructor", "a"); // IDEA 14
         }
     }
     public static RuntimeException sneakyThrow(Throwable ex) {
