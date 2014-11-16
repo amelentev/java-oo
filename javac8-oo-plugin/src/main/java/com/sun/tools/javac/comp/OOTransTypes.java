@@ -84,11 +84,14 @@ public class OOTransTypes extends TransTypes {
             Symbol.OperatorSymbol os = (Symbol.OperatorSymbol) tree.operator;
             if (os.opcode == ByteCodes.error+1) { // if operator overloading?
                 Symbol.MethodSymbol ms = (Symbol.MethodSymbol) os.owner;
+                boolean isRev = ms.name.toString().endsWith(OOMethods.revSuffix); // reverse hs if methodRev
+                JCTree.JCExpression lhs = isRev ? tree.rhs : tree.lhs;
+                JCTree.JCExpression rhs = isRev ? tree.lhs : tree.rhs;
                 // construct method invocation ast
-                JCTree.JCFieldAccess meth = make.Select(tree.lhs, ms.name);
+                JCTree.JCFieldAccess meth = make.Select(lhs, ms.name);
                 meth.type = ms.type;
                 meth.sym = ms;
-                result = make.Apply(null, meth, List.of(tree.rhs))
+                result = make.Apply(null, meth, List.of(rhs))
                         .setType( ((Type.MethodType)ms.type).restype ); // tree.type may be != ms.type.restype. see below
                 if (ms.name.contentEquals(OOMethods.compareTo)) {
                     // rewrite to `left.compareTo(right) </> 0`

@@ -18,6 +18,7 @@ import com.sun.tools.javac.util.List;
 import com.sun.tools.javac.util.Name;
 import javaoo.OOMethods;
 
+import static com.sun.tools.javac.code.Kinds.ABSENT_MTH;
 import static com.sun.tools.javac.code.Kinds.ERR;
 
 public class OOResolve extends Resolve {
@@ -31,6 +32,20 @@ public class OOResolve extends Resolve {
         return new OOResolve(context);
     }
 
+    final Symbol methodNotFound = new SymbolNotFoundError(ABSENT_MTH);
+
+    private Symbol findOperatorMethod(Env<AttrContext> env, Name name, List<Type> args) {
+        String methodName = args.tail.isEmpty() ? OOMethods.unary.get(name.toString()) : OOMethods.binary.get(name.toString());
+        if (methodName == null)
+            return methodNotFound;
+        Symbol res = findMethod(env, args.head, names.fromString(methodName), args.tail, null, true, false, false);
+        if (res.kind != Kinds.MTH) {
+            args = args.reverse(); // try reverse with methodRev
+            res = findMethod(env, args.head, names.fromString(methodName + OOMethods.revSuffix), args.tail, null, true, false, false);
+        }
+        return res;
+    }
+
     @Override
     Symbol findMethod(Env<AttrContext> env,
                       Type site,
@@ -42,22 +57,12 @@ public class OOResolve extends Resolve {
                       boolean operator) {
         Symbol bestSoFar = super.findMethod(env, site, name, argtypes, typeargtypes, allowBoxing, useVarargs, operator);
         if (bestSoFar.kind >= ERR && operator) { // try operator overloading
-            String opname = null;
-            List<Type> args = List.nil();
-            if (argtypes.size() == 2) {
-                opname = OOMethods.binary.get(name.toString());
-                args = List.of(argtypes.get(1));
-            } else if (argtypes.size() == 1)
-                opname = OOMethods.unary.get(name.toString());
-            if (opname != null) {
-                Symbol method = findMethod(env, argtypes.get(0), names.fromString(opname),
-                        args, null, true, false, false);
-                if (method.kind == Kinds.MTH) {
-                    bestSoFar = new Symbol.OperatorSymbol(method.name, method.type, ByteCodes.error+1, method);
-                    if (OOMethods.compareTo.equals(opname)) { // change result type to boolean if </>
-                        Type.MethodType oldmt = (Type.MethodType) method.type;
-                        bestSoFar.type = new Type.MethodType(oldmt.argtypes, syms.booleanType, oldmt.thrown, oldmt.tsym);
-                    }
+            Symbol method = findOperatorMethod(env, name, argtypes);
+            if (method.kind == Kinds.MTH) {
+                bestSoFar = new Symbol.OperatorSymbol(method.name, method.type, ByteCodes.error+1, method);
+                if (OOMethods.compareTo.equals(method.name.toString())) { // change result type to boolean if </>
+                    Type.MethodType oldmt = (Type.MethodType) method.type;
+                    bestSoFar.type = new Type.MethodType(oldmt.argtypes, syms.booleanType, oldmt.thrown, oldmt.tsym);
                 }
             }
         }
