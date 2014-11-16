@@ -43,6 +43,9 @@ public class JCPOOTest {
     @Test public void testAbstract() throws Exception {
         compile("Abstract", "../tests");
     }
+    @Test public void testBinaryRev() throws Exception {
+        compile("BinaryRev", "../tests");
+    }
     void compile(String clas) throws Exception {
         compile(clas, "../examples/");
     }
