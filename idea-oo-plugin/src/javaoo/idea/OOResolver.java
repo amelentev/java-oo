@@ -39,6 +39,8 @@ public class OOResolver {
         String methodname =  OOMethods.binary.get(op.getText());
         if (methodname != null && right != null) {
             PsiType res = resolveMethod(left, methodname, right);
+            if (res == null)
+                res = resolveMethod(right, methodname+OOMethods.revSuffix, left);
             if (res != null)
                 if (OOMethods.compareTo.equals(methodname)) return PsiType.BOOLEAN;
                 else return res;
@@ -75,7 +77,11 @@ public class OOResolver {
     }
 
     public static boolean isTypeConvertible(PsiType to, PsiExpression from) {
-        return from != null && resolveMethod(from.getProject(), from.getContext(), to.getCanonicalText(), OOMethods.valueOf, from)!=null;
+        if (from != null)
+            for (String methodName : OOMethods.valueOf)
+                if (resolveMethod(from.getProject(), from.getContext(), to.getCanonicalText(), methodName, from)!=null)
+                    return true;
+        return false;
     }
     public static @Nullable PsiType resolveMethod(PsiExpression receiver, String methodName, @NotNull PsiExpression... args) {
         return resolveMethod(receiver.getProject(), receiver.getContext(), receiver.getText(), methodName, args);
