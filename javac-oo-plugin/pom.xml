@@ -3,7 +3,7 @@
     <parent>
         <groupId>java-oo</groupId>
         <artifactId>parent</artifactId>
-        <version>0.5-SNAPSHOT</version>
+        <version>0.5</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>javac-oo-plugin</artifactId>
