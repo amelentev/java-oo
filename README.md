@@ -4,7 +4,7 @@ Java-OO is a modular extension (plugin) to Java compilers and IDEs
 for ([Scala-like]) [Operator Overloading] support.
 Works with standard JavaC compiler, [Netbeans IDE], [Eclipse IDE], [IntelliJ IDEA] IDE and any build tools.
 
-Example (see other examples at [examples/](https://github.com/amelentev/java-oo/tree/master/examples) dir):
+Example (see other examples at [examples/](https://github.com/amelentev/java-oo/tree/master/javac-oo-mvndemo/src/) dir):
 
 ```java
 import java.math.*;
@@ -75,7 +75,7 @@ Just add to classpath: [javac-oo-plugin.jar] for JDK7 or [javac8-oo-plugin.jar] 
 ```
 javac -cp javac-oo-plugin.jar <sources>
 ```
-Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/examples/compile.sh)
+Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh)
 
 ## [Eclipse IDE] update site ##
 Click in menu: `Help - Install New Software`. Enter in `Work with` field:
@@ -168,7 +168,7 @@ example: <br/>
 `BigInteger a = 1` is transformed to `BigInteger a = BigInteger.valueOf(1)`
 
 These methods exists in many java classes (example: BigInteger, BigDecimal) so you can
-use operators on them "out of the box". Or you can add these methods to your classes to use OO (see [examples/Vector.java](https://github.com/amelentev/java-oo/blob/master/examples/Vector.java)).
+use operators on them "out of the box". Or you can add these methods to your classes to use OO (see [examples/Vector.java](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src//Vector.java)).
 
 
 ## Subprojects / Implementation details
