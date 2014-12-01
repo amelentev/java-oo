@@ -30,12 +30,17 @@ public class Test {
 ```
 # Versions #
 
-	JavaC/Netbeans: 0.4
-	JavaC8:         0.1.1
+	JavaC/Netbeans: 0.5
+	JavaC8:         0.5
 	Eclipse:        0.4
-	IntelliJ IDEA:  0.3.1
+	IntelliJ IDEA:  0.4
 
 # News #
+2 December 2014. New feature: [Reverse binary operator overload via `operatorRev` methods][operatorRev].<br/>
+Plugin versions updated: <br/>
+JavaC7 & JavaC8: 0.5 <br/>
+IntelliJ IDEA: 0.4. Support of IDEA 14
+
 31 May 2014. Javac8 plugin version 0.1.1 released. Removed runtime depencendy on nbjavac.
 
 24 May 2014. [IntelliJ IDEA](#IDEA) plugin v0.3.1 released. Bugfixes for IDEA 13 Ultimate and for type resolution for binary expressions with primitives.
@@ -93,7 +98,7 @@ For other project types: <br/>
 3. Enable Annotation Processing:
 `Menu File -> Settings -> Compiler -> Annotation Processing -> Enable annotation processing`
 4. Make sure you use `javac` compiler in `Settings -> Java Compiler -> Use compiler`. <br/>
-Tested on IDEA 12.1.3 Community and Ultimate Editions.
+Tested on IDEA 14.0.1 Community and Ultimate Editions.
 
 ### Android project in IDEA 12 ###
 Add [javac-oo-plugin.jar] to `File - Settings - Compiler - Annotation Processors - Processor path` 
@@ -106,7 +111,7 @@ repositories {
 	maven { url 'http://amelentev.github.io/mvnrepo/' }
 }
 dependencies {
-	compile 'java-oo:javac-oo-plugin:0.4'
+	compile 'java-oo:javac-oo-plugin:0.5'
 }
 ```
 
@@ -133,6 +138,9 @@ binary:
 	| ^        | xor        |
 	| <<       | shiftLeft  |
 	| >>       | shiftRight |
+
+If left operand has no such method then the plugin will try to use ['reverse' method `<methodName>Rev`][operatorRev] on right operand.
+So `2*a` will be transformed to `a.multiplyRev(2)` if `a` has such method.
 
 unary:
 
@@ -209,3 +217,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.3.1.jar
 [IJPLA]: http://airccse.org/journal/ijpla/current2014.html#apr
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
+[operatorRev]: https://github.com/amelentev/java-oo/issues/25
