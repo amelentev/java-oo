@@ -2,7 +2,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>java-oo</groupId>
   <artifactId>javac-oo-mvndemo</artifactId>
-  <version>0.5</version>
+  <version>0.6-SNAPSHOT</version>
   <dependencies>
     <dependency>
       <groupId>java-oo</groupId>
