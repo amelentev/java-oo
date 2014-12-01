@@ -7,7 +7,7 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>javac8-oo-plugin</artifactId>
-    <version>0.5-SNAPSHOT</version>
+    <version>0.5</version>
     <packaging>jar</packaging>
     <name>Java Operator Overloading plugin for javac v8</name>
     <url>http://amelentev.github.io/java-oo/</url>
@@ -45,4 +45,8 @@
             </plugin>
         </plugins>
     </build>
+
+  <scm>
+    <tag>javac8-0.5</tag>
+  </scm>
 </project>
