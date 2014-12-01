@@ -1,11 +1,10 @@
 *~
 *.class
-bin
-out
-target
-**/.idea/workspace.xml
-.idea/workspace.xml
-**/.idea/libraries
-.idea/libraries
+bin/
+out/
+target/
+.idea/
+*.iml
 /javac-oo
 /javac8-oo
+/nb-javac-oo
