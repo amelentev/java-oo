@@ -1,7 +1,7 @@
 <idea-plugin version="2" url="http://amelentev.github.io/java-oo/">
   <id>javaoo.idea</id>
   <name>Java Operator Overloading support</name>
-  <version>0.3.1</version>
+  <version>0.4</version>
   <vendor email="amelentev_@_gmail.com" url="http://amelentev.github.io/java-oo/">Artem Melentyev</vendor>
 
   <description><![CDATA[
@@ -32,8 +32,12 @@
 
   <change-notes><![CDATA[
     <ul>
+        <li>0.4
+            <ol><a href="https://github.com/amelentev/java-oo/issues/25">#25: Reverse binary operator overload via 'operatorRev' methods</a></ol>
+            <ol>Support of IDEA 14</ol>
+        </li>
         <li>0.3.1
-            <ol><a href="https://github.com/amelentev/java-oo/issues/18">#18: bugfix in type resolution for binary expressions with primitives</a></ol></ol>
+            <ol><a href="https://github.com/amelentev/java-oo/issues/18">#18: bugfix in type resolution for binary expressions with primitives</a></ol>
         </li>
         <li>0.3
             <ol><a href="https://github.com/amelentev/java-oo/issues/17">#17: Bugfix for IDEA 13 Ultimate Edition</a></ol>
