@@ -21,6 +21,9 @@ public class Vector {
 			n[i] *= a;
 		return new Vector(n);
 	}
+	public Vector multiplyRev(int a) {
+		return multiply(a);
+	}
 	public int get(int i) {
 		return d[i];
 	}
@@ -57,7 +60,7 @@ public class Vector {
 	public static boolean test() {
 		Vector a = new Vector(1,2),
 				b = new int[]{2,3},
-				c = a + b*2;
+				c = a + 2*b;
 		if (!"[5, 8]".equals(c.toString()))
 			return false;
 		Matrix A = new Matrix(new int[][] {{1,2,3}, {4,5,6}});

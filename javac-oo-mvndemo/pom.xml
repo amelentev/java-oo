@@ -8,7 +8,7 @@
       <groupId>java-oo</groupId>
       <!-- javac 7: -->
       <artifactId>javac-oo-plugin</artifactId>
-      <version>0.4</version> 
+      <version>0.5</version>
       <!-- javac 8:
       <artifactId>javac8-oo-plugin</artifactId>
       <version>0.1.1</version> -->
