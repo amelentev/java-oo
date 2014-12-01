@@ -38,8 +38,8 @@ public class Test {
 # News #
 2 December 2014. New feature: [Reverse binary operator overload via `operatorRev` methods][operatorRev].<br/>
 Plugin versions updated: <br/>
-JavaC7 & JavaC8: 0.5 <br/>
-IntelliJ IDEA: 0.4. Support of IDEA 14
+[JavaC7 & JavaC8](#javac): 0.5 <br/>
+[IntelliJ IDEA](#IDEA): 0.4. Support of IDEA 14
 
 31 May 2014. Javac8 plugin version 0.1.1 released. Removed runtime depencendy on nbjavac.
 
@@ -69,6 +69,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 # Installation #
 
+<a name="javac" />
 ## javac, ant, etc ##
 Just add to classpath: [javac-oo-plugin.jar] for JDK7 or [javac8-oo-plugin.jar] for JDK8.
 ```
