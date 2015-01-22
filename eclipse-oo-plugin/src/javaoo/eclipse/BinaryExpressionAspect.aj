@@ -48,6 +48,8 @@ public aspect BinaryExpressionAspect {
 		if (method != null) {
 			// find method
 			MessageSend ms = Utils.findMethod(scope, that.left, method, new Expression[]{that.right});
+			if (ms == null)
+				ms = Utils.findMethod(scope, that.right, method + "Rev", new Expression[]{that.left}); // try find right.methodRev(left) 
 			if (ms != null) { // found
 				if ("compareTo".equals(method)) { //$NON-NLS-1$
 					// rewrite to `left.compareTo(right) </> 0`
