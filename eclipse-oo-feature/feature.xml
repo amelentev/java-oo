@@ -2,7 +2,7 @@
 <feature
       id="eclipse.jdt_oo"
       label="Java Operator Overloading for Eclipse"
-      version="0.4.0.qualifier">
+      version="0.5.0.qualifier">
 
    <description url="http://amelentev.github.com/java-oo/">
       Plugin for Java Operator Overloading support in Eclipse IDE
