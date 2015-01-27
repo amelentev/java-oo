@@ -36,7 +36,7 @@ public class Test {
 	IntelliJ IDEA:  0.4
 
 # News #
-27 January 2015. Eclipse-oo-plugin version 0.5 released with support of [reverse binary operator overload][operatorRev]. Unfortunate it [doesn't work in Eclipse 4.4 (Luna)](https://github.com/amelentev/java-oo/issues/26) yet.
+27 January 2015. Eclipse-oo-plugin version 0.5 released with support of [reverse binary operator overload][operatorRev]. Unfortunately it [doesn't work in Eclipse 4.4 (Luna)](https://github.com/amelentev/java-oo/issues/26) yet.
 
 2 December 2014. New feature: [Reverse binary operator overload via `operatorRev` methods][operatorRev].<br/>
 Plugin versions updated: <br/>
@@ -222,3 +222,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
 [equinox-weaving-launcher]: https://github.com/milessabin/equinox-weaving-launcher
+
