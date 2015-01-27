@@ -182,7 +182,7 @@ use operators on them "out of the box". Or you can add these methods to your cla
 - eclipse-oo-plugin
 	- [Eclipse IDE](JDT) plugin for OO support.
 	- Patching Eclipse Java Compiler to allow OO.
-	- Build in Eclipse with [PDE], [AJDT and Equanox Weaving] plugins. Run as Eclipse application.
+	- Build in Eclipse with [PDE], [AJDT and Equanox Weaving] plugins. Run as Eclipse application with [equinox weaving enabled][equinox-weaving-launcher].
 
 - idea-oo-plugin
 	- [IntelliJ IDEA] IDE plugin for OO support. 
@@ -221,3 +221,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [IJPLA]: http://airccse.org/journal/ijpla/current2014.html#apr
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
+[equinox-weaving-launcher]: https://github.com/milessabin/equinox-weaving-launcher
