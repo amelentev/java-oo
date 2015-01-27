@@ -32,10 +32,12 @@ public class Test {
 
 	JavaC/Netbeans: 0.5
 	JavaC8:         0.5
-	Eclipse:        0.4
+	Eclipse:        0.5
 	IntelliJ IDEA:  0.4
 
 # News #
+27 January 2015. Eclipse-oo-plugin version 0.5 released with support of [reverse binary operator overload][operatorRev]. Unfortunate it [doesn't work in Eclipse 4.4 (Luna)](https://github.com/amelentev/java-oo/issues/26) yet.
+
 2 December 2014. New feature: [Reverse binary operator overload via `operatorRev` methods][operatorRev].<br/>
 Plugin versions updated: <br/>
 [JavaC7 & JavaC8](#javac): 0.5 <br/>
@@ -82,7 +84,7 @@ Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
 	http://amelentev.github.io/eclipse.jdt-oo-site/
 
-Tested on Eclipse Standard 4.3.1. Should work with older/newer versions too.
+Tested on Eclipse Standard 4.3.2. Should work with older versions too. Don't work in 4.4 yet.
 
 ## [Netbeans IDE] ##
 1. Add [javac-oo-plugin.jar] as compile or processor library to Netbeans.
