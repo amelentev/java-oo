@@ -58,7 +58,7 @@ public class OOComponent implements ProjectComponent, OOMethods {
         ExtensionPoint<HighlightVisitor> ep = Extensions.getArea(project).getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
         Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, Set.class, "myExtensionAdapters");
         for (ExtensionComponentAdapter ca : hadapters) {
-            if (ca.isAssignableTo(HighlightVisitorImpl.class)) {
+            if (HighlightVisitorImpl.class.getName().equals(ca.getAssignableToClassName())) {
                 hadapters.remove(ca);
                 break;
             }
