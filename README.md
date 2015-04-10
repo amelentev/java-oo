@@ -33,9 +33,11 @@ public class Test {
 	JavaC/Netbeans: 0.5
 	JavaC8:         0.5
 	Eclipse:        0.5
-	IntelliJ IDEA:  0.4
+	IntelliJ IDEA:  0.4.1
 
 # News #
+10 April 2015. [IntelliJ IDEA](#IDEA) plugin v0.4.1 released with support of IDEA 14.1.
+
 27 January 2015. Eclipse-oo-plugin version 0.5 released with support of [reverse binary operator overload][operatorRev]. Unfortunately it [doesn't work in Eclipse 4.4 (Luna)](https://github.com/amelentev/java-oo/issues/26) yet.
 
 2 December 2014. New feature: [Reverse binary operator overload via `operatorRev` methods][operatorRev].<br/>
@@ -217,7 +219,7 @@ use operators on them "out of the box". Or you can add these methods to your cla
 
 [javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.5/javac-oo-plugin-0.5.jar
 [javac8-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.5/javac8-oo-plugin-0.5.jar
-[idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.4.jar
+[idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.4.1.jar
 [IJPLA]: http://airccse.org/journal/ijpla/current2014.html#apr
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
