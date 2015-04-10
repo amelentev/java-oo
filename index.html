@@ -1,37 +1,25 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="Java-OO : Java Operator Overloading">
-
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
-
-    <title>Java-OO</title>
+    <meta charset="UTF-8">
+    <title>Java-OO by amelentev</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
-
   <body>
+    <section class="page-header">
+      <h1 class="project-name">Java-OO</h1>
+      <h2 class="project-tagline">Java Operator Overloading</h2>
+      <a href="https://github.com/amelentev/java-oo" class="btn">View on GitHub</a>
+      <a href="https://github.com/amelentev/java-oo/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/amelentev/java-oo/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/amelentev/java-oo">View on GitHub</a>
-
-          <h1 id="project_title">Java-OO</h1>
-          <h2 id="project_tagline">Java Operator Overloading</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/amelentev/java-oo/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/amelentev/java-oo/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <section class="main-content">
+      <h1>
 <a id="java-operator-overloading" class="anchor" href="#java-operator-overloading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java Operator Overloading</h1>
 
 <p>Java-OO is a modular extension (plugin) to Java compilers and IDEs
@@ -42,22 +30,22 @@ Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans 
 
 <div class="highlight highlight-java"><pre><span class="pl-k">import</span> <span class="pl-smi">java.math.*</span>;
 <span class="pl-k">import</span> <span class="pl-smi">java.util.*</span>;
-<span class="pl-s">public</span> <span class="pl-s">class</span> <span class="pl-en">Test</span> {
-  <span class="pl-s">public</span> <span class="pl-s">static</span> <span class="pl-st">void</span> <span class="pl-en">main</span>(<span class="pl-st">String</span>[] <span class="pl-v">args</span>) {
-    <span class="pl-stj">BigInteger</span> a <span class="pl-k">=</span> <span class="pl-stj">BigInteger</span><span class="pl-k">.</span>valueOf(<span class="pl-c1">1</span>), <span class="pl-c">// without OO</span>
+<span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">Test</span> {
+  <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">main</span>(<span class="pl-k">String</span>[] <span class="pl-v">args</span>) {
+    <span class="pl-smi">BigInteger</span> a <span class="pl-k">=</span> <span class="pl-smi">BigInteger</span><span class="pl-k">.</span>valueOf(<span class="pl-c1">1</span>), <span class="pl-c">// without OO</span>
                b <span class="pl-k">=</span> <span class="pl-c1">2</span>, <span class="pl-c">// with OO</span>
 
     c1 <span class="pl-k">=</span> a<span class="pl-k">.</span>negate()<span class="pl-k">.</span>add(b<span class="pl-k">.</span>multiply(b))<span class="pl-k">.</span>add(b<span class="pl-k">.</span>divide(a)), <span class="pl-c">// without OO</span>
     c2 <span class="pl-k">=</span> <span class="pl-k">-</span>a <span class="pl-k">+</span> b<span class="pl-k">*</span>b <span class="pl-k">+</span> b<span class="pl-k">/</span>a; <span class="pl-c">// with OO</span>
 
     <span class="pl-k">if</span> (c1<span class="pl-k">.</span>compareTo(c2)<span class="pl-k">&lt;</span><span class="pl-c1">0</span> <span class="pl-k">||</span> c1<span class="pl-k">.</span>compareTo(c2)<span class="pl-k">&gt;</span><span class="pl-c1">0</span>) <span class="pl-c">// without OO</span>
-      <span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s1"><span class="pl-pds">"</span>impossible<span class="pl-pds">"</span></span>);
+      <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>impossible<span class="pl-pds">"</span></span>);
     <span class="pl-k">if</span> (c1<span class="pl-k">&lt;</span>c2 <span class="pl-k">||</span> c1<span class="pl-k">&gt;</span>c2) <span class="pl-c">// with OO</span>
-      <span class="pl-stj">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s1"><span class="pl-pds">"</span>impossible<span class="pl-pds">"</span></span>);
+      <span class="pl-smi">System</span><span class="pl-k">.</span>out<span class="pl-k">.</span>println(<span class="pl-s"><span class="pl-pds">"</span>impossible<span class="pl-pds">"</span></span>);
 
-    <span class="pl-st">HashMap&lt;<span class="pl-stj">String</span>, <span class="pl-stj">String</span>&gt;</span> map <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-st">HashMap&lt;&gt;</span>();
-    <span class="pl-k">if</span> (<span class="pl-k">!</span>map<span class="pl-k">.</span>containsKey(<span class="pl-s1"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>)) map<span class="pl-k">.</span>put(<span class="pl-s1"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>, map<span class="pl-k">.</span>get(<span class="pl-s1"><span class="pl-pds">"</span>asd<span class="pl-pds">"</span></span>)); <span class="pl-c">// without OO</span>
-    <span class="pl-k">if</span> (map[<span class="pl-s1"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>]<span class="pl-k">==</span><span class="pl-c1">null</span>) map[<span class="pl-s1"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>] <span class="pl-k">=</span> map[<span class="pl-s1"><span class="pl-pds">"</span>asd<span class="pl-pds">"</span></span>]; <span class="pl-c">// with OO</span>
+    <span class="pl-k">HashMap&lt;<span class="pl-smi">String</span>, <span class="pl-smi">String</span>&gt;</span> map <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-k">HashMap&lt;&gt;</span>();
+    <span class="pl-k">if</span> (<span class="pl-k">!</span>map<span class="pl-k">.</span>containsKey(<span class="pl-s"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>)) map<span class="pl-k">.</span>put(<span class="pl-s"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>, map<span class="pl-k">.</span>get(<span class="pl-s"><span class="pl-pds">"</span>asd<span class="pl-pds">"</span></span>)); <span class="pl-c">// without OO</span>
+    <span class="pl-k">if</span> (map[<span class="pl-s"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>]<span class="pl-k">==</span><span class="pl-c1">null</span>) map[<span class="pl-s"><span class="pl-pds">"</span>qwe<span class="pl-pds">"</span></span>] <span class="pl-k">=</span> map[<span class="pl-s"><span class="pl-pds">"</span>asd<span class="pl-pds">"</span></span>]; <span class="pl-c">// with OO</span>
   }
 }</pre></div>
 
@@ -67,11 +55,13 @@ Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans 
 <pre><code>JavaC/Netbeans: 0.5
 JavaC8:         0.5
 Eclipse:        0.5
-IntelliJ IDEA:  0.4
+IntelliJ IDEA:  0.4.1
 </code></pre>
 
 <h1>
 <a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>News</h1>
+
+<p>10 April 2015. <a href="#IDEA">IntelliJ IDEA</a> plugin v0.4.1 released with support of IDEA 14.1.</p>
 
 <p>27 January 2015. Eclipse-oo-plugin version 0.5 released with support of <a href="https://github.com/amelentev/java-oo/issues/25">reverse binary operator overload</a>. Unfortunately it <a href="https://github.com/amelentev/java-oo/issues/26">doesn't work in Eclipse 4.4 (Luna)</a> yet.</p>
 
@@ -149,7 +139,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> IDE</h2>
 
 <ol>
-<li>Install <a href="http://plugins.jetbrains.com/plugin?pr=&amp;pluginId=7224">Java Operator Overloading support</a> plugin: <code>File -&gt; Settings -&gt; Plugins -&gt; Browse repositories</code>. Mirror: <a href="http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.4.jar">idea-oo-plugin.jar</a>) <br>
+<li>Install <a href="http://plugins.jetbrains.com/plugin?pr=&amp;pluginId=7224">Java Operator Overloading support</a> plugin: <code>File -&gt; Settings -&gt; Plugins -&gt; Browse repositories</code>. Mirror: <a href="http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.4.1.jar">idea-oo-plugin.jar</a>) <br>
 For <a href="#maven">Maven projects</a> installation is done. IDEA should setup everything according to pom.xml. <br>
 For other project types: <br>
 </li>
@@ -246,18 +236,16 @@ use operators on them "out of the box". Or you can add these methods to your cla
 <a id="publications" class="anchor" href="#publications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Publications</h2>
 
 <p><a href="https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf">"Java Modular Extension for Operator Overloading", IJPLA, April 2014.</a></p>
-      </section>
-    </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">Java-OO maintained by <a href="https://github.com/amelentev">amelentev</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/amelentev/java-oo">Java-OO</a> is maintained by <a href="https://github.com/amelentev">amelentev</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
       </footer>
-    </div>
 
-              <script type="text/javascript">
+    </section>
+
+            <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
             document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
           </script>
@@ -268,6 +256,6 @@ use operators on them "out of the box". Or you can add these methods to your cla
             } catch(err) {}
           </script>
 
-
   </body>
 </html>
+
