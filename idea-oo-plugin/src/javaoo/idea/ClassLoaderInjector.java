@@ -39,7 +39,7 @@ public class ClassLoaderInjector {
         }
 
         List<String> referencedClasses = Arrays.asList(
-                OOResolver.class.getName(), Util.class.getName(), OOMethods.class.getName(),
+                OOResolver.class.getName(), Util.class.getName(), OOMethods.class.getName(), Util.class.getName(),
                 OOMethods.class.getName() + "$1", OOMethods.class.getName() + "$2");
         for (String className : referencedClasses)
             injectedClasses.add(transformClass(classLoader, className, className, (cv -> cv)));

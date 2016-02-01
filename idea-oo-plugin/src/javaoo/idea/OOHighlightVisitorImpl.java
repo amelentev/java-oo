@@ -146,10 +146,10 @@ public class OOHighlightVisitorImpl extends FakeHighlightVisitorImpl {
     // TODO: what highlightInfo to delete?
     private void removeLastHighlight() {
         // remove highlight
-        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, myHolder, List.class, "myInfos", "f");
+        List<HighlightInfo> myInfos = (List<HighlightInfo>) Util.get(HighlightInfoHolder.class, myHolder, List.class, "myInfos", "c");
         myInfos.remove(myHolder.size() - 1);
         // update error count
-        Field fmyErrorCount = Util.findField(HighlightInfoHolder.class, int.class, "myErrorCount", "e");
+        Field fmyErrorCount = Util.findField(HighlightInfoHolder.class, int.class, "myErrorCount", "f");
         try {
             fmyErrorCount.setInt(myHolder, fmyErrorCount.getInt(myHolder) - 1);
         } catch (IllegalAccessException e) {

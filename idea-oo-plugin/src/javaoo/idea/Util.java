@@ -52,6 +52,7 @@ public class Util {
         }
         if (count != 1)
             sneakyThrow(new NoSuchFieldException(String.format("Can't find %s fields in %s class", Arrays.toString(fields), clas.getName())));
+        found.setAccessible(true);
         return found;
     }
 
