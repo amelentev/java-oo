@@ -5,7 +5,7 @@
     <title>Java-OO by amelentev</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
   </head>
@@ -20,7 +20,7 @@
 
     <section class="main-content">
       <h1>
-<a id="java-operator-overloading" class="anchor" href="#java-operator-overloading" aria-hidden="true"><span class="octicon octicon-link"></span></a>Java Operator Overloading</h1>
+<a id="java-operator-overloading" class="anchor" href="#java-operator-overloading" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Java Operator Overloading</h1>
 
 <p>Java-OO is a modular extension (plugin) to Java compilers and IDEs
 for (<a href="http://www.slideshare.net/joeygibson/operator-overloading-in-scala-2923973">Scala-like</a>) <a href="http://en.wikipedia.org/wiki/Operator_overloading">Operator Overloading</a> support.
@@ -28,7 +28,7 @@ Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans 
 
 <p>Example (see other examples at <a href="https://github.com/amelentev/java-oo/tree/master/javac-oo-mvndemo/src/">examples/</a> dir):</p>
 
-<div class="highlight highlight-java"><pre><span class="pl-k">import</span> <span class="pl-smi">java.math.*</span>;
+<div class="highlight highlight-source-java"><pre><span class="pl-k">import</span> <span class="pl-smi">java.math.*</span>;
 <span class="pl-k">import</span> <span class="pl-smi">java.util.*</span>;
 <span class="pl-k">public</span> <span class="pl-k">class</span> <span class="pl-en">Test</span> {
   <span class="pl-k">public</span> <span class="pl-k">static</span> <span class="pl-k">void</span> <span class="pl-en">main</span>(<span class="pl-k">String</span>[] <span class="pl-v">args</span>) {
@@ -50,16 +50,20 @@ Works with standard JavaC compiler, <a href="http://www.netbeans.org/">Netbeans 
 }</pre></div>
 
 <h1>
-<a id="versions" class="anchor" href="#versions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Versions</h1>
+<a id="versions" class="anchor" href="#versions" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Versions</h1>
 
 <pre><code>JavaC/Netbeans: 0.5
 JavaC8:         0.5
 Eclipse:        0.5
-IntelliJ IDEA:  0.4.1
+IntelliJ IDEA:  0.5
 </code></pre>
 
+<p>Note plugin versions are independant. If version for X &gt; version for Y then it doesn't mean Y is behind featurewise.</p>
+
 <h1>
-<a id="news" class="anchor" href="#news" aria-hidden="true"><span class="octicon octicon-link"></span></a>News</h1>
+<a id="news" class="anchor" href="#news" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>News</h1>
+
+<p>2 Feb 2016. <a href="#IDEA">IntelliJ IDEA</a> plugin v0.5 released with support of IDEA 15. Requires Java8 to run the plugin.</p>
 
 <p>10 April 2015. <a href="#IDEA">IntelliJ IDEA</a> plugin v0.4.1 released with support of IDEA 14.1.</p>
 
@@ -96,12 +100,12 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <p>26 Nov 2012. <a href="https://github.com/amelentev/java-oo/issues?milestone=1&amp;state=closed">Version 0.2</a> released. New feature: <a href="https://github.com/amelentev/java-oo/issues/4">Assignment operator overloading</a> via static <em>#valueOf</em> method.</p>
 
 <h1>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h1>
 
 <p><a name="javac"></a></p>
 
 <h2>
-<a id="javac-ant-etc" class="anchor" href="#javac-ant-etc" aria-hidden="true"><span class="octicon octicon-link"></span></a>javac, ant, etc</h2>
+<a id="javac-ant-etc" class="anchor" href="#javac-ant-etc" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>javac, ant, etc</h2>
 
 <p>Just add to classpath: <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.5/javac-oo-plugin-0.5.jar">javac-oo-plugin.jar</a> for JDK7 or <a href="http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.5/javac8-oo-plugin-0.5.jar">javac8-oo-plugin.jar</a> for JDK8.</p>
 
@@ -111,8 +115,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <p>Demo at <a href="https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh">examples/compile.sh</a></p>
 
 <h2>
-<a id="eclipse-ide-update-site" class="anchor" href="#eclipse-ide-update-site" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a href="http://eclipse.org/">Eclipse IDE</a> update site</h2>
+<a id="eclipse-ide-update-site" class="anchor" href="#eclipse-ide-update-site" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://eclipse.org/">Eclipse IDE</a> update site</h2>
 
 <p>Click in menu: <code>Help - Install New Software</code>. Enter in <code>Work with</code> field:</p>
 
@@ -122,7 +125,7 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <p>Tested on Eclipse Standard 4.3.2. Should work with older versions too. Don't work in 4.4 yet.</p>
 
 <h2>
-<a id="netbeans-ide" class="anchor" href="#netbeans-ide" aria-hidden="true"><span class="octicon octicon-link"></span></a><a href="http://www.netbeans.org/">Netbeans IDE</a>
+<a id="netbeans-ide" class="anchor" href="#netbeans-ide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://www.netbeans.org/">Netbeans IDE</a>
 </h2>
 
 <ol>
@@ -135,11 +138,10 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <p><a name="IDEA"></a></p>
 
 <h2>
-<a id="intellij-idea-ide" class="anchor" href="#intellij-idea-ide" aria-hidden="true"><span class="octicon octicon-link"></span></a>
-<a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> IDE</h2>
+<a id="intellij-idea-ide" class="anchor" href="#intellij-idea-ide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://www.jetbrains.com/idea/">IntelliJ IDEA</a> IDE</h2>
 
 <ol>
-<li>Install <a href="http://plugins.jetbrains.com/plugin?pr=&amp;pluginId=7224">Java Operator Overloading support</a> plugin: <code>File -&gt; Settings -&gt; Plugins -&gt; Browse repositories</code>. Mirror: <a href="http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.4.1.jar">idea-oo-plugin.jar</a>) <br>
+<li>Install <a href="http://plugins.jetbrains.com/plugin?pr=&amp;pluginId=7224">Java Operator Overloading support</a> plugin: <code>File -&gt; Settings -&gt; Plugins -&gt; Browse repositories</code>. Mirror: <a href="http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.5.jar">idea-oo-plugin.jar</a>) <br>
 For <a href="#maven">Maven projects</a> installation is done. IDEA should setup everything according to pom.xml. <br>
 For other project types: <br>
 </li>
@@ -148,16 +150,16 @@ For other project types: <br>
 <code>Menu File -&gt; Settings -&gt; Compiler -&gt; Annotation Processing -&gt; Enable annotation processing</code>
 </li>
 <li>Make sure you use <code>javac</code> compiler in <code>Settings -&gt; Java Compiler -&gt; Use compiler</code>. <br>
-Tested on IDEA 14.0.1 Community and Ultimate Editions.</li>
+Tested on IDEA 15.0.3 Community and Ultimate Editions.</li>
 </ol>
 
 <h3>
-<a id="android-project-in-idea-12" class="anchor" href="#android-project-in-idea-12" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android project in IDEA 12</h3>
+<a id="android-project-in-idea-12" class="anchor" href="#android-project-in-idea-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Android project in IDEA 12</h3>
 
 <p>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.5/javac-oo-plugin-0.5.jar">javac-oo-plugin.jar</a> to <code>File - Settings - Compiler - Annotation Processors - Processor path</code> </p>
 
 <h3>
-<a id="android-studio-idea-13--gradle" class="anchor" href="#android-studio-idea-13--gradle" aria-hidden="true"><span class="octicon octicon-link"></span></a>Android Studio (IDEA 13) / Gradle</h3>
+<a id="android-studio-idea-13--gradle" class="anchor" href="#android-studio-idea-13--gradle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Android Studio (IDEA 13) / Gradle</h3>
 
 <p>add to <code>build.gradle</code>:</p>
 
@@ -172,12 +174,12 @@ dependencies {
 <p><a name="maven"></a></p>
 
 <h2>
-<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span class="octicon octicon-link"></span></a>Maven</h2>
+<a id="maven" class="anchor" href="#maven" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Maven</h2>
 
 <p>Look at <a href="https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/pom.xml">javac-oo-mvndemo/pom.xml</a></p>
 
 <h1>
-<a id="details" class="anchor" href="#details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Details</h1>
+<a id="details" class="anchor" href="#details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Details</h1>
 
 <p>Read the <a href="https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf">paper</a> to learn more.
 Supported operators (operator to method name map):</p>
@@ -233,7 +235,7 @@ example: <br>
 use operators on them "out of the box". Or you can add these methods to your classes to use OO (see <a href="https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src//Vector.java">examples/Vector.java</a>).</p>
 
 <h2>
-<a id="publications" class="anchor" href="#publications" aria-hidden="true"><span class="octicon octicon-link"></span></a>Publications</h2>
+<a id="publications" class="anchor" href="#publications" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Publications</h2>
 
 <p><a href="https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf">"Java Modular Extension for Operator Overloading", IJPLA, April 2014.</a></p>
 
@@ -258,4 +260,3 @@ use operators on them "out of the box". Or you can add these methods to your cla
 
   </body>
 </html>
-
