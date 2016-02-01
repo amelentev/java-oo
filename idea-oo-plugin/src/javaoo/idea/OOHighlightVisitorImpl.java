@@ -21,18 +21,32 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.org.objectweb.asm.ClassVisitor;
+import org.jetbrains.org.objectweb.asm.ClassWriter;
+import org.jetbrains.org.objectweb.asm.Type;
+import org.jetbrains.org.objectweb.asm.commons.RemappingClassAdapter;
+import org.jetbrains.org.objectweb.asm.commons.SimpleRemapper;
 
 import java.lang.reflect.Field;
 import java.util.List;
+import java.util.function.Function;
 
 import static javaoo.idea.Util.sneakyThrow;
 
-public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
+/** transformed to extends HighlightVisitorImpl by {@link #transformer} */
+public class OOHighlightVisitorImpl extends FakeHighlightVisitorImpl {
 
-    private final @NotNull PsiResolveHelper myResolveHelper;
+    /** replaces FakeHighlightVisitorImpl to HighlightVisitorImpl_public. see {@link FakeHighlightVisitorImpl#transformer} */
+    public static final Function<ClassVisitor, ClassVisitor> transformer = cw ->
+        new RemappingClassAdapter(cw,
+                new SimpleRemapper(
+                        Type.getInternalName(FakeHighlightVisitorImpl.class),
+                        Type.getInternalName(HighlightVisitorImpl.class)+"_public"));
+
     private HighlightInfoHolder myHolder;
+    private final PsiResolveHelper myResolveHelper;
 
-    private OOHighlightVisitorImpl(@NotNull PsiResolveHelper resolveHelper) {
+    public OOHighlightVisitorImpl(PsiResolveHelper resolveHelper) {
         super(resolveHelper);
         myResolveHelper = resolveHelper;
     }
@@ -110,7 +124,7 @@ public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
 
     private boolean isHighlighted(@NotNull PsiElement expression) {
         if (myHolder.hasErrorResults()) {
-            HighlightInfo hi = myHolder.get(myHolder.size()-1);
+            HighlightInfo hi = myHolder.get(myHolder.size() - 1);
             if (hi.getSeverity() != HighlightSeverity.ERROR) return false;
             if (expression instanceof PsiVariable) { // workaround for variable declaration incompatible types highlight
                 PsiVariable v = (PsiVariable) expression;

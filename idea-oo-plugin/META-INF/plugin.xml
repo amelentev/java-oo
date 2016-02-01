@@ -26,14 +26,14 @@
     <!-- Add your actions here -->
   </actions>
 
-  <extensions defaultExtensionNs="com.intellij">
-    <highlightVisitor implementation="javaoo.idea.OOHighlightVisitorImpl"/>
-  </extensions>
-
   <change-notes><![CDATA[
     <ul>
+        <li>0.5
+            <ol>Support of IDEA 15</ol>
+        </li>
         <li>0.4.1
             <ol>Support of IDEA 14.1</ol>
+        </li>
         <li>0.4
             <ol><a href="https://github.com/amelentev/java-oo/issues/25">#25: Reverse binary operator overload via 'operatorRev' methods</a></ol>
             <ol>Support of IDEA 14</ol>

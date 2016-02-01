@@ -23,6 +23,8 @@ import sun.reflect.ConstructorAccessor;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 
 public class Util {
@@ -68,6 +70,17 @@ public class Util {
             throw sneakyThrow(e);
         }
     }
+
+    public static Object invoke(Class<?> clas, Object obj, String methodName, Class<?>[] parameterTypes, Object... parameters) {
+        try {
+            Method method = clas.getDeclaredMethod(methodName, parameterTypes);
+            method.setAccessible(true);
+            return method.invoke(obj, parameters);
+        } catch (Exception e) {
+            throw sneakyThrow(e);
+        }
+    }
+
     public static void setJavaElementConstructor(IElementType et, Class<? extends ASTNode> clas) {
         Constructor clasConstructor = ReflectionUtil.getDefaultConstructor(clas);
         try {
