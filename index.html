@@ -58,16 +58,18 @@ Eclipse:        0.5
 IntelliJ IDEA:  0.5
 </code></pre>
 
-<p>Note plugin versions are independant. If version for X &gt; version for Y then it doesn't mean Y is behind featurewise.</p>
+<p>Note plugin versions are independent. If version for X &gt; version for Y then it doesn't mean Y is behind feature wise.</p>
 
 <h1>
 <a id="news" class="anchor" href="#news" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>News</h1>
+
+<p>14 July 2016. As a workaround <a href="#Eclipse">Eclipse plugin</a> works fine on Eclipse 4.4+ if you install <a href="http://scala-ide.org/download/current.html">Scala IDE</a> plugin first.</p>
 
 <p>2 Feb 2016. <a href="#IDEA">IntelliJ IDEA</a> plugin v0.5 released with support of IDEA 15. Requires Java8 to run the plugin.</p>
 
 <p>10 April 2015. <a href="#IDEA">IntelliJ IDEA</a> plugin v0.4.1 released with support of IDEA 14.1.</p>
 
-<p>27 January 2015. Eclipse-oo-plugin version 0.5 released with support of <a href="https://github.com/amelentev/java-oo/issues/25">reverse binary operator overload</a>. Unfortunately it <a href="https://github.com/amelentev/java-oo/issues/26">doesn't work in Eclipse 4.4 (Luna)</a> yet.</p>
+<p>27 January 2015. Eclipse-oo-plugin version 0.5 released with support of <a href="https://github.com/amelentev/java-oo/issues/25">reverse binary operator overload</a>.</p>
 
 <p>2 December 2014. New feature: <a href="https://github.com/amelentev/java-oo/issues/25">Reverse binary operator overload via <code>operatorRev</code> methods</a>.<br>
 Plugin versions updated: <br>
@@ -114,6 +116,8 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 <p>Demo at <a href="https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh">examples/compile.sh</a></p>
 
+<p><a name="Eclipse"></a></p>
+
 <h2>
 <a id="eclipse-ide-update-site" class="anchor" href="#eclipse-ide-update-site" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://eclipse.org/">Eclipse IDE</a> update site</h2>
 
@@ -122,7 +126,8 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <pre><code>http://amelentev.github.io/eclipse.jdt-oo-site/
 </code></pre>
 
-<p>Tested on Eclipse Standard 4.3.2. Should work with older versions too. Don't work in 4.4 yet.</p>
+<p>Tested on Eclipse Standard 4.3.2. Should work with older versions too. <br>
+To work on 4.4+ you need to install <a href="http://scala-ide.org/download/current.html">Scala IDE</a> plugin (or similar plugin with Equanox weaving). You can find it in <code>Help -&gt; Eclipse Marketplace</code>. This is workaround until normal solution will be found. Tested on 4.4 and 4.6.</p>
 
 <h2>
 <a id="netbeans-ide" class="anchor" href="#netbeans-ide" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a><a href="http://www.netbeans.org/">Netbeans IDE</a>
@@ -156,7 +161,7 @@ Tested on IDEA 15.0.3 Community and Ultimate Editions.</li>
 <h3>
 <a id="android-project-in-idea-12" class="anchor" href="#android-project-in-idea-12" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Android project in IDEA 12</h3>
 
-<p>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.5/javac-oo-plugin-0.5.jar">javac-oo-plugin.jar</a> to <code>File - Settings - Compiler - Annotation Processors - Processor path</code> </p>
+<p>Add <a href="http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.5/javac-oo-plugin-0.5.jar">javac-oo-plugin.jar</a> to <code>File - Settings - Compiler - Annotation Processors - Processor path</code></p>
 
 <h3>
 <a id="android-studio-idea-13--gradle" class="anchor" href="#android-studio-idea-13--gradle" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Android Studio (IDEA 13) / Gradle</h3>
