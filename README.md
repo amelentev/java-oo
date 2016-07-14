@@ -35,14 +35,16 @@ public class Test {
 	Eclipse:        0.5
 	IntelliJ IDEA:  0.5
 
-Note plugin versions are independant. If version for X > version for Y then it doesn't mean Y is behind featurewise.
+Note plugin versions are independent. If version for X > version for Y then it doesn't mean Y is behind feature wise.
 
 # News #
+14 July 2016. As a workaround [Eclipse plugin](#Eclipse) works fine on Eclipse 4.4+ if you install [Scala IDE] plugin first.
+
 2 Feb 2016. [IntelliJ IDEA](#IDEA) plugin v0.5 released with support of IDEA 15. Requires Java8 to run the plugin.
 
 10 April 2015. [IntelliJ IDEA](#IDEA) plugin v0.4.1 released with support of IDEA 14.1.
 
-27 January 2015. Eclipse-oo-plugin version 0.5 released with support of [reverse binary operator overload][operatorRev]. Unfortunately it [doesn't work in Eclipse 4.4 (Luna)](https://github.com/amelentev/java-oo/issues/26) yet.
+27 January 2015. Eclipse-oo-plugin version 0.5 released with support of [reverse binary operator overload][operatorRev].
 
 2 December 2014. New feature: [Reverse binary operator overload via `operatorRev` methods][operatorRev].<br/>
 Plugin versions updated: <br/>
@@ -85,12 +87,14 @@ javac -cp javac-oo-plugin.jar <sources>
 ```
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh)
 
+<a name='Eclipse' />
 ## [Eclipse IDE] update site ##
 Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
 	http://amelentev.github.io/eclipse.jdt-oo-site/
 
-Tested on Eclipse Standard 4.3.2. Should work with older versions too. Don't work in 4.4 yet.
+Tested on Eclipse Standard 4.3.2. Should work with older versions too. <br/>
+To work on 4.4+ you need to install [Scala IDE] plugin (or similar plugin with Equanox weaving). You can find it in `Help -> Eclipse Marketplace`. This is workaround until normal solution will be found. Tested on 4.4 and 4.6.
 
 ## [Netbeans IDE] ##
 1. Add [javac-oo-plugin.jar] as compile or processor library to Netbeans.
@@ -110,7 +114,7 @@ For other project types: <br/>
 Tested on IDEA 15.0.3 Community and Ultimate Editions.
 
 ### Android project in IDEA 12 ###
-Add [javac-oo-plugin.jar] to `File - Settings - Compiler - Annotation Processors - Processor path` 
+Add [javac-oo-plugin.jar] to `File - Settings - Compiler - Annotation Processors - Processor path`
 
 ### Android Studio (IDEA 13) / Gradle ###
 add to `build.gradle`:
@@ -191,7 +195,7 @@ use operators on them "out of the box". Or you can add these methods to your cla
 	- Build in Eclipse with [PDE], [AJDT and Equanox Weaving] plugins. Run as Eclipse application with [equinox weaving enabled][equinox-weaving-launcher].
 
 - idea-oo-plugin
-	- [IntelliJ IDEA] IDE plugin for OO support. 
+	- [IntelliJ IDEA] IDE plugin for OO support.
 	- Modify Java frontend in IDEA to allow OO. Need javac-oo-plugin to actually compile.
 	- Build in IDEA. Run as IDEA plugin.
 
@@ -228,4 +232,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
 [equinox-weaving-launcher]: https://github.com/milessabin/equinox-weaving-launcher
-
+[Scala IDE]: http://scala-ide.org/download/current.html
