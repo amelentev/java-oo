@@ -109,7 +109,7 @@ Tested on 7.2.1
 <a name="IDEA" />
 
 ## [IntelliJ IDEA] IDE ##
-1. Install [Java Operator Overloading support](http://plugins.jetbrains.com/plugin?pr=&pluginId=7224) plugin: `File -> Settings -> Plugins -> Browse repositories`. Mirror: [idea-oo-plugin.jar]) <br/>
+1. Install [Java Operator Overloading support](https://plugins.jetbrains.com/idea/plugin/7224-java-operator-overloading-support) plugin: `File -> Settings -> Plugins -> Browse repositories`. Mirror: [idea-oo-plugin.jar]) <br/>
 For [Maven projects](#maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
 For other project types: <br/>
 2. Add [javac8-oo-plugin.jar] as compile or processor library.
