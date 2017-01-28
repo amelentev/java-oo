@@ -1,7 +1,7 @@
 title: Java-OO
 description: Java Operator Overloading
 google_analytics: UA-31894853-1
-show_downloads: true
+show_downloads: false
 theme: jekyll-theme-cayman
 
 gems:
