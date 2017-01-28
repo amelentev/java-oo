@@ -81,9 +81,9 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 <a name="javac" />
 ## javac, ant, etc ##
-Just add to classpath: [javac-oo-plugin.jar] for JDK7 or [javac8-oo-plugin.jar] for JDK8.
+Just add to classpath: [javac8-oo-plugin.jar] for JDK8 or [javac-oo-plugin.jar] for JDK7.
 ```
-javac -cp javac-oo-plugin.jar <sources>
+javac -cp javac8-oo-plugin.jar <sources>
 ```
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh)
 
@@ -107,11 +107,11 @@ Tested on 7.2.1
 1. Install [Java Operator Overloading support](http://plugins.jetbrains.com/plugin?pr=&pluginId=7224) plugin: `File -> Settings -> Plugins -> Browse repositories`. Mirror: [idea-oo-plugin.jar]) <br/>
 For [Maven projects](#maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
 For other project types: <br/>
-2. Add [javac-oo-plugin.jar] as compile or processor library.
+2. Add [javac8-oo-plugin.jar] as compile or processor library.
 3. Enable Annotation Processing:
 `Menu File -> Settings -> Compiler -> Annotation Processing -> Enable annotation processing`
 4. Make sure you use `javac` compiler in `Settings -> Java Compiler -> Use compiler`. <br/>
-Tested on IDEA 15.0.3 Community and Ultimate Editions.
+Tested on IDEA 2016.3.3.
 
 ### Android project in IDEA 12 ###
 Add [javac-oo-plugin.jar] to `File - Settings - Compiler - Annotation Processors - Processor path`
