@@ -28,6 +28,7 @@ public class Test {
   }
 }
 ```
+
 # Versions #
 
 	JavaC/Netbeans: 0.5
@@ -75,7 +76,6 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.
 
 26 Nov 2012. [Version 0.2] released. New feature: [Assignment operator overloading](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
-[Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
 
 # Installation #
 
@@ -83,9 +83,11 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 ## javac, ant, etc ##
 Just add to classpath: [javac8-oo-plugin.jar] for JDK8 or [javac-oo-plugin.jar] for JDK7.
+
 ```
 javac -cp javac8-oo-plugin.jar <sources>
 ```
+
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh)
 
 <a name='Eclipse' />
@@ -186,6 +188,32 @@ example: <br/>
 These methods exists in many java classes (example: BigInteger, BigDecimal) so you can
 use operators on them "out of the box". Or you can add these methods to your classes to use OO (see [examples/Vector.java](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src//Vector.java)).
 
+
+## Subprojects / Implementation details
+
+- javac-oo-plugin
+	- Plugin to JavaC 1.7 and [Netbeans IDE] for operator overloading. Based on [javac-oo].
+	- Building via [maven] at top level: `cd java-oo; mvn clean install`. Or import maven settings in your IDE.
+
+- eclipse-oo-plugin
+	- [Eclipse IDE](JDT) plugin for OO support.
+	- Patching Eclipse Java Compiler to allow OO.
+	- Build in Eclipse with [PDE], [AJDT and Equanox Weaving] plugins. Run as Eclipse application with [equinox weaving enabled][equinox-weaving-launcher].
+
+- idea-oo-plugin
+	- [IntelliJ IDEA] IDE plugin for OO support.
+	- Modify Java frontend in IDEA to allow OO. Need javac-oo-plugin to actually compile.
+	- Build in IDEA. Run as IDEA plugin.
+
+- by-products:
+	- [javac-oo]
+		- Patched version of JavaC 1.7 for Operator Overloading support. If you need standalone javac compiler with OO.
+		- Build via ant or netbeans: http://openjdk.java.net/groups/compiler/README.html#build
+	- [eclipse-oo]
+		- Eclipse [Java Developer Tools] fork for Operator Overloading.
+		- Use it if you need native [Eclipse IDE] support, or Eclipse Java Compiler support.
+		- Build in Eclipse with [PDE]. Run as Eclipse application.
+
 ## Publications
 ["Java Modular Extension for Operator Overloading", IJPLA, April 2014.](https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf)
 
@@ -211,3 +239,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
 [equinox-weaving-launcher]: https://github.com/milessabin/equinox-weaving-launcher
 [Scala IDE]: http://scala-ide.org/download/current.html
+[Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
