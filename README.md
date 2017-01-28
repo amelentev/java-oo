@@ -28,6 +28,7 @@ public class Test {
   }
 }
 ```
+
 # Versions #
 
 	JavaC/Netbeans: 0.5
@@ -75,7 +76,6 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 17 Apr 2013. [IntelliJ IDEA](#IDEA) IDE plugin v0.2.
 
 26 Nov 2012. [Version 0.2] released. New feature: [Assignment operator overloading](https://github.com/amelentev/java-oo/issues/4) via static _#valueOf_ method.
-[Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
 
 # Installation #
 
@@ -83,9 +83,11 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 
 ## javac, ant, etc ##
 Just add to classpath: [javac8-oo-plugin.jar] for JDK8 or [javac-oo-plugin.jar] for JDK7.
+
 ```
 javac -cp javac8-oo-plugin.jar <sources>
 ```
+
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh)
 
 <a name='Eclipse' />
@@ -237,3 +239,4 @@ use operators on them "out of the box". Or you can add these methods to your cla
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
 [equinox-weaving-launcher]: https://github.com/milessabin/equinox-weaving-launcher
 [Scala IDE]: http://scala-ide.org/download/current.html
+[Version 0.2]: https://github.com/amelentev/java-oo/issues?milestone=1&state=closed
