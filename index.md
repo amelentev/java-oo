@@ -82,7 +82,6 @@ Removed copypasta from Eclipse Compiler. Plugin should be more steady agains com
 <a name="javac" />
 
 ## javac, ant, etc ##
-
 Just add to classpath: [javac8-oo-plugin.jar] for JDK8 or [javac-oo-plugin.jar] for JDK7.
 ```
 javac -cp javac8-oo-plugin.jar <sources>
@@ -90,6 +89,7 @@ javac -cp javac8-oo-plugin.jar <sources>
 Demo at [examples/compile.sh](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/src/compile.sh)
 
 <a name='Eclipse' />
+
 ## [Eclipse IDE] update site ##
 Click in menu: `Help - Install New Software`. Enter in `Work with` field:
 
@@ -105,6 +105,7 @@ To work on 4.4+ you need to install [Scala IDE] plugin (or similar plugin with E
 Tested on 7.2.1
 
 <a name="IDEA" />
+
 ## [IntelliJ IDEA] IDE ##
 1. Install [Java Operator Overloading support](http://plugins.jetbrains.com/plugin?pr=&pluginId=7224) plugin: `File -> Settings -> Plugins -> Browse repositories`. Mirror: [idea-oo-plugin.jar]) <br/>
 For [Maven projects](#maven) installation is done. IDEA should setup everything according to pom.xml. <br/>
@@ -131,6 +132,7 @@ dependencies {
 ```
 
 <a name="maven" />
+
 ## Maven ##
 Look at [javac-oo-mvndemo/pom.xml](https://github.com/amelentev/java-oo/blob/master/javac-oo-mvndemo/pom.xml)
 
