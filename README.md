@@ -34,11 +34,13 @@ public class Test {
 	JavaC/Netbeans: 0.5
 	JavaC8:         0.5
 	Eclipse:        0.5
-	IntelliJ IDEA:  0.5
+	IntelliJ IDEA:  0.6
 
 Note plugin versions are independent. If version for X > version for Y then it doesn't mean Y is behind feature wise.
 
 # News #
+20 May 2017. [IntelliJ IDEA](#IDEA) plugin v0.6 released with support of IDEA 2017.
+
 14 July 2016. As a workaround [Eclipse plugin](#Eclipse) works fine on Eclipse 4.4+ if you install [Scala IDE] plugin first.
 
 2 Feb 2016. [IntelliJ IDEA](#IDEA) plugin v0.5 released with support of IDEA 15. Requires Java8 to run the plugin.
@@ -116,7 +118,7 @@ For other project types: <br/>
 3. Enable Annotation Processing:
 `Menu File -> Settings -> Compiler -> Annotation Processing -> Enable annotation processing`
 4. Make sure you use `javac` compiler in `Settings -> Java Compiler -> Use compiler`. <br/>
-Tested on IDEA 2016.3.3.
+Tested on IDEA 2017.1.3 Ultimate & Community editions. Since version 0.6 plugin requeres minimum IDEA version 2016.2. Use earlier plugin versions for older IDEA releases.
 
 ### Android project in IDEA 12 ###
 Add [javac-oo-plugin.jar] to `File - Settings - Compiler - Annotation Processors - Processor path`
@@ -233,7 +235,7 @@ use operators on them "out of the box". Or you can add these methods to your cla
 
 [javac-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac-oo-plugin/0.5/javac-oo-plugin-0.5.jar
 [javac8-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/javac8-oo-plugin/0.5/javac8-oo-plugin-0.5.jar
-[idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.5.jar
+[idea-oo-plugin.jar]: http://amelentev.github.io/mvnrepo/java-oo/idea-oo-plugin/idea-oo-plugin-0.6.jar
 [IJPLA]: http://airccse.org/journal/ijpla/current2014.html#apr
 [paper]: https://github.com/amelentev/java-oo/raw/master/doc/ijpla.pdf
 [operatorRev]: https://github.com/amelentev/java-oo/issues/25
