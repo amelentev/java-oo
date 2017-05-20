@@ -19,11 +19,9 @@ import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
-import sun.reflect.ConstructorAccessor;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
@@ -84,13 +82,9 @@ public class Util {
 
     public static void setJavaElementConstructor(IElementType et, Class<? extends ASTNode> clas) {
         Constructor clasConstructor = ReflectionUtil.getDefaultConstructor(clas);
-        try {
-            set(JavaElementType.JavaCompositeElementType.class, et, Constructor.class, clasConstructor, "myConstructor", "a"); // IDEA 13
-        } catch (Exception e) {
-            ConstructorAccessor accessor = ReflectionUtil.getConstructorAccessor(clasConstructor);
-            set(JavaElementType.JavaCompositeElementType.class, et, ConstructorAccessor.class, accessor, "myConstructor", "a"); // IDEA 14
-        }
+        set(JavaElementType.JavaCompositeElementType.class, et, Constructor.class, clasConstructor, "myConstructor", "a");
     }
+
     public static RuntimeException sneakyThrow(Throwable ex) {
         return Util.sneakyThrowInner(ex);
     }

@@ -1,7 +1,7 @@
 <idea-plugin version="2" url="http://amelentev.github.io/java-oo/">
   <id>javaoo.idea</id>
   <name>Java Operator Overloading support</name>
-  <version>0.5</version>
+  <version>0.6</version>
   <vendor email="amelentev_@_gmail.com" url="http://amelentev.github.io/java-oo/">Artem Melentyev</vendor>
 
   <description><![CDATA[
@@ -11,7 +11,7 @@
   <category>Custom Languages</category>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Build+Number+Ranges for description -->
-  <idea-version since-build="107.105"/>
+  <idea-version since-build="162"/>
 
   <!-- please see http://confluence.jetbrains.net/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
        on how to target different products -->
@@ -29,6 +29,9 @@
 
   <change-notes><![CDATA[
     <ul>
+        <li>0.6
+            <ol>Support of IDEA 2017.1.3. Minimum 2016.2</ol>
+        </li>
         <li>0.5
             <ol>Support of IDEA 15. Java8 is required to run the plugin.</ol>
         </li>

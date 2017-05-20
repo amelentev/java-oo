@@ -61,7 +61,7 @@ public class OOComponent implements ProjectComponent {
             if (HighlightVisitorImpl.class.getName().equals(ca.getAssignableToClassName())) {
                 try {
                     Class ooHighlightVisitorClass = classLoaderInjector.injectOOHighlightVisitorImplClass(HighlightVisitorImpl.class.getClassLoader());
-                    Util.set(ExtensionComponentAdapter.class, ca, Class.class, ooHighlightVisitorClass, "myImplementationClass");
+                    Util.set(ExtensionComponentAdapter.class, ca, Object.class, ooHighlightVisitorClass, "myImplementationClassOrName");
                 } catch (Exception e) {
                     LOG.error("Can't load transformed OOHighlightVisitorImpl class", e);
                 }
