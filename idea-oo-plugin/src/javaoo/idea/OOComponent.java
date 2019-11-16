@@ -19,6 +19,7 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightVisitorImpl;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.ExtensionPoint;
+import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.extensions.impl.ExtensionComponentAdapter;
 import com.intellij.openapi.extensions.impl.ExtensionPointImpl;
 import com.intellij.openapi.project.Project;
@@ -53,7 +54,8 @@ public class OOComponent implements ProjectComponent {
         Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiOOPolyadicExpressionImpl::new);
         Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiOOArrayAccessExpressionImpl::new);
 
-        ExtensionPoint<HighlightVisitor> ep = project.getExtensionArea().getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
+        // TODO: replace to project.getExtensionArea() after 2019.3
+        ExtensionPoint<HighlightVisitor> ep = Extensions.getArea(project).getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
         List<ExtensionComponentAdapter> hadapters = (List<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, List.class, "myAdapters");
         for (ExtensionComponentAdapter ca : hadapters) {
             if (HighlightVisitorImpl.class.getName().equals(ca.getAssignableToClassName())) {
