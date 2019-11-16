@@ -17,13 +17,11 @@ package javaoo.idea;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.impl.source.tree.JavaElementType;
 import com.intellij.psi.tree.IElementType;
-import com.intellij.util.ReflectionUtil;
 import org.jetbrains.annotations.NotNull;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.function.Supplier;
 
 public class Util {
     private Util() {}
@@ -70,19 +68,8 @@ public class Util {
         }
     }
 
-    public static Object invoke(Class<?> clas, Object obj, String methodName, Class<?>[] parameterTypes, Object... parameters) {
-        try {
-            Method method = clas.getDeclaredMethod(methodName, parameterTypes);
-            method.setAccessible(true);
-            return method.invoke(obj, parameters);
-        } catch (Exception e) {
-            throw sneakyThrow(e);
-        }
-    }
-
-    public static void setJavaElementConstructor(IElementType et, Class<? extends ASTNode> clas) {
-        Constructor clasConstructor = ReflectionUtil.getDefaultConstructor(clas);
-        set(JavaElementType.JavaCompositeElementType.class, et, Constructor.class, clasConstructor, "myConstructor", "a");
+    public static void setJavaElementConstructor(IElementType et, Supplier<? extends ASTNode> constructor) {
+        set(JavaElementType.JavaCompositeElementType.class, et, Supplier.class, constructor, "myConstructor", "a");
     }
 
     public static RuntimeException sneakyThrow(Throwable ex) {

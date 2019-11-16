@@ -19,7 +19,6 @@ import com.intellij.codeInsight.daemon.impl.analysis.HighlightVisitorImpl;
 import com.intellij.openapi.components.ProjectComponent;
 import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.extensions.ExtensionPoint;
-import com.intellij.openapi.extensions.Extensions;
 import com.intellij.openapi.extensions.impl.ExtensionComponentAdapter;
 import com.intellij.openapi.extensions.impl.ExtensionPointImpl;
 import com.intellij.openapi.project.Project;
@@ -30,13 +29,12 @@ import com.intellij.psi.impl.source.tree.java.PsiPolyadicExpressionImpl;
 import com.intellij.psi.impl.source.tree.java.PsiPrefixExpressionImpl;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Set;
+import java.util.List;
 
 public class OOComponent implements ProjectComponent {
     private static final Logger LOG = Logger.getInstance("#"+OOComponent.class.getName());
 
     private final Project project;
-    private final ClassLoaderInjector classLoaderInjector = new ClassLoaderInjector();
 
     public OOComponent(Project project) {
         this.project = project;
@@ -50,18 +48,17 @@ public class OOComponent implements ProjectComponent {
     @Override
     public void initComponent() {
         LOG.info("OO init");
-        Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiOOBinaryExpressionImpl.class);
-        Util.setJavaElementConstructor(JavaElementType.PREFIX_EXPRESSION, PsiOOPrefixExpressionImpl.class);
-        Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiOOPolyadicExpressionImpl.class);
-        Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiOOArrayAccessExpressionImpl.class);
+        Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiOOBinaryExpressionImpl::new);
+        Util.setJavaElementConstructor(JavaElementType.PREFIX_EXPRESSION, PsiOOPrefixExpressionImpl::new);
+        Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiOOPolyadicExpressionImpl::new);
+        Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiOOArrayAccessExpressionImpl::new);
 
-        ExtensionPoint<HighlightVisitor> ep = Extensions.getArea(project).getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
-        Set<ExtensionComponentAdapter> hadapters = (Set<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, Set.class, "myExtensionAdapters");
+        ExtensionPoint<HighlightVisitor> ep = project.getExtensionArea().getExtensionPoint(HighlightVisitor.EP_HIGHLIGHT_VISITOR);
+        List<ExtensionComponentAdapter> hadapters = (List<ExtensionComponentAdapter>) Util.get(ExtensionPointImpl.class, (ExtensionPointImpl<HighlightVisitor>) ep, List.class, "myAdapters");
         for (ExtensionComponentAdapter ca : hadapters) {
             if (HighlightVisitorImpl.class.getName().equals(ca.getAssignableToClassName())) {
                 try {
-                    Class ooHighlightVisitorClass = classLoaderInjector.injectOOHighlightVisitorImplClass(HighlightVisitorImpl.class.getClassLoader());
-                    Util.set(ExtensionComponentAdapter.class, ca, Object.class, ooHighlightVisitorClass, "myImplementationClassOrName");
+                    Util.set(ExtensionComponentAdapter.class, ca, Object.class, OOHighlightVisitorImpl.class, "myImplementationClassOrName");
                 } catch (Exception e) {
                     LOG.error("Can't load transformed OOHighlightVisitorImpl class", e);
                 }
@@ -73,11 +70,10 @@ public class OOComponent implements ProjectComponent {
     @Override
     public void disposeComponent() {
         LOG.info("OO dispose");
-        Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiBinaryExpressionImpl.class);
-        Util.setJavaElementConstructor(JavaElementType.PREFIX_EXPRESSION, PsiPrefixExpressionImpl.class);
-        Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiPolyadicExpressionImpl.class);
-        Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiArrayAccessExpressionImpl.class);
-        classLoaderInjector.injectedClasses.clear();
+        Util.setJavaElementConstructor(JavaElementType.BINARY_EXPRESSION, PsiBinaryExpressionImpl::new);
+        Util.setJavaElementConstructor(JavaElementType.PREFIX_EXPRESSION, PsiPrefixExpressionImpl::new);
+        Util.setJavaElementConstructor(JavaElementType.POLYADIC_EXPRESSION, PsiPolyadicExpressionImpl::new);
+        Util.setJavaElementConstructor(JavaElementType.ARRAY_ACCESS_EXPRESSION, PsiArrayAccessExpressionImpl::new);
     }
 
     public void projectOpened() {}

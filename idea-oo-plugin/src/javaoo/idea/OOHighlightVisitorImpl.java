@@ -21,35 +21,15 @@ import com.intellij.lang.annotation.HighlightSeverity;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.*;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.org.objectweb.asm.ClassVisitor;
-import org.jetbrains.org.objectweb.asm.ClassWriter;
-import org.jetbrains.org.objectweb.asm.Type;
-import org.jetbrains.org.objectweb.asm.commons.RemappingClassAdapter;
-import org.jetbrains.org.objectweb.asm.commons.SimpleRemapper;
 
 import java.lang.reflect.Field;
 import java.util.List;
-import java.util.function.Function;
 
 import static javaoo.idea.Util.sneakyThrow;
 
-/** transformed to extends HighlightVisitorImpl by {@link #transformer} */
-public class OOHighlightVisitorImpl extends FakeHighlightVisitorImpl {
-
-    /** replaces FakeHighlightVisitorImpl to HighlightVisitorImpl_public. see {@link FakeHighlightVisitorImpl#transformer} */
-    public static final Function<ClassVisitor, ClassVisitor> transformer = cw ->
-        new RemappingClassAdapter(cw,
-                new SimpleRemapper(
-                        Type.getInternalName(FakeHighlightVisitorImpl.class),
-                        Type.getInternalName(HighlightVisitorImpl.class)+"_public"));
+public class OOHighlightVisitorImpl extends HighlightVisitorImpl {
 
     private HighlightInfoHolder myHolder;
-    private final PsiResolveHelper myResolveHelper;
-
-    public OOHighlightVisitorImpl(PsiResolveHelper resolveHelper) {
-        super(resolveHelper);
-        myResolveHelper = resolveHelper;
-    }
 
     @Override
     public boolean analyze(@NotNull PsiFile file, boolean updateWholeFile, @NotNull HighlightInfoHolder holder, @NotNull Runnable action) {
@@ -157,10 +137,9 @@ public class OOHighlightVisitorImpl extends FakeHighlightVisitorImpl {
         }
     }
 
-    @SuppressWarnings("CloneDoesntCallSuperClone")
     @Override
     @NotNull
     public OOHighlightVisitorImpl clone() {
-        return new OOHighlightVisitorImpl(myResolveHelper);
+        return new OOHighlightVisitorImpl();
     }
 }
